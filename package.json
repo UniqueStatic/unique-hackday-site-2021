@@ -1,12 +1,17 @@
 {
+  "name": "unique-hackday-site-2021",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
     "test": "web-test-runner \"src/**/*.test.tsx\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
+    "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint:css": "stylelint \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
+    "@emotion/react": "^11.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -25,6 +30,8 @@
     "chai": "^4.3.4",
     "prettier": "^2.2.1",
     "snowpack": "^3.3.7",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
     "typescript": "^4.2.4"
   }
 }
