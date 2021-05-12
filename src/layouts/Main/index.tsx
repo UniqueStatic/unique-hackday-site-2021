@@ -24,12 +24,15 @@ const Main: FC<AppProps> = ({}) => {
   return (
     <>
     <Global styles={css`
+      html{ 
+        -webkit-text-size-adjust:none;
+      }
       body{ 
         margin: 0;
       }
     `}/>
     <BasicLayout>
-      <Splash />
+      <Splash.PC />
       <Content />
     </BasicLayout>
     </>
