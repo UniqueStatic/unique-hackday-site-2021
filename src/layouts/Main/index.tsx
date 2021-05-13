@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import Splash from '../Splash';
 import Section from '../Section';
 import { Background, Primary } from '@/consts/color';
+import { Global, css } from '@emotion/react';
 
 const BasicLayout = styled.div({
   background: Background,
@@ -23,10 +24,20 @@ interface AppProps {}
 const Main: FC<AppProps> = ({}) => {
   // Create the count state.
   return (
+    <>
+    <Global styles={css`
+      html{ 
+        -webkit-text-size-adjust:none;
+      }
+      body{ 
+        margin: 0;
+      }
+    `}/>
     <BasicLayout>
-      {/* <Splash /> */}
+      <Splash.PC />
       <Section />
     </BasicLayout>
+    </>
   );
 };
 

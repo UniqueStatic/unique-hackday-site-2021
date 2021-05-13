@@ -1,27 +1,9 @@
-import React, { useState, useEffect, FC } from 'react';
-import logo from '@/assets/logo.svg';
-// import './styles.css';
-import styled from '@emotion/styled';
+import {Splash as Moblie} from './Moblie' 
+import {Splash as PC} from './PC' 
 
-const SplashLayout = styled.div({
-  minHeight: '100vh',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: 'calc(10px + 2vmin)',
-  // color: 'white',
-});
+const Splash = {
+  Moblie,
+  PC
+}
 
-interface AppProps {}
-
-const Splash: FC<AppProps> = ({}) => {
-  // Create the count state.
-  return (
-    <SplashLayout>
-      <div>Splash</div>
-    </SplashLayout>
-  );
-};
-
-export default Splash;
+export default Splash
