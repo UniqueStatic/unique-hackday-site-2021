@@ -115,7 +115,7 @@ const fadeIn = keyframes({
 const ScrollView = styled.div<IExpandable>(({ expanded = false }) => ({
   // padding: '0 3vw',
   borderTop: `${BorderWidth} solid ${Primary}`,
-  overflowY: 'scroll',
+  overflowY: 'auto',
   width: 'calc(41vw + 1px)',
 
   // whiteSpace:'nowrap',
@@ -183,7 +183,7 @@ const Content: FC<IContentProps> = ({ expanded = false, index, animating }) => {
         {expanded && ` ${nameChn} / ${nameEng}`}
       </ItemTitle>
       {expanded ? (
-        <ScrollView>{content}</ScrollView>
+        <ScrollView onWheelCapture={ev=>ev.stopPropagation()} >{content}</ScrollView>
       ) : (
         <RotatedText>{nameEng}</RotatedText>
       )}
