@@ -1,26 +1,64 @@
-import React, { useState, useEffect, FC, useCallback, useRef } from 'react';
+/** @jsx jsx */
+import React from 'react';
 import styled from '@emotion/styled';
+import { jsx, css } from '@emotion/react';
+
+const Container = styled.div({
+  padding: '0 4vw',
+  h2: {
+    fontSize: '1.7rem',
+    // margin: '2em 0',
+  },
+  h3: {
+    fontSize: '1.3rem',
+    marginBottom: '2rem',
+  },
+  small: {
+    fontSize: '1.2rem',
+    // margin:'none'
+  },
+  p: {
+    fontSize: '1.45rem',
+  },
+  '& > *': {
+    // display:'none'
+    margin: '0 0 3rem',
+    ':first-child': {
+      margin: '3rem 0',
+    },
+  },
+});
 
 export const Introduction = (
-  <>
+  <Container>
     <h2>Unique Hackday</h2>
     <p>
-      最初源于联创团队内部成员的Hackday比赛
-      之后将比赛的规模扩大，邀请来自全国的大 学一同参与。
+      最初源于联创团队内部成员的Hackday比赛之后将比赛的规模扩大，邀请来自全国的大学一同参与。
     </p>
     <p>
-      因疫情缘故缺席了2020年，而今年我们决定
-      重启，继续将开放、创新、极客的精神传递 给更多的人。
+      因疫情缘故缺席了2020年，而今年我们决定重启，继续将开放、创新、极客的精神传递给更多的人。
     </p>
-    <h2>150名参赛选手</h2>
-    <small>通过简历筛选出来来自全国各大高校的150名学生</small>
+    <h2>
+      150名参赛选手{' '}
+      <small
+        css={css({
+          display: 'inline-block',
+          fontWeight: 'normal',
+          fontSize: '1rem!important',
+          letterSpacing: '0.5ch',
+        })}
+      >
+        通过简历筛选出来来自全国各大高校的150名学生
+      </small>
+    </h2>
+
     <h3>24小时</h3>
-    <p>程序、设计、产品在24小时内实现产品开发。</p>
+    <small>程序、设计、产品在24小时内实现产品开发。</small>
     <h3>{'旅行&食物'}</h3>
-    <p>报销交通费与无限量的食物供应。</p>
+    <small>报销交通费与无限量的食物供应。</small>
     <h3>{'奖金&纪念'}</h3>
-    <p>丰厚的奖金与精美的纪念品。</p>
-  </>
+    <small>丰厚的奖金与精美的纪念品。</small>
+  </Container>
 );
 
 const scheduleData = [
@@ -47,7 +85,7 @@ const scheduleData = [
 ];
 
 export const Schedule = (
-  <>
+  <Container>
     {scheduleData.map((day, i) => (
       <div key={i}>
         <h2>
@@ -63,7 +101,7 @@ export const Schedule = (
         ))}
       </div>
     ))}
-  </>
+  </Container>
 );
 
 const awardsData = [
@@ -75,7 +113,7 @@ const awardsData = [
 ];
 
 export const Awards = (
-  <>
+  <Container>
     {awardsData.map(({ nameChn, nameEng, value }, i) => (
       <div key={i}>
         <h2>
@@ -84,7 +122,7 @@ export const Awards = (
         <p>{value}</p>
       </div>
     ))}
-  </>
+  </Container>
 );
 
 const faqsData = [
@@ -150,18 +188,18 @@ const faqsData = [
 ];
 
 export const FAQs = (
-  <>
+  <Container>
     {faqsData.map(({ question, answer }, i) => (
       <div key={i}>
         <h2>{question}</h2>
         <div>{answer}</div>
       </div>
     ))}
-  </>
+  </Container>
 );
 
 export const Access = (
-  <>
+  <Container>
     <h2>湖北省 武汉市 洪山区 珞喻路 1037号</h2>
     <h2>华中科技大学 启明学院</h2>
     <a
@@ -171,5 +209,5 @@ export const Access = (
       contact@hustunique.com
     </a>
     <p>官方FAQ QQ群组：852034326</p>
-  </>
+  </Container>
 );

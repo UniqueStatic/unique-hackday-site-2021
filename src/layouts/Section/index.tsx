@@ -2,7 +2,7 @@ import React, { useState, useEffect, FC, useCallback, useRef } from 'react';
 import logo from '@/assets/logo.svg';
 // import './styles.css';
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import { Background, Primary, Secondary } from '@/consts/color';
 import { Access, Awards, FAQs, Introduction, Schedule } from './data';
 
@@ -44,15 +44,15 @@ const ContentLayout = styled.div({
   width: '80vw',
   margin: '0 10%',
   borderTop: `${BorderWidth} solid ${Primary}`,
-  '&::after': {
-    content: '""',
-    width: '100%',
-    /* display: table; */
-    position: 'absolute',
-    height: BorderWidth,
-    top: '60vh',
-    background: Primary,
-  },
+  // '&::after': {
+  //   content: '""',
+  //   width: '100%',
+  //   /* display: table; */
+  //   position: 'absolute',
+  //   height: BorderWidth,
+  //   top: '70vh',
+  //   background: Primary,
+  // },
 });
 
 const withBorder = css({
@@ -61,14 +61,20 @@ const withBorder = css({
   marginTop: `-${BorderWidth}`,
 });
 
-const ItemLayout = styled.li<{ expanded?: boolean }>(
+interface IExpandable {
+  expanded?: boolean;
+}
+
+const ItemLayout = styled.li<IExpandable>(
   ({ expanded = false }) => ({
     position: 'relative',
+    overflow: 'hidden',
 
     listStyle: 'none',
     width: expanded ? '41vw' : '7vw',
-    minHeight:'60vh',
-    maxHeight: expanded ? '80vh' : '60vh',
+    height: '80vh',
+
+    // maxHeight: expanded ? '90vh' : '60vh',
     transition: 'width .5s ease-in-out',
     display: 'flex',
     flexDirection: 'column',
@@ -80,12 +86,41 @@ const ItemLayout = styled.li<{ expanded?: boolean }>(
   withBorder,
 );
 
-const ScrollView = styled.div({
-  padding: '0 3vw',
+const bounce = keyframes`
+  from, 20%, 53%, 80%, to {
+    transform: translate3d(0,0,0);
+  }
+
+  40%, 43% {
+    transform: translate3d(0, -30px, 0);
+  }
+
+  70% {
+    transform: translate3d(0, -15px, 0);
+  }
+
+  90% {
+    transform: translate3d(0,-4px,0);
+  }
+`;
+
+const fadeIn = keyframes({
+  '0%': { opacity: 0 },
+  '100%': { opacity: 1 },
+});
+
+const ScrollView = styled.div<IExpandable>(({ expanded = false }) => ({
+  // padding: '0 3vw',
   borderTop: `${BorderWidth} solid ${Primary}`,
   overflowY: 'scroll',
+  width:'calc(41vw + 1px)',
+
+  // whiteSpace:'nowrap',
   marginRight: `-${BorderWidth}`,
   marginBottom: `-${BorderWidth}`,
+  // animation: `${fadeIn} 1s ease;`,
+  // animationFillMode:'backwards',
+  // animationDelay: '.5s',
   '::-webkit-scrollbar': {
     width: '32px',
   },
@@ -98,7 +133,7 @@ const ScrollView = styled.div({
     border: '6px solid transparent;',
     boxShadow: `inset 0 0 0 ${BorderWidth} ${Primary}, inset 0 0 0 20px ${Secondary}`,
   },
-});
+}));
 
 interface AppProps {}
 
@@ -109,15 +144,15 @@ const RotatedText = styled.div({
   position: 'absolute',
   bottom: '0',
   left: 'calc(50% - 1ch)',
-  fontFamily: ['Archivo Black'],
+  fontFamily: ['Russo One'],
 });
 
-const BlackText = styled.div<{ expanded: boolean }>(({ expanded = false }) => ({
+const BlackText = styled.div<IExpandable>(({ expanded = false }) => ({
   margin: expanded ? '3vw' : 'initial',
-  fontFamily: ['Archivo Black'],
+  fontFamily: ['Russo One'],
 }));
 
-const ItemTitle = styled.div<{ expanded: boolean }>(({ expanded = false }) => ({
+const ItemTitle = styled.div<IExpandable>(({ expanded = false }) => ({
   flex: '0 0 10vh',
   display: 'flex',
   alignItems: 'center',
@@ -146,7 +181,7 @@ const Content: FC<IContentProps> = ({ expanded = false, index, animating }) => {
         {expanded && ` ${nameChn} / ${nameEng}`}
       </ItemTitle>
       {expanded ? (
-        !animating && <ScrollView>{content}</ScrollView>
+        <ScrollView>{content}</ScrollView>
       ) : (
         <RotatedText>{nameEng}</RotatedText>
       )}

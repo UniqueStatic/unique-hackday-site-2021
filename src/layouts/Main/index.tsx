@@ -13,6 +13,7 @@ const BasicLayout = styled.div({
   flexDirection: 'column',
   alignItems: 'center',
   // justifyContent: 'center',
+
   fontSize: 'calc(10px + 2vmin)',
   color: Primary,
 });
