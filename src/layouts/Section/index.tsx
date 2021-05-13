@@ -47,15 +47,16 @@ const ContentLayout = styled.div({
   paddingTop: '12vh',
   minHeight: '100vh',
 
-  // '&::after': {
-  //   content: '""',
-  //   width: '100%',
-  //   /* display: table; */
-  //   position: 'absolute',
-  //   height: BorderWidth,
-  //   top: '70vh',
-  //   background: Primary,
-  // },
+  '&::after': {
+    content: '""',
+    width: '94vw',
+    /* display: table; */
+    position: 'absolute',
+    height: BorderWidth,
+    top: 'calc(92vh + 2px)',
+    // bottom:'10vh',
+    background: Primary,
+  },
 });
 
 const withBorder = css({

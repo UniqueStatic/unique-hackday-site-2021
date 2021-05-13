@@ -1,7 +1,10 @@
-import React, { useState, useEffect, FC } from 'react';
+/** @jsx jsx */
+
+import React, { FC } from 'react';
 import styled from '@emotion/styled';
 import computer from '../../assets/imgs/Computer.png';
 import unique from '../../assets/imgs/UniqueMoblie.png';
+import { jsx, css } from '@emotion/react';
 const pics = {
   computer,
   unique,
@@ -145,7 +148,13 @@ const HackDayTitle: FC<HackdayProps> = (props) => {
   return (
     <HackdayTitleLayout shouldUp={shouldUp}>
       <UniqueText>UNIQUESTUDIO</UniqueText>
-      <HackdayText>HACKDAY</HackdayText>
+      <HackdayText
+        css={css({
+          fontFamily: 'Maven Pro',
+        })}
+      >
+        HACKDAY
+      </HackdayText>
     </HackdayTitleLayout>
   );
 };
@@ -172,7 +181,7 @@ const HackdayTitleLayout = styled.div<HackdayProps>(({ shouldUp }) => ({
   position: 'absolute',
   left: '0',
   // top: '10px',
-  padding:'10px 0 0',
+  padding: '10px 0 0',
   transform: `translateY(${shouldUp ? '-100%' : 0})`,
   transition: 'transform 0.5s',
 }));
@@ -220,7 +229,7 @@ interface MenuButtonProps {
 }
 
 const MenuButton: FC<MenuButtonProps> = (props) => {
-  const {click, active} = props
+  const { click, active } = props;
   return (
     <MenuButtonLayout onClick={click}>
       <MenuButtonBlock
