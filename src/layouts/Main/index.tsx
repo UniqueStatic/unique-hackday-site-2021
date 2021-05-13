@@ -7,7 +7,7 @@ import Section from '../Section';
 import { Background, Primary } from '@/consts/color';
 import { Global, css } from '@emotion/react';
 import Pager from '@/components/Pager';
-import * as common from '../Splash/common'
+import * as SplashCommon from '../Splash/common';
 
 const BasicLayout = styled.div({
   position: 'relative',
@@ -20,7 +20,7 @@ const BasicLayout = styled.div({
   overflowY: 'hidden',
   fontSize: 'calc(10px + 2vmin)',
   color: Primary,
-  scrollBehavior: 'smooth'
+  scrollBehavior: 'smooth',
 });
 
 const enum Direction {
@@ -31,12 +31,24 @@ const enum Direction {
 const PageMax = 5;
 
 const Main: FC = () => {
-  const {Header, Menu} = common.components
+  const { Header, Menu } = SplashCommon.components;
   const [showMenu, setShowMenu] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const layoutRef = useRef<HTMLDivElement | null>(null);
   const SplashRef = useRef<HTMLDivElement | null>(null);
   const SectionRef = useRef<HTMLDivElement | null>(null);
+  const switchPage = useCallback((pageIndex: number) => {
+    switch (pageIndex) {
+      case 0: {
+        SplashRef.current?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      }
+      default: {
+        SectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+        break;
+      }
+    }
+  }, []);
   const handleScroll = useCallback(
     (direction: Direction) => {
       setPageIndex((index) => {
@@ -52,18 +64,7 @@ const Main: FC = () => {
           default:
             break;
         }
-        switch (ret) {
-          case 0: {
-            SplashRef.current?.scrollIntoView({ behavior: 'smooth' });
-            break;
-          }
-          case 1: {
-            SectionRef.current?.scrollIntoView({ behavior: 'smooth' });
-            break;
-          }
-          default:
-            break;
-        }
+        switchPage(ret);
         return ret;
       });
     },
@@ -74,7 +75,6 @@ const Main: FC = () => {
     let throttle: number | null = null;
     const handler = (ev: WheelEvent) => {
       ev.preventDefault();
-      console.log('refs:', SplashRef.current, SectionRef.current);
 
       if (throttle) return;
       if (ev.deltaY > 0) {
@@ -94,26 +94,16 @@ const Main: FC = () => {
   }, [handleScroll]);
 
   useEffect(() => {
-    const handler = () => {
-      switch (pageIndex) {
-        case 0: {
-          SplashRef.current?.scrollIntoView({ behavior: 'smooth' });
-          break;
-        }
-        default: {
-          SectionRef.current?.scrollIntoView({ behavior: 'smooth' });
-          break;
-        }
-      }
-    };
+    const handler = () => switchPage(pageIndex);
     window.addEventListener('resize', handler);
     return () => window.removeEventListener('resize', handler);
-  }, [pageIndex]);
+  }, [pageIndex, switchPage]);
 
-  let handleMenuOption = (pageIndex : number) =>{
+  let handleMenuOption = (pageIndex: number) => {
     setPageIndex(pageIndex);
     setShowMenu(false);
-  }
+    switchPage(pageIndex)
+  };
   // Create the count state.
   return (
     <>
@@ -128,7 +118,11 @@ const Main: FC = () => {
         `}
       />
       <BasicLayout ref={layoutRef}>
-      <Header switchMenu={setShowMenu.bind(this, !showMenu)} pageIndex={pageIndex}/>
+        <Header
+          switchMenu={setShowMenu.bind(this, !showMenu)}
+          pageIndex={pageIndex}
+          showMenu={showMenu}
+        />
         <Splash.PC ref={SplashRef} />
         <Section
           ref={SectionRef}
@@ -137,7 +131,7 @@ const Main: FC = () => {
         />
       </BasicLayout>
       <Pager pageIndex={pageIndex} />
-      <Menu setPageIndex={setPageIndex} isHidden={!showMenu} />
+      <Menu setPageIndex={handleMenuOption} isHidden={!showMenu} />
     </>
   );
 };

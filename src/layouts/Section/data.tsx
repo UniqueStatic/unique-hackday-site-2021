@@ -23,7 +23,7 @@ const Container = styled.div({
   '& > *': {
     // display:'none'
     margin: '0 0 3rem',
-    ':first-child': {
+    ':first-of-type': {
       margin: '3rem 0',
     },
   },
@@ -79,7 +79,7 @@ const scheduleData = [
       { from: '11:00', to: '13:00', content: '进行午餐 休息' },
       { from: '14:00', to: '16:30', content: '项目展示' },
       { from: '16:30', to: '18:00', content: '闭幕式&颁奖仪式' },
-      { from: '16:30', to: '18:30', content: '合影留念' },
+      { from: '18:00', to: '18:30', content: '合影留念' },
     ],
   },
 ];

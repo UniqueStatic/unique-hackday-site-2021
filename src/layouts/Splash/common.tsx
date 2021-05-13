@@ -1,11 +1,11 @@
 import React, { useState, useEffect, FC } from 'react';
 import styled from '@emotion/styled';
-import computer from '../../assets/imgs/Computer.png'
-import unique from '../../assets/imgs/UniqueMoblie.png'
+import computer from '../../assets/imgs/Computer.png';
+import unique from '../../assets/imgs/UniqueMoblie.png';
 const pics = {
   computer,
-  unique
-}
+  unique,
+};
 
 // interface HeaderProps {
 //   switchMenu: () => void;
@@ -121,26 +121,27 @@ const pics = {
 interface HeaderProps {
   switchMenu: () => void;
   pageIndex: number;
+  showMenu: boolean;
 }
 const Header: FC<HeaderProps> = (props) => {
-  const {switchMenu, pageIndex} = props
+  const { showMenu, switchMenu, pageIndex } = props;
   return (
     <>
       <SplitLine>
         <No2021>NO.2021</No2021>
-        <HackDayTitle shouldUp={pageIndex === 0 ? false : true}/>
-        <MenuButton click={switchMenu} />
+        <HackDayTitle shouldUp={pageIndex === 0 ? false : true} />
+        <MenuButton active={showMenu} click={switchMenu} />
       </SplitLine>
     </>
   );
 };
 
 interface HackdayProps {
-  shouldUp: boolean
+  shouldUp: boolean;
 }
 
 const HackDayTitle: FC<HackdayProps> = (props) => {
-  const {shouldUp} = props
+  const { shouldUp } = props;
   return (
     <HackdayTitleLayout shouldUp={shouldUp}>
       <UniqueText>UNIQUESTUDIO</UniqueText>
@@ -148,7 +149,6 @@ const HackDayTitle: FC<HackdayProps> = (props) => {
     </HackdayTitleLayout>
   );
 };
-
 
 const SplitLine = styled.div({
   position: 'fixed',
@@ -168,11 +168,13 @@ const No2021 = styled.div({
   fontWeight: 300,
 });
 
-const HackdayTitleLayout = styled.div<HackdayProps>( props => ({
+const HackdayTitleLayout = styled.div<HackdayProps>(({ shouldUp }) => ({
   position: 'absolute',
   left: '0',
-  top: props.shouldUp ? 'calc(-28px - 3vmin)' : '10px',
-  transition: 'top 0.5s'
+  // top: '10px',
+  padding:'10px 0 0',
+  transform: `translateY(${shouldUp ? '-100%' : 0})`,
+  transition: 'transform 0.5s',
 }));
 
 const UniqueText = styled.div({
@@ -214,17 +216,13 @@ const MenuButtonLayout = styled.div({
 
 interface MenuButtonProps {
   click: () => void;
+  active: boolean;
 }
 
 const MenuButton: FC<MenuButtonProps> = (props) => {
-  const [active, setActive] = useState(false);
-
-  let onClick = () => {
-    props.click();
-    setActive(!active);
-  };
+  const {click, active} = props
   return (
-    <MenuButtonLayout onClick={onClick}>
+    <MenuButtonLayout onClick={click}>
       <MenuButtonBlock
         color="black"
         isTop={true}
@@ -307,7 +305,7 @@ const Option = styled.div({
   height: 'calc(10px + 2vmin)',
   padding: 'calc(6px + 2vmin)',
   fontWeight: 300,
-  cursor: 'pointer'
+  cursor: 'pointer',
 });
 
 const MenuMain = styled.div({
@@ -318,28 +316,30 @@ const MenuMain = styled.div({
 });
 interface MenuProps {
   isHidden: boolean;
-  setPageIndex: (n : number) => void;
+  setPageIndex: (n: number) => void;
 }
 
 const Menu: FC<MenuProps> = (props) => {
   const optionText = [
-    '首页 / Top', 
+    '首页 / Top',
     '比赛介绍 / Introduction',
     '流程安排 / Schedule',
     '奖项设置 / Awards',
     '常见问题 / FAQs',
     '联系我们 / Access',
-    '主办方 / About Us'
-  ]
-  const {isHidden, setPageIndex} = props;
-  const options = optionText.map((_, i) => <Option onClick={() => setPageIndex(i)}key={_}>{_}</Option>)
+    '主办方 / About Us',
+  ];
+  const { isHidden, setPageIndex } = props;
+  const options = optionText.map((_, i) => (
+    <Option onClick={() => setPageIndex(i)} key={_}>
+      {_}
+    </Option>
+  ));
   return (
     <MenuLayout isHidden={isHidden}>
       <MenuMain>
         <MenuTitle />
-        <Select>
-          {options}
-        </Select>
+        <Select>{options}</Select>
       </MenuMain>
     </MenuLayout>
   );
@@ -347,9 +347,9 @@ const Menu: FC<MenuProps> = (props) => {
 
 const components = {
   Header,
-  Menu
-}
+  Menu,
+};
 
 export default pics;
 
-export {pics, components};
+export { pics, components };
