@@ -9,6 +9,9 @@ import { Global, css } from '@emotion/react';
 import Pager from '@/components/Pager';
 import * as SplashCommon from '../Splash/common';
 
+const isSafari = window.navigator.userAgent.includes('Safari')
+const isChrome = window.navigator.userAgent.includes('Chrome')
+
 const BasicLayout = styled.div({
   position: 'relative',
   background: Background,
@@ -17,10 +20,13 @@ const BasicLayout = styled.div({
   flexDirection: 'column',
   alignItems: 'center',
   // justifyContent: 'center',
-  overflowY: 'hidden',
+  overflowY: isSafari && !isChrome ? 'auto' : 'hidden',
   fontSize: 'calc(10px + 2vmin)',
   color: Primary,
   scrollBehavior: 'smooth',
+  '-ms-overflow-style': 'none' /* IE and Edge */,
+  scrollbarWidth: 'none' /* Firefox */,
+  '::-webkit-scrollbar': { display: 'none' },
 });
 
 const enum Direction {
@@ -134,6 +140,6 @@ const Main: FC = () => {
       <Menu setPageIndex={handleMenuOption} isHidden={!showMenu} />
     </>
   );
-};
+}; 
 
 export default Main;

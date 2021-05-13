@@ -7,7 +7,7 @@ import { Background, Primary, Secondary } from '@/consts/color';
 import { Access, Awards, FAQs, Introduction, Schedule } from './data';
 import type { IRefForwarder } from '@/interface';
 
-const BorderWidth = '1.5px';
+const BorderWidth = '2px';
 
 const data = [
   {
