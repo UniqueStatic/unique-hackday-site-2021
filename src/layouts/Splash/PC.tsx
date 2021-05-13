@@ -1,12 +1,13 @@
 import React, { useState, useEffect, FC } from 'react';
 import logo from '@/assets/logo.svg';
 // import './styles.css';
-import pics from './common'
+import pics from './common';
 import styled from '@emotion/styled';
+import type { IRefForwarder } from '@/interface';
 
 const SplashLayout = styled.div({
   minHeight: '100vh',
-  width:'-webkit-fill-available',
+  width: '-webkit-fill-available',
   flex: 1,
   display: 'flex',
   flexDirection: 'column',
@@ -16,15 +17,15 @@ const SplashLayout = styled.div({
   // color: 'white',
 });
 
-const FrontPageLayout = styled.div(props => ({
+const FrontPageLayout = styled.div((props) => ({
   height: '100vh',
-  width:'-webkit-fill-available',
+  width: '-webkit-fill-available',
   backgroundColor: '#EFB8D3',
   display: 'flex',
   alignItems: 'center',
   overflow: 'hidden',
-  flexFlow: 'column'
-}))
+  flexFlow: 'column',
+}));
 
 const SplitLine = styled.div({
   position: 'relative',
@@ -34,7 +35,7 @@ const SplitLine = styled.div({
   zIndex: 2,
   margin: '0 auto',
   marginTop: '12vh',
-})
+});
 
 const No2021 = styled.div({
   position: 'absolute',
@@ -42,23 +43,23 @@ const No2021 = styled.div({
   top: 'calc(-1 * (12px + 2vmin))',
   fontSize: 'calc(4px + 2vmin)',
   fontWeight: 300,
-})
+});
 
 const HackdayTitleLayout = styled.div({
   position: 'absolute',
   left: '0',
-  top: '10px'
-})
+  top: '10px',
+});
 
 const UniqueText = styled.div({
   fontSize: 'calc(6px + 1vmin)',
   fontWeight: 300,
-  letterSpacing: '3px'
-})
+  letterSpacing: '3px',
+});
 
 const HackdayText = styled.div({
-  fontSize: 'calc(12px + 2vmin)'
-})
+  fontSize: 'calc(12px + 2vmin)',
+});
 
 const ComputerLayout = styled.div({
   position: 'relative',
@@ -68,19 +69,19 @@ const ComputerLayout = styled.div({
   justifyContent: 'center',
   overflow: 'hidden',
   alignItems: 'center',
-})
+});
 
 const ComputerPic = styled.img({
   maxHeight: '100%',
   maxWidth: '100%',
-})
+});
 
 const RebootTextLayout = styled.div({
   position: 'absolute',
   top: '31%',
   left: '35%',
   fontSize: '2.2vmin',
-})
+});
 
 const Reboot2021 = styled.div({
   position: 'absolute',
@@ -89,12 +90,12 @@ const Reboot2021 = styled.div({
   fontSize: '1.5vmin',
   color: 'black',
   transform: 'rotate(-7deg)',
-  fontWeight: 900
-})
+  fontWeight: 900,
+});
 
-const RebootText = styled.div(props => ({
-  color: props.color
-}))
+const RebootText = styled.div((props) => ({
+  color: props.color,
+}));
 
 const SignUpBlock = styled.div({
   position: 'absolute',
@@ -109,7 +110,7 @@ const SignUpBlock = styled.div({
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: 'white',
-})
+});
 
 const SignUpBackground = styled.div({
   position: 'absolute',
@@ -119,91 +120,107 @@ const SignUpBackground = styled.div({
   width: 'calc(50px + 10vmin)',
   backgroundColor: '#E3E3E3',
   border: '1px black solid',
-  cursor: 'pointer'
-})
-
-interface AppProps { }
+  cursor: 'pointer',
+});
 
 interface MenuButtonBlockProps {
-  color: string,
-  isTop: boolean,
-  isBottom: boolean,
-  active: boolean,
+  color: string;
+  isTop: boolean;
+  isBottom: boolean;
+  active: boolean;
 }
-const MenuButtonBlock = styled.div<MenuButtonBlockProps>(props => ({
+const MenuButtonBlock = styled.div<MenuButtonBlockProps>((props) => ({
   width: '100%',
   height: '3px',
   margin: '1px 0',
   backgroundColor: props.color,
-  transform: props.isTop && props.active ? 'rotate(45deg) translateY(5.5px)' : props.isBottom && props.active ? 'rotate(-45deg) translateY(-5.5px)' : 'none',
-  transition: '0.5s'
-}))
+  transform:
+    props.isTop && props.active
+      ? 'rotate(45deg) translateY(5.5px)'
+      : props.isBottom && props.active
+      ? 'rotate(-45deg) translateY(-5.5px)'
+      : 'none',
+  transition: '0.5s',
+}));
 
 const MenuButtonLayout = styled.div({
   position: 'absolute',
   top: '20px',
   right: '10vmin',
   width: '20px',
-  cursor: 'pointer'
-})
+  cursor: 'pointer',
+});
 
 interface MenuButtonProps {
-  click: () => void
+  click: () => void;
 }
 
 const MenuButton: FC<MenuButtonProps> = (props) => {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState(false);
 
   let onClick = () => {
-    props.click()
-    setActive(!active)
-  }
+    props.click();
+    setActive(!active);
+  };
   return (
     <MenuButtonLayout onClick={onClick}>
-      <MenuButtonBlock color='black' isTop={true} isBottom={false} active={active} />
-      <MenuButtonBlock color='transparent' isTop={false} isBottom={false} active={active} />
-      <MenuButtonBlock color='black' isTop={false} isBottom={true} active={active} />
+      <MenuButtonBlock
+        color="black"
+        isTop={true}
+        isBottom={false}
+        active={active}
+      />
+      <MenuButtonBlock
+        color="transparent"
+        isTop={false}
+        isBottom={false}
+        active={active}
+      />
+      <MenuButtonBlock
+        color="black"
+        isTop={false}
+        isBottom={true}
+        active={active}
+      />
     </MenuButtonLayout>
-  )
-}
-
-const SignUp: FC<AppProps> = ({ }) => {
-  return (
-    <SignUpBackground color='#E6E6E6'>
-      <SignUpBlock color='white'>立即报名</SignUpBlock>
-    </SignUpBackground>
-  )
-}
-
-const Reboot: FC<AppProps> = ({ }) => {
-  return (
-    <RebootTextLayout>
-      <RebootText color='#EFB8D3'>REBOOT</RebootText>
-      <RebootText color='#EFB8D3'>THE</RebootText>
-      <RebootText color='white'>HACKDAY</RebootText>
-    </RebootTextLayout>
-  )
-}
-
-const Splash: FC<AppProps> = ({ }) => {
-  // Create the count state.
-  return (
-    <SplashLayout>
-      <FrontPage />
-    </SplashLayout>
   );
 };
 
-const HackDayTitle: FC<AppProps> = ({ }) => {
+const SignUp: FC = () => {
+  return (
+    <SignUpBackground color="#E6E6E6">
+      <SignUpBlock color="white">立即报名</SignUpBlock>
+    </SignUpBackground>
+  );
+};
+
+const Reboot: FC = () => {
+  return (
+    <RebootTextLayout>
+      <RebootText color="#EFB8D3">REBOOT</RebootText>
+      <RebootText color="#EFB8D3">THE</RebootText>
+      <RebootText color="white">HACKDAY</RebootText>
+    </RebootTextLayout>
+  );
+};
+
+
+const Splash = React.forwardRef<HTMLDivElement|null>((props, ref) => (
+      <SplashLayout ref={ref}>
+      <FrontPage />
+    </SplashLayout>
+));
+
+const HackDayTitle: FC = () => {
   return (
     <HackdayTitleLayout>
       <UniqueText>UNIQUESTUDIO</UniqueText>
       <HackdayText>HACKDAY</HackdayText>
     </HackdayTitleLayout>
-  )
-}
+  );
+};
 interface HeaderProps {
-  switchMenu: () => void
+  switchMenu: () => void;
 }
 const Header: FC<HeaderProps> = (props) => {
   return (
@@ -214,14 +231,14 @@ const Header: FC<HeaderProps> = (props) => {
         <MenuButton click={props.switchMenu} />
       </SplitLine>
     </>
-  )
-}
+  );
+};
 
 interface MenuLayoutProps {
-  isHidden: boolean
+  isHidden: boolean;
 }
 
-const MenuLayout = styled.div<MenuLayoutProps>(props => ({
+const MenuLayout = styled.div<MenuLayoutProps>((props) => ({
   position: 'absolute',
   backgroundColor: '#E3E3E3',
   height: '100vh',
@@ -229,7 +246,7 @@ const MenuLayout = styled.div<MenuLayoutProps>(props => ({
   top: 0,
   transform: props.isHidden ? 'translateY(-100%)' : 'none',
   transition: 'transform 1s',
-}))
+}));
 
 const MenuTitleBlock = styled.div({
   position: 'absolute',
@@ -244,7 +261,7 @@ const MenuTitleBlock = styled.div({
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: '#E3E3E3',
-})
+});
 
 const MenuTitleBackground = styled.div({
   position: 'absolute',
@@ -254,62 +271,63 @@ const MenuTitleBackground = styled.div({
   width: 'calc(100px + 20vmin)',
   backgroundColor: 'transparent',
   border: '1px black solid',
-  cursor: 'pointer'
-})
+  cursor: 'pointer',
+});
 
-const MenuTitle: FC<AppProps> = ({ }) => {
+const MenuTitle: FC = () => {
   return (
     <MenuTitleBackground>
       <MenuTitleBlock>MENU ---------- 2021</MenuTitleBlock>
     </MenuTitleBackground>
-  )
-}
+  );
+};
 
 const Select = styled.div({
   position: 'absolute',
   top: '15%',
-  left: '15%'
-})
+  left: '15%',
+});
 
 const Option = styled.div({
   width: 'calc(200px + 40vmin)',
   height: 'calc(10px + 2vmin)',
   padding: 'calc(6px + 2vmin)',
   fontWeight: 300,
-
-})
+});
 
 const MenuMain = styled.div({
   position: 'relative',
   marginTop: 'calc(50px + 10vh)',
   height: 'calc(90vh - 50px)',
-  overflow: 'hidden'
-})
+  overflow: 'hidden',
+});
 interface MenuProps {
-  isHidden: boolean
+  isHidden: boolean;
 }
 
 const Menu: FC<MenuProps> = (props) => {
   return (
     <MenuLayout isHidden={props.isHidden}>
       <MenuMain>
-      <MenuTitle />
-      <Select>
-        <Option>首页&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Top</Option>
-        <Option>比赛介绍&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Introduction</Option>
-        <Option>流程安排&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Schedule</Option>
-        <Option>奖项设置&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Awards</Option>
-        <Option>常见问题&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;FAQs</Option>
-        <Option>联系我们&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Access</Option>
-        <Option>主办方&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;About Us</Option>
-      </Select>
+        <MenuTitle />
+        <Select>
+          <Option>首页&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Top</Option>
+          <Option>
+            比赛介绍&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Introduction
+          </Option>
+          <Option>流程安排&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Schedule</Option>
+          <Option>奖项设置&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Awards</Option>
+          <Option>常见问题&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;FAQs</Option>
+          <Option>联系我们&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Access</Option>
+          <Option>主办方&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;About Us</Option>
+        </Select>
       </MenuMain>
     </MenuLayout>
-  )
-}
+  );
+};
 
-const FrontPage: FC<AppProps> = ({ }) => {
-  const [showMenu, setShowMenu] = useState(false)
+const FrontPage: FC = ({}) => {
+  const [showMenu, setShowMenu] = useState(false);
   return (
     <FrontPageLayout>
       <Header switchMenu={setShowMenu.bind(this, !showMenu)} />
@@ -321,7 +339,7 @@ const FrontPage: FC<AppProps> = ({ }) => {
       <SignUp />
       <Menu isHidden={!showMenu} />
     </FrontPageLayout>
-  )
-}
+  );
+};
 
-export {Splash};
+export { Splash };

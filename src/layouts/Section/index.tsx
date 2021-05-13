@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { css, keyframes } from '@emotion/react';
 import { Background, Primary, Secondary } from '@/consts/color';
 import { Access, Awards, FAQs, Introduction, Schedule } from './data';
+import type { IRefForwarder } from '@/interface';
 
 const BorderWidth = '1.5px';
 
@@ -44,6 +45,8 @@ const ContentLayout = styled.div({
   width: '80vw',
   margin: '0 10%',
   borderTop: `${BorderWidth} solid ${Primary}`,
+  minHeight: '100vh',
+
   // '&::after': {
   //   content: '""',
   //   width: '100%',
@@ -113,7 +116,7 @@ const ScrollView = styled.div<IExpandable>(({ expanded = false }) => ({
   // padding: '0 3vw',
   borderTop: `${BorderWidth} solid ${Primary}`,
   overflowY: 'scroll',
-  width:'calc(41vw + 1px)',
+  width: 'calc(41vw + 1px)',
 
   // whiteSpace:'nowrap',
   marginRight: `-${BorderWidth}`,
@@ -172,7 +175,6 @@ interface IContentProps {
 
 const Content: FC<IContentProps> = ({ expanded = false, index, animating }) => {
   const { nameChn, nameEng, content } = data[index];
-  console.log(content);
   return (
     <>
       {' '}
@@ -189,42 +191,57 @@ const Content: FC<IContentProps> = ({ expanded = false, index, animating }) => {
   );
 };
 
-const Container: FC<AppProps> = ({}) => {
-  // Create the count state.
-  const [index, setIndex] = useState(0);
-  const [animating, setAnimating] = useState(false);
+interface ISectionProps {
+  pageIndex: number;
+  setPageIndex: (index: number) => void;
+}
 
-  const ref = useRef<HTMLDivElement | null>(null);
-  const handleSwitch = useCallback(
-    (i: number) => {
-      if (animating || i == index) return;
-      setAnimating(true);
+const Container = React.forwardRef<HTMLDivElement | null, ISectionProps>(
+  ({ pageIndex, setPageIndex }, ref) => {
+    // Create the count state.
+    const [index, setIndex] = useState(0);
+    const [animating, setAnimating] = useState(false);
 
-      ref.current?.addEventListener(
-        'transitionend',
-        () => setAnimating(false),
-        {
-          once: true,
-        },
-      );
+    useEffect(() => {
+      if (pageIndex) setIndex(pageIndex === 0 ? pageIndex : pageIndex - 1);
+    }, [pageIndex]);
 
-      setIndex(i);
-      return () => {};
-    },
-    [animating, index],
-  );
-  return (
-    <ContentLayout ref={ref}>
-      {data.map((v, i) => {
-        const expanded = i === index;
-        return (
-          <ItemLayout key={i} onClick={() => handleSwitch(i)} {...{ expanded }}>
-            <Content expanded={expanded} index={i} animating={animating} />
-          </ItemLayout>
-        );
-      })}
-    </ContentLayout>
-  );
-};
+    const handleSwitch = useCallback(
+      (i: number) => {
+        if (animating || i == index) return;
+        setAnimating(true);
+        if (ref && 'current' in ref) {
+          ref.current?.addEventListener(
+            'transitionend',
+            () => setAnimating(false),
+            {
+              once: true,
+            },
+          );
+        }
+        // setIndex(i);
+        setPageIndex(i + 1);
+        return () => {};
+      },
+      [animating, index],
+    );
+    return (
+      <ContentLayout ref={ref}>
+        {data.map((v, i) => {
+          const expanded = i === index;
+          return (
+            <ItemLayout
+              key={i}
+              onClick={() => handleSwitch(i)}
+              {...{ expanded }}
+            >
+              <Content expanded={expanded} index={i} animating={animating} />
+            </ItemLayout>
+          );
+        })}
+      </ContentLayout>
+    );
+  },
+);
 
 export default Container;
