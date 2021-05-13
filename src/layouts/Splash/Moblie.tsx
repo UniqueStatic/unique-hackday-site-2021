@@ -25,31 +25,7 @@ const FrontPageLayout = styled.div((props) => ({
   justifyContent: 'center',
 }));
 
-const SplitLine = styled.div({
-  position: 'relative',
-  width: '-webkit-fill-available',
-  height: '1.5px',
-  backgroundColor: 'black',
-  zIndex: 2,
-  margin: '0 auto',
-  marginTop: '12vh',
-});
 
-const HackdayTitleLayout = styled.div({
-  position: 'absolute',
-  left: '20px',
-  top: '-40px',
-});
-
-const UniqueText = styled.div({
-  fontSize: 'calc(6px + 1vmin)',
-  fontWeight: 300,
-  letterSpacing: '3px',
-});
-
-const HackdayText = styled.div({
-  fontSize: 'calc(12px + 2vmin)',
-});
 
 const UniqueLayout = styled.img({
   position: 'absolute',
@@ -107,68 +83,6 @@ const SignUpBlock = styled.div({
   color: 'white',
   fontWeight: 600,
 });
-interface MenuButtonBlockProps {
-  color: string;
-  isTop: boolean;
-  isBottom: boolean;
-  active: boolean;
-}
-const MenuButtonBlock = styled.div<MenuButtonBlockProps>((props) => ({
-  width: '100%',
-  height: '3px',
-  margin: '1px 0',
-  backgroundColor: props.color,
-  transform:
-    props.isTop && props.active
-      ? 'rotate(45deg) translateY(5.5px)'
-      : props.isBottom && props.active
-      ? 'rotate(-45deg) translateY(-5.5px)'
-      : 'none',
-  transition: '0.5s',
-}));
-
-const MenuButtonLayout = styled.div({
-  position: 'absolute',
-  top: '-30px',
-  right: '10vmin',
-  width: '20px',
-  cursor: 'pointer',
-});
-
-interface MenuButtonProps {
-  click: () => void;
-}
-
-const MenuButton: FC<MenuButtonProps> = (props) => {
-  const [active, setActive] = useState(false);
-
-  let onClick = () => {
-    props.click();
-    setActive(!active);
-  };
-  return (
-    <MenuButtonLayout onClick={onClick}>
-      <MenuButtonBlock
-        color="black"
-        isTop={true}
-        isBottom={false}
-        active={active}
-      />
-      <MenuButtonBlock
-        color="transparent"
-        isTop={false}
-        isBottom={false}
-        active={active}
-      />
-      <MenuButtonBlock
-        color="black"
-        isTop={false}
-        isBottom={true}
-        active={active}
-      />
-    </MenuButtonLayout>
-  );
-};
 
 const SignUp: FC = () => {
   return <SignUpBlock>START</SignUpBlock>;
@@ -190,27 +104,8 @@ const Splash = React.forwardRef<HTMLDivElement | null>((props, ref) => (
   </SplashLayout>
 ));
 
-const HackDayTitle: FC = () => {
-  return (
-    <HackdayTitleLayout>
-      <UniqueText>UNIQUESTUDIO</UniqueText>
-      <HackdayText>HACKDAY</HackdayText>
-    </HackdayTitleLayout>
-  );
-};
-interface HeaderProps {
-  switchMenu: () => void;
-}
-const Header: FC<HeaderProps> = (props) => {
-  return (
-    <>
-      <SplitLine>
-        <HackDayTitle />
-        <MenuButton click={props.switchMenu} />
-      </SplitLine>
-    </>
-  );
-};
+
+
 
 interface MenuLayoutProps {
   isHidden: boolean;
@@ -325,7 +220,6 @@ const FrontPage: FC = () => {
   const [showMenu, setShowMenu] = useState(false);
   return (
     <FrontPageLayout>
-      <Header switchMenu={setShowMenu.bind(this, !showMenu)} />
       <UniqueLayout src={pics.unique} />
       <ComputerLayout>
         <ComputerPic src={pics.computer} />

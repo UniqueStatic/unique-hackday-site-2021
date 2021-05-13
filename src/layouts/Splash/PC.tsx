@@ -330,7 +330,6 @@ const FrontPage: FC = ({}) => {
   const [showMenu, setShowMenu] = useState(false);
   return (
     <FrontPageLayout>
-      <Header switchMenu={setShowMenu.bind(this, !showMenu)} />
       <ComputerLayout>
         <ComputerPic src={pics.computer} />
         <Reboot />

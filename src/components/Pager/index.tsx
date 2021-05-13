@@ -37,7 +37,7 @@ const Pager: FC<IPagerProps> = ({ pageIndex = 0, max = 6 }) => {
       {Array(max)
         .fill(null)
         .map((_, i) => (
-          <PagerItem show={i <= pageIndex} />
+          <PagerItem key={'pager' + i} show={i <= pageIndex} />
         ))}
     </PagerContainer>
   );

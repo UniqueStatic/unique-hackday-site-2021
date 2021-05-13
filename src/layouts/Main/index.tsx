@@ -7,6 +7,7 @@ import Section from '../Section';
 import { Background, Primary } from '@/consts/color';
 import { Global, css } from '@emotion/react';
 import Pager from '@/components/Pager';
+import * as common from '../Splash/common'
 
 const BasicLayout = styled.div({
   position: 'relative',
@@ -19,10 +20,7 @@ const BasicLayout = styled.div({
   overflowY: 'hidden',
   fontSize: 'calc(10px + 2vmin)',
   color: Primary,
-  // scroll
-  '-ms-overflow-style': 'none' /* IE and Edge */,
-  scrollbarWidth: 'none' /* Firefox */,
-  '::-webkit-scrollbar': { display: 'none' },
+  scrollBehavior: 'smooth'
 });
 
 const enum Direction {
@@ -33,11 +31,12 @@ const enum Direction {
 const PageMax = 5;
 
 const Main: FC = () => {
+  const {Header, Menu} = common.components
+  const [showMenu, setShowMenu] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const layoutRef = useRef<HTMLDivElement | null>(null);
   const SplashRef = useRef<HTMLDivElement | null>(null);
   const SectionRef = useRef<HTMLDivElement | null>(null);
-
   const handleScroll = useCallback(
     (direction: Direction) => {
       setPageIndex((index) => {
@@ -101,17 +100,20 @@ const Main: FC = () => {
           SplashRef.current?.scrollIntoView({ behavior: 'smooth' });
           break;
         }
-        case 1: {
+        default: {
           SectionRef.current?.scrollIntoView({ behavior: 'smooth' });
           break;
         }
-        default:
-          break;
       }
     };
     window.addEventListener('resize', handler);
     return () => window.removeEventListener('resize', handler);
   }, [pageIndex]);
+
+  let handleMenuOption = (pageIndex : number) =>{
+    setPageIndex(pageIndex);
+    setShowMenu(false);
+  }
   // Create the count state.
   return (
     <>
@@ -126,6 +128,7 @@ const Main: FC = () => {
         `}
       />
       <BasicLayout ref={layoutRef}>
+      <Header switchMenu={setShowMenu.bind(this, !showMenu)} pageIndex={pageIndex}/>
         <Splash.PC ref={SplashRef} />
         <Section
           ref={SectionRef}
@@ -134,6 +137,7 @@ const Main: FC = () => {
         />
       </BasicLayout>
       <Pager pageIndex={pageIndex} />
+      <Menu setPageIndex={setPageIndex} isHidden={!showMenu} />
     </>
   );
 };

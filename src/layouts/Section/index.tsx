@@ -44,7 +44,7 @@ const ContentLayout = styled.div({
   fontSize: 'calc(10px + 2vmin)',
   width: '80vw',
   margin: '0 10%',
-  borderTop: `${BorderWidth} solid ${Primary}`,
+  paddingTop: '12vh',
   minHeight: '100vh',
 
   // '&::after': {
@@ -61,7 +61,6 @@ const ContentLayout = styled.div({
 const withBorder = css({
   border: `${BorderWidth} solid ${Primary}`,
   marginLeft: `-${BorderWidth}`,
-  marginTop: `-${BorderWidth}`,
 });
 
 interface IExpandable {
@@ -231,7 +230,7 @@ const Container = React.forwardRef<HTMLDivElement | null, ISectionProps>(
           const expanded = i === index;
           return (
             <ItemLayout
-              key={i}
+              key={v.nameEng}
               onClick={() => handleSwitch(i)}
               {...{ expanded }}
             >
