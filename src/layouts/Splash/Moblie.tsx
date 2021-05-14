@@ -1,9 +1,8 @@
 import React, { useState, useEffect, FC } from 'react';
 import logo from '@/assets/logo.svg';
 // import './styles.css';
-import pics from './common';
+import { pics } from '.';
 import styled from '@emotion/styled';
-import type { IRefForwarder } from '@/interface';
 
 const SplashLayout = styled.div({
   minHeight: '100vh',
@@ -24,8 +23,6 @@ const FrontPageLayout = styled.div((props) => ({
   display: 'flex',
   justifyContent: 'center',
 }));
-
-
 
 const UniqueLayout = styled.img({
   position: 'absolute',
@@ -104,9 +101,6 @@ const Splash = React.forwardRef<HTMLDivElement | null>((props, ref) => (
   </SplashLayout>
 ));
 
-
-
-
 interface MenuLayoutProps {
   isHidden: boolean;
 }
@@ -119,6 +113,7 @@ const MenuLayout = styled.div<MenuLayoutProps>((props) => ({
   top: 0,
   transform: props.isHidden ? 'translateY(-100%)' : 'none',
   transition: 'transform 1s',
+  zIndex: 1,
 }));
 
 const MenuTitle = styled.div({
@@ -145,12 +140,18 @@ interface ActiveProps {
   active: boolean;
 }
 
-const OptionBlock = styled.div<ActiveProps>((props) => ({
+const OptionBlock = styled.div<ActiveProps>(({active}) => ({
+  position: 'relative',
+  top: '-4px',
   width: 'calc(200px + 40vmin)',
-  height: 'calc(15px + 2vmin)',
+  height: active ? 'calc(28px + 4vmin)' : 'calc(15px + 2vmin)',
   padding: 'calc(6px + 2vmin)',
-  fontWeight: props.active ? 600 : 400,
-  fontSize: props.active ? 'calc(14px + 2vmin)' : 'inherit',
+  paddingTop: '0',
+  paddingBottom: 'calc(12px + 4vmin)',
+  fontWeight: active ? 600 : 400,
+  fontSize: active ? 'calc(14px + 2vmin)' : 'inherit',
+  display: 'flex',
+  alignItems: 'flex-start'
 }));
 
 const MenuMain = styled.div({
@@ -160,56 +161,38 @@ const MenuMain = styled.div({
   overflow: 'hidden',
 });
 
-interface OptionProps {
-  word: string;
-  active: boolean;
-}
-
-const Option: FC<OptionProps> = (props) => {
-  const { word, active } = props;
-  return (
-    <OptionBlock active={active}>{(active ? `-  ` : '') + word}</OptionBlock>
-  );
-};
-
 interface MenuProps {
   isHidden: boolean;
+  setPageIndex: (n: number) => void;
+  pageIndex: number;
 }
 
 const Menu: FC<MenuProps> = (props) => {
+  const optionText = [
+    '首页 / Top',
+    '比赛介绍 / Introduction',
+    '流程安排 / Schedule',
+    '奖项设置 / Awards',
+    '常见问题 / FAQs',
+    '联系我们 / Access',
+    '主办方 / About Us',
+  ];
+  const { pageIndex, isHidden, setPageIndex } = props;
+  const options = optionText.map((_, i) => (
+    <OptionBlock
+      onClick={() => setPageIndex(i)}
+      active={pageIndex === i ? true : false}
+      key={_}
+    >
+      {pageIndex === i ? `- ${_}` : _}
+    </OptionBlock>
+  ));
   return (
-    <MenuLayout isHidden={props.isHidden}>
+    <MenuLayout isHidden={isHidden}>
       <MenuMain>
         <MenuTitle>MENU ---- 2021</MenuTitle>
         <Select>
-          <Option
-            word="首页&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Top"
-            active={true}
-          ></Option>
-          <Option
-            word="比赛介绍&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Introduction"
-            active={false}
-          ></Option>
-          <Option
-            word="流程安排&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Schedule"
-            active={false}
-          ></Option>
-          <Option
-            word="奖项设置&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Awards"
-            active={false}
-          ></Option>
-          <Option
-            word="常见问题&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;FAQs"
-            active={false}
-          ></Option>
-          <Option
-            word="联系我们&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;Access"
-            active={false}
-          ></Option>
-          <Option
-            word="主办方&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;About Us"
-            active={false}
-          ></Option>
+          {options}
         </Select>
       </MenuMain>
     </MenuLayout>
@@ -227,9 +210,118 @@ const FrontPage: FC = () => {
         <Reboot2021>2021</Reboot2021>
       </ComputerLayout>
       <SignUp />
-      <Menu isHidden={!showMenu} />
     </FrontPageLayout>
   );
 };
 
-export { Splash };
+interface HeaderProps {
+  switchMenu: () => void;
+  showMenu: boolean;
+}
+const Header: FC<HeaderProps> = (props) => {
+  const { showMenu, switchMenu } = props;
+  return (
+    <SplitLine>
+      <HeaderContainer>
+        <HackDayTitle />
+        <MenuButton active={showMenu} click={switchMenu} />
+      </HeaderContainer>
+    </SplitLine>
+  );
+};
+const HeaderContainer = styled.div({
+  position: 'relative',
+});
+const HackDayTitle: FC = () => {
+  return (
+    <HackdayTitleLayout>
+      <UniqueText>UNIQUESTUDIO</UniqueText>
+      <HackdayText>HACKDAY</HackdayText>
+    </HackdayTitleLayout>
+  );
+};
+
+const SplitLine = styled.div({
+  position: 'fixed',
+  width: '-webkit-fill-available',
+  height: '1.5px',
+  backgroundColor: 'black',
+  zIndex: 2,
+  margin: '0 auto',
+  marginTop: '12vh',
+});
+
+const HackdayTitleLayout = styled.div({
+  position: 'absolute',
+  left: '20px',
+  top: '-40px',
+});
+
+const UniqueText = styled.div({
+  fontSize: 'calc(6px + 1vmin)',
+  fontWeight: 300,
+  letterSpacing: '3px',
+});
+
+const HackdayText = styled.div({
+  fontSize: 'calc(12px + 2vmin)',
+  fontFamily: 'Maven Pro',
+});
+const MenuButtonLayout = styled.div({
+  position: 'absolute',
+  top: '-30px',
+  right: '10vmin',
+  width: '20px',
+  cursor: 'pointer',
+});
+
+interface MenuButtonProps {
+  click: () => void;
+  active: boolean;
+}
+interface MenuButtonBlockProps {
+  color: string;
+  isTop: boolean;
+  isBottom: boolean;
+  active: boolean;
+}
+const MenuButtonBlock = styled.div<MenuButtonBlockProps>((props) => ({
+  width: '100%',
+  height: '3px',
+  margin: '1px 0',
+  backgroundColor: props.color,
+  transform:
+    props.isTop && props.active
+      ? 'rotate(45deg) translateY(5.5px)'
+      : props.isBottom && props.active
+      ? 'rotate(-45deg) translateY(-5.5px)'
+      : 'none',
+  transition: '0.5s',
+}));
+const MenuButton: FC<MenuButtonProps> = (props) => {
+  const { click, active } = props;
+  return (
+    <MenuButtonLayout onClick={click}>
+      <MenuButtonBlock
+        color="black"
+        isTop={true}
+        isBottom={false}
+        active={active}
+      />
+      <MenuButtonBlock
+        color="transparent"
+        isTop={false}
+        isBottom={false}
+        active={active}
+      />
+      <MenuButtonBlock
+        color="black"
+        isTop={false}
+        isBottom={true}
+        active={active}
+      />
+    </MenuButtonLayout>
+  );
+};
+
+export { Splash, Header, Menu };

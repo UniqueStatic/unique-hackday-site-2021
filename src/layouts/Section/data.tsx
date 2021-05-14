@@ -6,28 +6,33 @@ import { jsx, css } from '@emotion/react';
 const Container = styled.div({
   padding: '0 4vw',
   h2: {
-    fontSize: '1.7rem',
+    fontSize: '1.5rem',
+    fontWeight: 'normal'
     // margin: '2em 0',
   },
   h3: {
-    fontSize: '1.3rem',
-    marginBottom: '2rem',
+    fontSize: '1.2rem',
+    fontWeight: 'normal',
+    margin: '0 0 32px 0'
   },
   small: {
-    fontSize: '1.2rem',
+    fontSize: '1rem',
+    margin: '0 0 0 20px'
     // margin:'none'
   },
   p: {
-    fontSize: '1.45rem',
-  },
-  '& > *': {
-    // display:'none'
-    margin: '0 0 3rem',
-    ':first-of-type': {
-      margin: '3rem 0',
-    },
+    fontSize: '1.2rem',
+    margin: '0'
   },
 });
+
+interface PhraseProps {
+  doubleMargin: boolean
+}
+
+const P = styled.p<PhraseProps>(({doubleMargin}) => ({
+  marginBottom: doubleMargin ? '72px!important' : '36px'
+}))
 
 export const Introduction = (
   <Container>
@@ -40,24 +45,24 @@ export const Introduction = (
     </p>
     <h2>
       150名参赛选手{' '}
-      <small
+    </h2>
+    <small
         css={css({
           display: 'inline-block',
           fontWeight: 'normal',
           fontSize: '1rem!important',
           letterSpacing: '0.5ch',
+          margin: '0 0 72px 0!important'
         })}
       >
         通过简历筛选出来来自全国各大高校的150名学生
       </small>
-    </h2>
-
     <h3>24小时</h3>
-    <small>程序、设计、产品在24小时内实现产品开发。</small>
+    <P doubleMargin={true}>程序、设计、产品在24小时内实现产品开发。</P>
     <h3>{'旅行&食物'}</h3>
-    <small>报销交通费与无限量的食物供应。</small>
+    <P doubleMargin={true}>报销交通费与无限量的食物供应。</P>
     <h3>{'奖金&纪念'}</h3>
-    <small>丰厚的奖金与精美的纪念品。</small>
+    <P doubleMargin={true}>丰厚的奖金与精美的纪念品。</P>
   </Container>
 );
 
@@ -84,20 +89,41 @@ const scheduleData = [
   },
 ];
 
+interface TitleProps {
+  needBorder : boolean 
+}
+
+const Title = styled.div<TitleProps>( ({ needBorder }) => ({
+  fontSize: '1.7rem',
+  fontWeight: 'normal',
+  margin: '20px 0',
+  paddingLeft: '5px',
+  borderLeft: needBorder ? '2px solid black' : 'none',
+  position: 'relative',
+  left: '-7px',
+  display: 'flex',
+  alignItems: 'center',
+}))
+
 export const Schedule = (
   <Container>
     {scheduleData.map((day, i) => (
       <div key={i}>
-        <h2>
+        <Title needBorder={true}>
           DAY {i + 1} <small>{day.date}</small>
-        </h2>
+        </Title>
         {day.spans.map(({ from, to, content }) => (
-          <div key={from}>
-            <h3>
+          <h2 key={from}>
+            <h3 css={css`
+              margin-bottom: 18px!important;
+            `}>
               {from}~{to}
             </h3>
-            <p>{content}</p>
-          </div>
+            <p css={css`
+              font-size: 1rem!important;
+              margin-bottom: 40px!important;
+            `}>{content}</p>
+          </h2>
         ))}
       </div>
     ))}
@@ -116,10 +142,12 @@ export const Awards = (
   <Container>
     {awardsData.map(({ nameChn, nameEng, value }, i) => (
       <div key={i}>
-        <h2>
-          {nameChn} <small>{nameEng}</small>
-        </h2>
-        <p>{value}</p>
+        <Title needBorder={false}>
+          {nameChn} <small>{'/'}</small><small>{nameEng}</small>
+        </Title>
+        <p css={css`
+          margin-bottom: 50px!important;
+        `}>{value}</p>
       </div>
     ))}
   </Container>
@@ -191,8 +219,8 @@ export const FAQs = (
   <Container>
     {faqsData.map(({ question, answer }, i) => (
       <div key={i}>
-        <h2>{question}</h2>
-        <div>{answer}</div>
+        <h3>{question}</h3>
+        <P doubleMargin={true}>{answer}</P>
       </div>
     ))}
   </Container>
@@ -211,3 +239,10 @@ export const Access = (
     <p>官方FAQ QQ群组：852034326</p>
   </Container>
 );
+
+export const data = {
+  Introduction,
+  scheduleData,
+  awardsData,
+  faqsData
+}
