@@ -1,193 +1,334 @@
-import React, { useState, useEffect, FC, useCallback, useRef } from 'react';
+import React, { useState, useEffect, FC, useCallback, useRef, forwardRef } from 'react';
 import logo from '@/assets/logo.svg';
 // import './styles.css';
 import styled from '@emotion/styled';
+import SponsorPic from '../../assets/imgs/Sponsor.png'
 import { css, keyframes } from '@emotion/react';
 import { Background, Primary, Secondary } from '@/consts/color';
-import { Access, Awards, FAQs, Introduction, Schedule } from './data';
+import data from './data';
 import type { IRefForwarder } from '@/interface';
+const { titleData, introductionData, scheduleData, awardsData } = data
 
-const BorderWidth = '2px';
 
-const data = [
-  {
-    nameChn: '比赛介绍',
-    nameEng: 'Introduction',
-    content: Introduction,
-  },
-  {
-    nameChn: '流程安排',
-    nameEng: 'Schedule',
-    content: Schedule,
-  },
-  {
-    nameChn: '奖项设置',
-    nameEng: 'Awards',
-    content: Awards,
-  },
-  {
-    nameChn: '常见问题',
-    nameEng: 'FAQs',
-    content: FAQs,
-  },
-  {
-    nameChn: '联系我们',
-    nameEng: 'Contact',
-    content: Access,
-  },
-];
+
+// const ContentContainer = styled.div({
+//   height: '100vh',
+//   width: '-webkit-fill-available',
+//   background: '#e3e3e3',
+//   overflow: 'auto',
+// })
+
+// const Content : FC = () => {
+//   return(
+//     <ContentContainer></ContentContainer>
+//   )
+// }
+
+// export default Content;
+const IntroLayout = styled.div({
+  borderLeft: '2px solid black',
+  paddingLeft: '20px',
+  lineHeight: 'calc(100% + 20px)',
+  fontSize: '1rem',
+  marginBottom: '162px'
+})
+
+const SubTitle = styled.div({
+  fontSize: '0.75rem',
+  position: 'relative',
+  top: '-50px'
+})
+
+interface FloatBlockProps {
+  isRight: boolean
+}
+
+const FloatBlock = styled.div<FloatBlockProps>(({ isRight }) => ({
+  borderLeft: '2px solid black',
+  paddingLeft: '20px',
+  position: 'relative',
+  left: isRight ? '100%' : 'none',
+  transform: isRight ? 'translateX(-100%)' : 'none'
+}))
+
+interface TextBlockProps {
+  isTitle: boolean
+}
+
+const TextBlock = styled.div<TextBlockProps>(({ isTitle }) => ({
+  fontSize: isTitle ? '1.2rem' : '1rem',
+  lineHeight: 'calc(100% + 20px)',
+}))
+
+const Introduction: FC = () => {
+  return (
+    <>
+      <IntroLayout>
+        {introductionData[0]}
+        <br />
+        {introductionData[1]}
+        <br />
+        {introductionData[2]}
+      </IntroLayout>
+      <ItemTitle width='80%'>{introductionData[3]}</ItemTitle>
+      <SubTitle>{introductionData[4]}</SubTitle>
+      <FloatBlock isRight={false}>
+        <TextBlock isTitle={true}>{introductionData[5]}</TextBlock>
+        <TextBlock isTitle={false}>{introductionData[6]}</TextBlock>
+        <TextBlock isTitle={false}>{introductionData[7]}</TextBlock>
+      </FloatBlock>
+      <FloatBlock isRight={true}>
+        <TextBlock isTitle={true}>{introductionData[8]}</TextBlock>
+        <TextBlock isTitle={false}>{introductionData[9]}</TextBlock>
+        <TextBlock isTitle={false}>{introductionData[10]}</TextBlock>
+      </FloatBlock>
+      <FloatBlock isRight={false}>
+        <TextBlock isTitle={true}>{introductionData[11]}</TextBlock>
+        <TextBlock isTitle={false}>{introductionData[12]}</TextBlock>
+        <TextBlock isTitle={false}>{introductionData[13]}</TextBlock>
+      </FloatBlock>
+    </>
+  )
+}
+
+const DateBlock = styled.div({
+  paddingLeft: '20px',
+  borderLeft: '2px solid black',
+  marginBottom: '42px'
+})
+
+const TimeBlock = styled.div({
+  margin: '32px 0'
+})
+
+const Schedule: FC = () => {
+  const elements = scheduleData.map((_) => {
+    const times = _.spans.map(_ =>
+      <TimeBlock key={_.from}>
+        <TextBlock isTitle={false}>{_.from} ~ {_.to}</TextBlock>
+        <TextBlock isTitle={false}>{_.content}</TextBlock>
+      </TimeBlock>
+    )
+    return (
+      <div key={_.day}>
+        <DateBlock>
+          <TextBlock isTitle={false}>{_.date}</TextBlock>
+          <TextBlock isTitle={true}>{_.day}</TextBlock>
+        </DateBlock>
+        {times}
+      </div>
+    )
+  })
+  return (
+    <>
+      {elements}
+    </>
+  )
+}
+
+const AwardsBlock = styled.div({
+  marginBottom: '48px'
+})
+
+const Awards: FC = () => {
+  const awards = awardsData.map(_ =>
+    <AwardsBlock key={_.nameChn}>
+      <TextBlock isTitle={false}>{_.nameChn} / {_.nameEng}</TextBlock>
+      <TextBlock isTitle={false}>{_.value}</TextBlock>
+    </AwardsBlock>
+  )
+  return (
+    <>
+      {awards}
+    </>
+  )
+}
+const FAQBlock = styled.div({
+  marginBottom: '48px'
+})
+
+const FAQText = styled.div<TextBlockProps>(({ isTitle }) => ({
+  fontSize: isTitle ? '1.2rem' : '1rem',
+  marginBottom: isTitle ? '1rem' : '0'
+}))
+
+const FAQs: FC = () => {
+  const faqs = data.faqsData.map(_ =>
+    <FAQBlock key={_.question}>
+      <FAQText isTitle={true}>{_.question}</FAQText>
+      <FAQText isTitle={false}>{_.answer}</FAQText>
+    </FAQBlock>
+  )
+  return (
+    <>
+      {faqs}
+    </>
+  )
+}
+
+const AccessBlock = styled.div({
+  borderLeft: '2px solid black',
+  paddingLeft: '20px',
+})
+
+const AccessMail = styled.a({
+  color: 'black',
+  marginTop: '50px',
+  display: 'block'
+})
+
+const Access: FC = () => {
+  const { position, institution, mail, qq } = data.accessData
+  return (
+    <AccessBlock>
+      <TextBlock isTitle={false}>{position}</TextBlock>
+      <TextBlock isTitle={false}>{institution}</TextBlock>
+      <AccessMail href={`mailto:${mail}`}>{mail}</AccessMail>
+      <TextBlock isTitle={false}>{qq}</TextBlock>
+    </AccessBlock>
+  )
+}
+
+interface ContentContainerProps {
+  index: number;
+  handleSwitch: (n: number) => void;
+}
+
+const ContentContainer = forwardRef<HTMLDivElement | null, ContentContainerProps>(({ index, handleSwitch }, ref) => {
+  return (
+    <ContentLayout ref={ref}>
+      {titleData.map((v, i) => {
+        return (
+          <ItemLayout
+            key={v.nameEng}
+            id={`item${i}`}
+          >
+            <Content index={i} />
+          </ItemLayout>
+        );
+      })}
+      <Sponsor id='item5'/>
+    </ContentLayout>
+  )
+})
 
 const ContentLayout = styled.div({
-  display: 'flex',
-  position: 'relative',
-  justifyContent: 'center',
-  fontSize: 'calc(10px + 2vmin)',
-  width: '80vw',
-  margin: '0 10%',
-  paddingTop: '12vh',
-  minHeight: '100vh',
-
-  '&::after': {
-    content: '""',
-    width: '94vw',
-    /* display: table; */
-    position: 'absolute',
-    height: BorderWidth,
-    top: 'calc(92vh + 2px)',
-    // bottom:'10vh',
-    background: Primary,
-  },
-});
-
-const withBorder = css({
-  border: `${BorderWidth} solid ${Primary}`,
-  marginLeft: `-${BorderWidth}`,
+  paddingTop: '15vh',
+  width: '100%',
 });
 
 interface IExpandable {
   expanded?: boolean;
 }
 
-const ItemLayout = styled.li<IExpandable>(
-  ({ expanded = false }) => ({
-    position: 'relative',
-    overflow: 'hidden',
-
-    listStyle: 'none',
-    width: expanded ? '41vw' : '7vw',
-    height: '80vh',
-
-    // maxHeight: expanded ? '90vh' : '60vh',
-    transition: 'width .5s ease-in-out',
-    display: 'flex',
-    flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    zIndex: 1,
-  }),
-
-  withBorder,
-);
-
-const bounce = keyframes`
-  from, 20%, 53%, 80%, to {
-    transform: translate3d(0,0,0);
-  }
-
-  40%, 43% {
-    transform: translate3d(0, -30px, 0);
-  }
-
-  70% {
-    transform: translate3d(0, -15px, 0);
-  }
-
-  90% {
-    transform: translate3d(0,-4px,0);
-  }
-`;
-
-const fadeIn = keyframes({
-  '0%': { opacity: 0 },
-  '100%': { opacity: 1 },
-});
-
-const ScrollView = styled.div<IExpandable>(({ expanded = false }) => ({
-  // padding: '0 3vw',
-  borderTop: `${BorderWidth} solid ${Primary}`,
-  overflowY: 'auto',
-  width: 'calc(41vw + 1px)',
-
-  // whiteSpace:'nowrap',
-  marginRight: `-${BorderWidth}`,
-  marginBottom: `-${BorderWidth}`,
-  // animation: `${fadeIn} 1s ease;`,
-  // animationFillMode:'backwards',
-  // animationDelay: '.5s',
-  '::-webkit-scrollbar': {
-    width: '32px',
-  },
-  '::-webkit-scrollbar-track': {
-    border: `${BorderWidth} solid ${Primary}`,
-    borderTop: `none`,
-    background: Background,
-  },
-  '::-webkit-scrollbar-thumb': {
-    border: '6px solid transparent;',
-    boxShadow: `inset 0 0 0 ${BorderWidth} ${Primary}, inset 0 0 0 20px ${Secondary}`,
-  },
-}));
-
-interface AppProps {}
-
-const RotatedText = styled.div({
-  transform: 'rotate(-90deg)',
-  transformOrigin: 'left top',
-  fontSize: '25px',
-  position: 'absolute',
-  bottom: '0',
-  left: 'calc(50% - 1ch)',
-  fontFamily: ['Russo One'],
-});
-
-const BlackText = styled.div<IExpandable>(({ expanded = false }) => ({
-  margin: expanded ? '3vw' : 'initial',
-  fontFamily: ['Russo One'],
-}));
-
-const ItemTitle = styled.div<IExpandable>(({ expanded = false }) => ({
-  flex: '0 0 10vh',
+const ItemLayout = styled.div({
   display: 'flex',
-  alignItems: 'center',
-  justifyContent: expanded ? 'flex-start' : 'center',
-  whiteSpace: 'nowrap',
-  overflow: 'hidden',
-  // div: {
-  //   display: 'contents',
-  // },
-}));
+  flexFlow: 'column',
+  padding: '0 24px',
+  alignItems: 'flex-start',
+});
 
-interface IContentProps {
-  expanded?: boolean;
-  index: number;
-  animating: boolean;
+interface ItemTitleProps {
+  width: string
 }
 
-const Content: FC<IContentProps> = ({ expanded = false, index, animating }) => {
-  const { nameChn, nameEng, content } = data[index];
+const ItemTitle = styled.div<ItemTitleProps>(({ width }) => ({
+  color: 'white',
+  background: 'black',
+  padding: '4px 20px',
+  margin: '0 0 64px',
+  width: width
+}))
+
+interface IContentProps {
+  index: number;
+}
+const SponsorBlock = styled.div({
+  position: 'relative',
+  height: 'calc(100vh - 101.5px)',
+  padding: '50px 30px',
+  background: 'black',
+  width: '-webkit-fill-available',
+  zIndex: 4,
+})
+
+const SponsorTitle = styled.div({
+  color: 'white',
+  background: 'black',
+  margin: '0 0 64px',
+})
+
+const SponsorImg = styled.img({
+  position: 'absolute',
+  top: '90px',
+  left: '30px',
+  maxHeight: '20px'
+})
+
+const SponsorName = styled.div({
+  fontSize: '1.2rem',
+  paddingTop: '10vh',
+  color: 'white',
+  background: 'black',
+})
+
+const SponsorText = styled.div({
+  fontSize: '0.8rem',
+  lineHeight: 'calc(100% + 20px)',
+  paddingTop: '15px',
+  color: 'white',
+  background: 'black',
+})
+
+interface SponsorProps {
+  id: string 
+}
+
+const Sponsor: FC<SponsorProps> = ({ id }) => {
   return (
-    <>
-      {' '}
-      <ItemTitle {...{ expanded }}>
-        <BlackText {...{ expanded }}>0{index + 1}</BlackText>
-        {expanded && ` ${nameChn} / ${nameEng}`}
+    <SponsorBlock id={id}>
+      <SponsorTitle>赞助商 / Sponsor</SponsorTitle>
+      <SponsorImg src={SponsorPic}></SponsorImg>
+      <SponsorName>武汉夜莺科技有限公司</SponsorName>
+      <SponsorText>坐落于武汉光谷核心繁华地带（K11写字楼）。
+核心创始人来自华中科技大学联创团队。
+是一家专注于智能营销领域的科技公司。
+于2016年获得知名投资机构真格基金投资、于2018年获得近
+千万元战略融资、于2021年获得新一轮融资。
+核心业务微伴助手、壹伴助手直接或间影响国内数亿C端用户。
+近3年公司估值上涨百倍，除此之外，目前仍在超高速上涨！
+“是一个不折不扣的潜力股”。
+这些Tag可以更好的给我们做一个概述：
+大厂薪资、酷炫工作氛围、优质办公环境、大牛多、扁平化、
+双休、涨薪快（半年固定涨）、弹性工作、零食下午茶、生日
+庆祝、周年礼物、节日礼包、学习报销……
+我们欢迎有理想的小伙伴加入！</SponsorText>
+    </SponsorBlock>
+  )
+}
+const ContentBlock = styled.div({
+  marginBottom: '100px',
+  display: 'flex',
+  flexFlow: 'column',
+  alignItems: 'flex-start'
+})
+
+const Content: FC<IContentProps> = ({ index }) => {
+  const { nameChn, nameEng } = titleData[index];
+  const Contents = [
+    <Introduction />,
+    <Schedule />,
+    <Awards />,
+    <FAQs />,
+    <Access />,
+  ]
+  return (
+    <ContentBlock>
+      <ItemTitle width='auto'>
+        {`${nameChn} / ${nameEng}`}
       </ItemTitle>
-      {expanded ? (
-        <ScrollView onWheelCapture={ev=>ev.stopPropagation()} >{content}</ScrollView>
-      ) : (
-        <RotatedText>{nameEng}</RotatedText>
-      )}
-    </>
+      {Contents[index]}
+    </ContentBlock>
   );
 };
 
@@ -196,7 +337,7 @@ interface ISectionProps {
   setPageIndex: (index: number) => void;
 }
 
-const Container = React.forwardRef<HTMLDivElement | null, ISectionProps>(
+const Container = forwardRef<HTMLDivElement | null, ISectionProps>(
   ({ pageIndex, setPageIndex }, ref) => {
     // Create the count state.
     const [index, setIndex] = useState(0);
@@ -221,25 +362,12 @@ const Container = React.forwardRef<HTMLDivElement | null, ISectionProps>(
         }
         // setIndex(i);
         setPageIndex(i + 1);
-        return () => {};
+        return () => { };
       },
       [animating, index],
     );
     return (
-      <ContentLayout ref={ref}>
-        {data.map((v, i) => {
-          const expanded = i === index;
-          return (
-            <ItemLayout
-              key={v.nameEng}
-              onClick={() => handleSwitch(i)}
-              {...{ expanded }}
-            >
-              <Content expanded={expanded} index={i} animating={animating} />
-            </ItemLayout>
-          );
-        })}
-      </ContentLayout>
+      <ContentContainer ref={ref} index={index} handleSwitch={handleSwitch} />
     );
   },
 );

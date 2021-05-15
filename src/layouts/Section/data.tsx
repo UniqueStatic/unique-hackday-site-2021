@@ -20,6 +20,7 @@ const Container = styled.div({
     margin: '0 0 0 20px'
     // margin:'none'
   },
+
   p: {
     fontSize: '1.2rem',
     margin: '0'
@@ -33,8 +34,23 @@ interface PhraseProps {
 const P = styled.p<PhraseProps>(({doubleMargin}) => ({
   marginBottom: doubleMargin ? '72px!important' : '36px'
 }))
-
-export const Introduction = (
+const introductionData = [
+  'Unique Hackday',
+  '最初源于联创团队内部成员的Hackday比赛之后将比赛的规模扩大，邀请来自全国的大学一同参与。',
+  '因疫情缘故缺席了2020年，而今年我们决定重启，继续将开放、创新、极客的精神传递给更多的人。',
+  '150名参赛选手',
+  '通过简历筛选出来来自全国各大高校的150名学生',
+  '24小时',
+  '程序、设计、产品',
+  '在24小时内实现产品开发',
+  '旅行&食物',
+  '报销交通费',
+  '无限量的食物供应',
+  '奖金&纪念',
+  '丰厚的奖金',
+  '精美的纪念品'
+]
+const Introduction = (
   <Container>
     <h2>Unique Hackday</h2>
     <p>
@@ -69,6 +85,7 @@ export const Introduction = (
 const scheduleData = [
   {
     date: '2021.06.13',
+    day: '第一天',
     spans: [
       { from: '08:00', to: '09:30', content: '参会嘉宾/比赛选手 ·签到' },
       { from: '09:30', to: '11:00', content: '启明学院报告厅 ·比赛开幕式' },
@@ -79,6 +96,7 @@ const scheduleData = [
   },
   {
     date: '2021.06.13',
+    day: '第二天',
     spans: [
       { from: '07:00', to: '08:00', content: '进行早餐' },
       { from: '11:00', to: '13:00', content: '进行午餐 休息' },
@@ -105,7 +123,7 @@ const Title = styled.div<TitleProps>( ({ needBorder }) => ({
   alignItems: 'center',
 }))
 
-export const Schedule = (
+const Schedule = (
   <Container>
     {scheduleData.map((day, i) => (
       <div key={i}>
@@ -138,7 +156,7 @@ const awardsData = [
   { nameChn: '企业特色奖', nameEng: 'Corporate', value: 'TBD' },
 ];
 
-export const Awards = (
+const Awards = (
   <Container>
     {awardsData.map(({ nameChn, nameEng, value }, i) => (
       <div key={i}>
@@ -215,7 +233,7 @@ const faqsData = [
   },
 ];
 
-export const FAQs = (
+const FAQs = (
   <Container>
     {faqsData.map(({ question, answer }, i) => (
       <div key={i}>
@@ -226,7 +244,7 @@ export const FAQs = (
   </Container>
 );
 
-export const Access = (
+const Access = (
   <Container>
     <h2>湖北省 武汉市 洪山区 珞喻路 1037号</h2>
     <h2>华中科技大学 启明学院</h2>
@@ -240,9 +258,48 @@ export const Access = (
   </Container>
 );
 
-export const data = {
-  Introduction,
+const accessData = {
+  position: '湖北省 武汉市 洪山区 珞喻路 1037号',
+  institution: '华中科技大学 启明学院',
+  mail: 'contact@hustunique.com',
+  qq: '官方FAQ QQ群组：852034326'
+}
+
+const titleData = [
+  {
+    nameChn: '比赛介绍',
+    nameEng: 'Introduction',
+    content: Introduction,
+  },
+  {
+    nameChn: '流程安排',
+    nameEng: 'Schedule',
+    content: Schedule,
+  },
+  {
+    nameChn: '奖项设置',
+    nameEng: 'Awards',
+    content: Awards,
+  },
+  {
+    nameChn: '常见问题',
+    nameEng: 'FAQs',
+    content: FAQs,
+  },
+  {
+    nameChn: '联系我们',
+    nameEng: 'Contact',
+    content: Access,
+  },
+];
+
+const data = {
+  titleData,
+  introductionData,
   scheduleData,
   awardsData,
-  faqsData
+  faqsData,
+  accessData,
 }
+
+export default data

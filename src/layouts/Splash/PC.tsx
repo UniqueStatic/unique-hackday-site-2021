@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 // import './styles.css';
 import {pics} from '.';
 import styled from '@emotion/styled';
+import { Background, Primary, Secondary } from '@/consts/color';
 import { jsx, css } from '@emotion/react';
 
 const SplashLayout = styled.div({
@@ -19,7 +20,7 @@ const SplashLayout = styled.div({
 const FrontPageLayout = styled.div((props) => ({
   height: '100vh',
   width: '-webkit-fill-available',
-  backgroundColor: '#EFB8D3',
+  backgroundColor: Background,
   display: 'flex',
   alignItems: 'center',
   overflow: 'hidden',
@@ -28,7 +29,7 @@ const FrontPageLayout = styled.div((props) => ({
 
 const ComputerLayout = styled.div({
   position: 'relative',
-  width: 'calc(80vh * 421 / 403)',
+  width: 'calc(100vh * 421 / 403)',
   maxWidth: '100%',
   display: 'flex',
   justifyContent: 'center',
@@ -167,11 +168,12 @@ const HackDayTitle: FC<HackdayProps> = (props) => {
 const SplitLine = styled.div({
   position: 'fixed',
   width: '94vw',
-  height: '2px',
-  backgroundColor: 'black',
+  height: '0',
+  borderBottom: '2px black solid',
+  backgroundColor: Background,
   zIndex: 2,
   margin: '0 auto',
-  marginTop: '12vh',
+  paddingTop: '12vh',
 });
 
 const No2021 = styled.div({
@@ -222,7 +224,7 @@ const MenuButtonBlock = styled.div<MenuButtonBlockProps>((props) => ({
 
 const MenuButtonLayout = styled.div({
   position: 'absolute',
-  top: '20px',
+  top: 'calc(12vh + 20px)',
   right: '10vmin',
   width: '20px',
   cursor: 'pointer',
@@ -265,7 +267,7 @@ interface MenuLayoutProps {
 
 const MenuLayout = styled.div<MenuLayoutProps>((props) => ({
   position: 'absolute',
-  backgroundColor: '#E3E3E3',
+  backgroundColor: Background,
   height: '100vh',
   width: '-webkit-fill-available',
   top: 0,
@@ -286,7 +288,7 @@ const MenuTitleBlock = styled.div({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#E3E3E3',
+  backgroundColor: Background,
 });
 
 const MenuTitleBackground = styled.div({
@@ -300,10 +302,19 @@ const MenuTitleBackground = styled.div({
   cursor: 'pointer',
 });
 
+const Line = styled.div({
+  width: '100px',
+  height: '0',
+  borderTop: '1.5px black solid',
+  margin: '0 10px'
+})
+
 const MenuTitle: FC = () => {
   return (
     <MenuTitleBackground>
-      <MenuTitleBlock>MENU ---------- 2021</MenuTitleBlock>
+      <MenuTitleBlock>MENU 
+        <Line></Line>
+      2021</MenuTitleBlock>
     </MenuTitleBackground>
   );
 };

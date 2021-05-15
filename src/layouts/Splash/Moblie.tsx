@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FC } from 'react';
 import logo from '@/assets/logo.svg';
+import { Background, Primary } from '@/consts/color';
 // import './styles.css';
 import { pics } from '.';
 import styled from '@emotion/styled';
@@ -107,7 +108,7 @@ interface MenuLayoutProps {
 
 const MenuLayout = styled.div<MenuLayoutProps>((props) => ({
   position: 'absolute',
-  backgroundColor: '#E3E3E3',
+  backgroundColor: Background,
   height: '100vh',
   width: '-webkit-fill-available',
   top: 0,
@@ -140,7 +141,8 @@ interface ActiveProps {
   active: boolean;
 }
 
-const OptionBlock = styled.div<ActiveProps>(({active}) => ({
+const OptionBlock = styled.a<ActiveProps>(({active}) => ({
+  color: 'black',
   position: 'relative',
   top: '-4px',
   width: 'calc(200px + 40vmin)',
@@ -151,7 +153,8 @@ const OptionBlock = styled.div<ActiveProps>(({active}) => ({
   fontWeight: active ? 600 : 400,
   fontSize: active ? 'calc(14px + 2vmin)' : 'inherit',
   display: 'flex',
-  alignItems: 'flex-start'
+  alignItems: 'flex-start',
+  textDecoration: 'none'
 }));
 
 const MenuMain = styled.div({
@@ -175,7 +178,7 @@ const Menu: FC<MenuProps> = (props) => {
     '奖项设置 / Awards',
     '常见问题 / FAQs',
     '联系我们 / Access',
-    '主办方 / About Us',
+    '赞助商 / Sponsor',
   ];
   const { pageIndex, isHidden, setPageIndex } = props;
   const options = optionText.map((_, i) => (
@@ -183,6 +186,7 @@ const Menu: FC<MenuProps> = (props) => {
       onClick={() => setPageIndex(i)}
       active={pageIndex === i ? true : false}
       key={_}
+      href={`#item${i - 1}`}
     >
       {pageIndex === i ? `- ${_}` : _}
     </OptionBlock>
@@ -244,11 +248,12 @@ const HackDayTitle: FC = () => {
 const SplitLine = styled.div({
   position: 'fixed',
   width: '-webkit-fill-available',
-  height: '1.5px',
-  backgroundColor: 'black',
+  height: '0',
+  borderBottom: '1.5px solid black',
+  backgroundColor:'#EFB8D3',
   zIndex: 2,
   margin: '0 auto',
-  marginTop: '12vh',
+  paddingTop: '12vh',
 });
 
 const HackdayTitleLayout = styled.div({
