@@ -244,26 +244,25 @@ const FAQs = (
   </Container>
 );
 
-const Access = (
-  <Container>
-    <h2>湖北省 武汉市 洪山区 珞喻路 1037号</h2>
-    <h2>华中科技大学 启明学院</h2>
-    <a
-      href="
-        mailto:contact@hustunique.com"
-    >
-      contact@hustunique.com
-    </a>
-    <p>官方FAQ QQ群组：852034326</p>
-  </Container>
-);
-
 const accessData = {
   position: '湖北省 武汉市 洪山区 珞喻路 1037号',
   institution: '华中科技大学 启明学院',
   mail: 'contact@hustunique.com',
-  qq: '官方FAQ QQ群组：852034326'
+  qq: '官方FAQ QQ群组：1057802260'
 }
+
+const Access = (
+  <Container>
+    <h2>{accessData.position}</h2>
+    <h2>{accessData.institution}</h2>
+    <a href="mailto:contact@hustunique.com">
+      {accessData.mail}
+    </a>
+    <p>{accessData.qq}</p>
+  </Container>
+);
+
+
 
 const titleData = [
   {

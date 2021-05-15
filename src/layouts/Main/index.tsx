@@ -42,7 +42,7 @@ const PageMax = 5;
 const Main: FC = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
-  const [isPC, setIsPC] = useState(true);
+  const [isPC, setIsPC] = useState(false);
   const layoutRef = useRef<HTMLDivElement | null>(null);
   const SplashRef = useRef<HTMLDivElement | null>(null);
   const SectionRef = useRef<HTMLDivElement | null>(null);

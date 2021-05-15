@@ -245,7 +245,7 @@ interface IContentProps {
 }
 const SponsorBlock = styled.div({
   position: 'relative',
-  height: 'calc(100vh - 101.5px)',
+  height: 'calc(100vh - 100px)',
   padding: '50px 30px',
   background: 'black',
   width: '-webkit-fill-available',
