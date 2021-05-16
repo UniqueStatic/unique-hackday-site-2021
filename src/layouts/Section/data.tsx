@@ -184,8 +184,8 @@ interface TitleProps {
 
 const Title = styled.div<TitleProps>(({ needBorder }) => ({
   fontSize: '1.7rem',
-  fontWeight: 'normal',
-  margin: '20px 0',
+  fontWeight: 500,
+  margin: '5vh 0 3vh 0',
   paddingLeft: '5px',
   borderLeft: needBorder ? '2px solid black' : 'none',
   position: 'relative',
@@ -201,25 +201,32 @@ const Schedule = (
         <Title needBorder={true}>
           DAY {i + 1} <small>{day.date}</small>
         </Title>
-        {day.spans.map(({ from, to, content }) => (
-          <h2 key={from}>
-            <p
-              css={css`
-                margin-bottom: 18px !important;
-              `}
-            >
-              {from}~{to}
-            </p>
-            <p
-              css={css`
-                font-size: 1rem !important;
-                margin-bottom: 40px !important;
-              `}
-            >
-              {content}
-            </p>
-          </h2>
-        ))}
+        <div
+          css={css`
+            padding-left: 0.5vw;
+          `}
+        >
+          {day.spans.map(({ from, to, content }) => (
+            <h2 key={from}>
+              <p
+                css={css`
+                  margin-bottom: 18px !important;
+                `}
+              >
+                {from}~{to}
+              </p>
+              <p
+                css={css`
+                  font-size: 1rem !important;
+                  margin-bottom: 40px !important;
+                  font-weight: 400;
+                `}
+              >
+                {content}
+              </p>
+            </h2>
+          ))}
+        </div>
       </div>
     ))}
   </Container>
