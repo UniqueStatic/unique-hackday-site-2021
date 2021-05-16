@@ -143,7 +143,7 @@ interface ActiveProps {
   active: boolean;
 }
 
-const OptionBlock = styled.a<ActiveProps>(({active}) => ({
+const OptionBlock = styled.a<ActiveProps>(({ active }) => ({
   color: 'black',
   position: 'relative',
   top: '-4px',
@@ -156,7 +156,7 @@ const OptionBlock = styled.a<ActiveProps>(({active}) => ({
   fontSize: active ? 'calc(14px + 2vmin)' : 'inherit',
   display: 'flex',
   alignItems: 'flex-start',
-  textDecoration: 'none'
+  textDecoration: 'none',
 }));
 
 const MenuMain = styled.div({
@@ -197,9 +197,7 @@ const Menu: FC<MenuProps> = (props) => {
     <MenuLayout isHidden={isHidden}>
       <MenuMain>
         <MenuTitle>MENU ---- 2021</MenuTitle>
-        <Select>
-          {options}
-        </Select>
+        <Select>{options}</Select>
       </MenuMain>
     </MenuLayout>
   );
@@ -252,7 +250,7 @@ const SplitLine = styled.div({
   width: '-webkit-fill-available',
   height: '0',
   borderBottom: '1.5px solid black',
-  backgroundColor:'#EFB8D3',
+  backgroundColor: '#EFB8D3',
   zIndex: 2,
   margin: '0 auto',
   paddingTop: '12vh',
@@ -274,7 +272,7 @@ const HackdayText = styled.div({
   fontSize: 'calc(12px + 2vmin)',
   fontFamily: 'Swis721 BlkEx BT',
   position: 'relative',
-  left: '-2px'
+  left: '-2px',
 });
 const MenuButtonLayout = styled.div({
   position: 'absolute',

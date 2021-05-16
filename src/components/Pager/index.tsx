@@ -3,11 +3,11 @@ import styled from '@emotion/styled';
 import { Background, Primary } from '@/consts/color';
 import { Global, css } from '@emotion/react';
 
-interface PagerContainerProps{
-  showPager: boolean
+interface PagerContainerProps {
+  showPager: boolean;
 }
 
-const PagerContainer = styled.div<PagerContainerProps>(({showPager}) => ({
+const PagerContainer = styled.div<PagerContainerProps>(({ showPager }) => ({
   display: 'flex',
   border: `${Primary} 2px solid`,
   borderRadius: '2px',
@@ -16,7 +16,7 @@ const PagerContainer = styled.div<PagerContainerProps>(({showPager}) => ({
   bottom: '2vh',
   right: '5vw',
   padding: '2px 1px',
-  visibility: showPager ? 'visible' : 'hidden'
+  visibility: showPager ? 'visible' : 'hidden',
 }));
 interface IPagerItemProps {
   show?: boolean;
