@@ -8,14 +8,14 @@ import { Global, css } from '@emotion/react';
 import Pager from '@/components/Pager';
 import * as SplashCommon from '../Splash';
 
-const isSafari = window.navigator.userAgent.includes('Safari')
-const isChrome = window.navigator.userAgent.includes('Chrome')
+const isSafari = window.navigator.userAgent.includes('Safari');
+const isChrome = window.navigator.userAgent.includes('Chrome');
 
 interface BasicLayoutProps {
-  isPC: boolean
+  isPC: boolean;
 }
 
-const BasicLayout = styled.div<BasicLayoutProps>( ({isPC}) => ({
+const BasicLayout = styled.div<BasicLayoutProps>(({ isPC }) => ({
   position: 'relative',
   background: Background,
   maxHeight: '100vh',
@@ -23,11 +23,11 @@ const BasicLayout = styled.div<BasicLayoutProps>( ({isPC}) => ({
   flexDirection: 'column',
   alignItems: 'center',
   // justifyContent: 'center',
-  overflowY: !isPC || isSafari && !isChrome ? 'auto' : 'hidden',
+  overflowY: !isPC || (isSafari && !isChrome) ? 'auto' : 'hidden',
   fontSize: 'calc(10px + 2vmin)',
   color: Primary,
   scrollBehavior: 'smooth',
-  'msOverflowStyle': 'none' /* IE and Edge */,
+  msOverflowStyle: 'none' /* IE and Edge */,
   scrollbarWidth: 'none' /* Firefox */,
   '::-webkit-scrollbar': { display: 'none' },
 }));
@@ -39,8 +39,7 @@ const enum Direction {
 
 const PageMax = 5;
 
-
-const isPC = !(window.innerWidth / window.innerHeight < 0.8)
+const isPC = !(window.innerWidth / window.innerHeight < 0.8);
 
 const Main: FC = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -81,7 +80,6 @@ const Main: FC = () => {
     if (isPC) {
       let throttle: number | null = null;
       const handler = (ev: WheelEvent) => {
-
         ev.preventDefault();
 
         if (throttle) return;
@@ -111,23 +109,28 @@ const Main: FC = () => {
   let handleMenuOption = (pageIndex: number) => {
     setPageIndex(pageIndex);
     setShowMenu(false);
-    switchPage(pageIndex)
+    switchPage(pageIndex);
   };
-  const { Header, Menu, Splash } = isPC ? SplashCommon.components.PC : SplashCommon.components.Mobile;
-  let Section = isPC ? SectionCommon.components.PC : SectionCommon.components.Mobile;
+  const { Header, Menu, Splash } = isPC
+    ? SplashCommon.components.PC
+    : SplashCommon.components.Mobile;
+  let Section = isPC
+    ? SectionCommon.components.PC
+    : SectionCommon.components.Mobile;
   // Create the count state.
   return (
     <>
       <Global
         styles={css({
-          body:{
-            margin: '0'
+          body: {
+            margin: '0',
           },
           '@font-face': {
             fontFamily: 'Swis721 BlkEx BT',
-            src: 'url("../../dist/assets/font/swz721ke.woff2") format("woff2")'
-          }
-      })} />
+            src: 'url("../../dist/assets/font/swz721ke.woff2") format("woff2")',
+          },
+        })}
+      />
       <BasicLayout ref={layoutRef} isPC={isPC}>
         <Header
           switchMenu={setShowMenu.bind(this, !showMenu)}
@@ -142,7 +145,11 @@ const Main: FC = () => {
         />
       </BasicLayout>
       <Pager pageIndex={pageIndex} showPager={isPC} />
-      <Menu pageIndex={pageIndex} setPageIndex={handleMenuOption} isHidden={!showMenu} />
+      <Menu
+        pageIndex={pageIndex}
+        setPageIndex={handleMenuOption}
+        isHidden={!showMenu}
+      />
     </>
   );
 };

@@ -2,13 +2,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { jsx, css } from '@emotion/react';
-import schedulePic from '../../assets/imgs/流程安排.png'
-import twentyFourPic from '../../assets/imgs/24小时.png'
-import travelFoodPic from '../../assets/imgs/旅行食物.png'
-import trophyPic from '../../assets/imgs/奖杯.png'
-import introPic from '../../assets/imgs/Introduction.png'
-import questionPic from '../../assets/imgs/问号.png'
-
+import schedulePic from '../../assets/imgs/流程安排.png';
+import twentyFourPic from '../../assets/imgs/24小时.png';
+import travelFoodPic from '../../assets/imgs/旅行食物.png';
+import trophyPic from '../../assets/imgs/奖杯.png';
+import introPic from '../../assets/imgs/Introduction.png';
+import questionPic from '../../assets/imgs/问号.png';
 
 export const pic = {
   schedulePic,
@@ -16,49 +15,49 @@ export const pic = {
   travelFoodPic,
   trophyPic,
   introPic,
-  questionPic
-}
+  questionPic,
+};
 
 const Container = styled.div({
   padding: '0 4vw',
   h2: {
     fontSize: '1.5rem',
-    fontWeight: 'normal'
+    fontWeight: 'normal',
     // margin: '2em 0',
   },
   h3: {
     fontSize: '1.2rem',
     fontWeight: 'normal',
-    margin: '0 0 32px 0'
+    margin: '0 0 32px 0',
   },
   small: {
     fontSize: '1rem',
-    margin: '0 0 0 20px'
+    margin: '0 0 0 20px',
     // margin:'none'
   },
 
   p: {
     fontSize: '1.2rem',
-    margin: '0'
+    margin: '0',
   },
 
   a: {
-    color:'black',
-    fontWeight:'bold'
-  }
+    color: 'black',
+    fontWeight: 'bold',
+  },
 });
 
 interface PhraseProps {
-  doubleMargin: boolean
+  doubleMargin: boolean;
 }
 
-const P = styled.p<PhraseProps>(({doubleMargin}) => ({
-  marginBottom: doubleMargin ? '72px!important' : '36px'
-}))
+const P = styled.p<PhraseProps>(({ doubleMargin }) => ({
+  marginBottom: doubleMargin ? '72px!important' : '36px',
+}));
 
-const Div = styled.div<PhraseProps>(({doubleMargin}) => ({
-  marginBottom: doubleMargin ? '72px!important' : '36px'
-}))
+const Div = styled.div<PhraseProps>(({ doubleMargin }) => ({
+  marginBottom: doubleMargin ? '72px!important' : '36px',
+}));
 
 const introductionData = [
   'Unique Hackday',
@@ -74,8 +73,8 @@ const introductionData = [
   '无限量的食物供应',
   '奖金&纪念',
   '丰厚的奖金',
-  '精美的纪念品'
-]
+  '精美的纪念品',
+];
 
 const IntroImg = styled.img({
   width: '6vmin',
@@ -83,13 +82,13 @@ const IntroImg = styled.img({
   position: 'absolute',
   top: '0',
   transform: 'translateY(-25%)',
-  right: '-10vw'
-})
+  right: '-10vw',
+});
 
 const Text = styled.div({
   position: 'relative',
-  display: 'inline-block'
-})
+  display: 'inline-block',
+});
 
 const Introduction = (
   <Container>
@@ -100,30 +99,37 @@ const Introduction = (
     <p>
       因疫情缘故缺席了2020年，而今年我们决定重启，继续将开放、创新、极客的精神传递给更多的人。
     </p>
-    <h2>
-      150名参赛选手{' '}
-    </h2>
+    <h2>150名参赛选手 </h2>
     <small
-        css={css({
-          display: 'inline-block',
-          fontWeight: 'normal',
-          fontSize: '1rem!important',
-          letterSpacing: '0.5ch',
-          margin: '0 0 72px 0!important'
-        })}
-      >
-        通过简历筛选出来来自全国各大高校的150名学生
-      </small>
+      css={css({
+        display: 'inline-block',
+        fontWeight: 'normal',
+        fontSize: '1rem!important',
+        letterSpacing: '0.5ch',
+        margin: '0 0 72px 0!important',
+      })}
+    >
+      通过简历筛选出来来自全国各大高校的150名学生
+    </small>
     <h3>
-      <Text><IntroImg src={pic.twentyFourPic}/>24小时</Text>
+      <Text>
+        <IntroImg src={pic.twentyFourPic} />
+        24小时
+      </Text>
     </h3>
     <P doubleMargin={true}>程序、设计、产品在24小时内实现产品开发。</P>
     <h3>
-      <Text><IntroImg src={pic.travelFoodPic}/>{'旅行&食物'}</Text>
+      <Text>
+        <IntroImg src={pic.travelFoodPic} />
+        {'旅行&食物'}
+      </Text>
     </h3>
     <P doubleMargin={true}>报销交通费与无限量的食物供应。</P>
     <h3>
-      <Text><IntroImg src={pic.trophyPic}/>{'奖金&纪念'}</Text>
+      <Text>
+        <IntroImg src={pic.trophyPic} />
+        {'奖金&纪念'}
+      </Text>
     </h3>
     <P doubleMargin={true}>丰厚的奖金与精美的纪念品。</P>
   </Container>
@@ -155,10 +161,10 @@ const scheduleData = [
 ];
 
 interface TitleProps {
-  needBorder : boolean 
+  needBorder: boolean;
 }
 
-const Title = styled.div<TitleProps>( ({ needBorder }) => ({
+const Title = styled.div<TitleProps>(({ needBorder }) => ({
   fontSize: '1.7rem',
   fontWeight: 'normal',
   margin: '20px 0',
@@ -168,7 +174,7 @@ const Title = styled.div<TitleProps>( ({ needBorder }) => ({
   left: '-7px',
   display: 'flex',
   alignItems: 'center',
-}))
+}));
 
 const Schedule = (
   <Container>
@@ -179,15 +185,21 @@ const Schedule = (
         </Title>
         {day.spans.map(({ from, to, content }) => (
           <h2 key={from}>
-            <p css={css`
-              margin-bottom: 18px!important;
-            `}>
+            <p
+              css={css`
+                margin-bottom: 18px !important;
+              `}
+            >
               {from}~{to}
             </p>
-            <p css={css`
-              font-size: 1rem!important;
-              margin-bottom: 40px!important;
-            `}>{content}</p>
+            <p
+              css={css`
+                font-size: 1rem !important;
+                margin-bottom: 40px !important;
+              `}
+            >
+              {content}
+            </p>
           </h2>
         ))}
       </div>
@@ -208,11 +220,16 @@ const Awards = (
     {awardsData.map(({ nameChn, nameEng, value }, i) => (
       <div key={i}>
         <Title needBorder={false}>
-          {nameChn} <small>{'/'}</small><small>{nameEng}</small>
+          {nameChn} <small>{'/'}</small>
+          <small>{nameEng}</small>
         </Title>
-        <p css={css`
-          margin-bottom: 50px!important;
-        `}>{value}</p>
+        <p
+          css={css`
+            margin-bottom: 50px !important;
+          `}
+        >
+          {value}
+        </p>
       </div>
     ))}
   </Container>
@@ -222,9 +239,7 @@ const faqsData = [
   {
     question: '谁可以参加？',
     answer: (
-      <p>
-        不管你是高中毕业生，还是大学在校生,都可以报名参加我们的比赛。
-      </p>
+      <p>不管你是高中毕业生，还是大学在校生,都可以报名参加我们的比赛。</p>
     ),
   },
   {
@@ -259,7 +274,13 @@ const faqsData = [
         <p>你可以以个人申请，你也可组好队伍以一个团队一起申请。</p>
         <p>
           你可以在
-          <a css={css`color:black; font-weight:bold;`}href="https://console.hack.hustunique.com">
+          <a
+            css={css`
+              color: black;
+              font-weight: bold;
+            `}
+            href="https://console.hack.hustunique.com"
+          >
             console.hack.hustunique.com
           </a>
           进入您的控制台并选择“我的队伍”更新您的参赛信息。
@@ -271,7 +292,7 @@ const faqsData = [
     question: '参加比赛有硬件提供吗？',
     answer: (
       <p>
-         如果您有特定的硬件，请随身携带。我们将尽最大努力在活动中提供硬件。有关这方面的更多细节将在活动附近提供。
+        如果您有特定的硬件，请随身携带。我们将尽最大努力在活动中提供硬件。有关这方面的更多细节将在活动附近提供。
       </p>
     ),
   },
@@ -280,7 +301,11 @@ const faqsData = [
     answer: (
       <>
         如果您希望能够在黑客马拉松中展示您的品牌，并在您的目标群体进行宣传，请发送邮件至
-        <a css={css`color:black; font-weight:bold;`}
+        <a
+          css={css`
+            color: black;
+            font-weight: bold;
+          `}
           href="
         mailto:contact@hustunique.com"
         >
@@ -307,21 +332,17 @@ const accessData = {
   position: '湖北省 武汉市 洪山区 珞喻路 1037号',
   institution: '华中科技大学 启明学院',
   mail: 'contact@hustunique.com',
-  qq: '官方FAQ QQ群组：1057802260'
-}
+  qq: '官方FAQ QQ群组：1057802260',
+};
 
 const Access = (
   <Container>
     <h2>{accessData.position}</h2>
     <h2>{accessData.institution}</h2>
-    <a href="mailto:contact@hustunique.com">
-      {accessData.mail}
-    </a>
+    <a href="mailto:contact@hustunique.com">{accessData.mail}</a>
     <p>{accessData.qq}</p>
   </Container>
 );
-
-
 
 const titleData = [
   {
@@ -358,6 +379,6 @@ const data = {
   awardsData,
   faqsData,
   accessData,
-}
+};
 
-export default data
+export default data;

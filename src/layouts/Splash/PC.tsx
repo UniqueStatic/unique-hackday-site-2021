@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 // import './styles.css';
-import {pics} from '.';
+import { pics } from '.';
 import styled from '@emotion/styled';
 import { Background, Primary, Secondary } from '@/consts/color';
 import { jsx, css } from '@emotion/react';
@@ -57,7 +57,7 @@ const Reboot2021 = styled.div({
   left: '16%',
   fontSize: '1.2vmin',
   color: 'black',
-  transform: 'rotate(-7deg)'
+  transform: 'rotate(-7deg)',
 });
 
 const RebootText = styled.div((props) => ({
@@ -108,11 +108,10 @@ const Reboot: FC = () => {
   );
 };
 
-
-const Splash = React.forwardRef<HTMLDivElement|null>((props, ref) => (
-      <SplashLayout ref={ref}>
-      <FrontPage />
-    </SplashLayout>
+const Splash = React.forwardRef<HTMLDivElement | null>((props, ref) => (
+  <SplashLayout ref={ref}>
+    <FrontPage />
+  </SplashLayout>
 ));
 
 const FrontPage: FC = ({}) => {
@@ -155,9 +154,7 @@ const HackDayTitle: FC<HackdayProps> = (props) => {
   return (
     <HackdayTitleLayout shouldUp={shouldUp}>
       <UniqueText>UNIQUESTUDIO</UniqueText>
-      <HackdayText>
-        HACKDAY
-      </HackdayText>
+      <HackdayText>HACKDAY</HackdayText>
     </HackdayTitleLayout>
   );
 };
@@ -200,7 +197,7 @@ const HackdayText = styled.div({
   fontSize: 'calc(12px + 2vmin)',
   fontFamily: 'Swis721 BlkEx BT',
   position: 'relative',
-  left: '-2px'
+  left: '-2px',
 });
 interface MenuButtonBlockProps {
   color: string;
@@ -306,15 +303,17 @@ const Line = styled.div({
   width: '100px',
   height: '0',
   borderTop: '1.5px black solid',
-  margin: '0 10px'
-})
+  margin: '0 10px',
+});
 
 const MenuTitle: FC = () => {
   return (
     <MenuTitleBackground>
-      <MenuTitleBlock>MENU 
+      <MenuTitleBlock>
+        MENU
         <Line></Line>
-      2021</MenuTitleBlock>
+        2021
+      </MenuTitleBlock>
     </MenuTitleBackground>
   );
 };

@@ -5,12 +5,12 @@ import styled from '@emotion/styled';
 import { css, keyframes } from '@emotion/react';
 import { Background, Primary, Secondary } from '@/consts/color';
 import data from './data';
-import {pic} from './data'
+import { pic } from './data';
 import type { IRefForwarder } from '@/interface';
 
 const BorderWidth = '2px';
 
-const titleData = data.titleData
+const titleData = data.titleData;
 
 const ContentLayout = styled.div({
   display: 'flex',
@@ -47,7 +47,7 @@ const ItemLayout = styled.li<IExpandable>(
   ({ expanded = false }) => ({
     position: 'relative',
     overflow: 'hidden',
-    background:'#e3e3e3',
+    background: '#e3e3e3',
     listStyle: 'none',
     width: expanded ? '41vw' : '7vw',
     height: '80vh',
@@ -118,7 +118,7 @@ const ItemTitle = styled.div<IExpandable>(({ expanded = false }) => ({
   justifyContent: expanded ? 'flex-start' : 'center',
   whiteSpace: 'nowrap',
   overflow: 'hidden',
-  position: 'relative'
+  position: 'relative',
   // div: {
   //   display: 'contents',
   // },
@@ -139,26 +139,28 @@ const Content: FC<IContentProps> = ({ expanded = false, index, animating }) => {
         {expanded && ` ${nameChn} / ${nameEng}`}
       </ItemTitle>
       {expanded ? (
-        <ScrollView onWheelCapture={ev=>ev.stopPropagation()} >{content}</ScrollView>
+        <ScrollView onWheelCapture={(ev) => ev.stopPropagation()}>
+          {content}
+        </ScrollView>
       ) : (
         <RotatedText>{nameEng}</RotatedText>
       )}
     </>
   );
 };
-interface TitleImgProps{
-  isExpanded: boolean
+interface TitleImgProps {
+  isExpanded: boolean;
 }
 
 const TitleImg = styled.img<TitleImgProps>(({ isExpanded }) => ({
-  position:'absolute',
+  position: 'absolute',
   width: '6vh',
   height: '6vh',
   top: 'calc(9vh - 4vh)',
   left: 'calc(90% - 4vh)',
   visibility: isExpanded ? 'visible' : 'hidden',
   zIndex: 2,
-}))
+}));
 interface ISectionProps {
   pageIndex: number;
   setPageIndex: (index: number) => void;
@@ -169,7 +171,13 @@ const Container = React.forwardRef<HTMLDivElement | null, ISectionProps>(
     // Create the count state.
     const [index, setIndex] = useState(0);
     const [animating, setAnimating] = useState(false);
-    const imgs = [pic.introPic, pic.schedulePic, pic.trophyPic, pic.questionPic, '']
+    const imgs = [
+      pic.introPic,
+      pic.schedulePic,
+      pic.trophyPic,
+      pic.questionPic,
+      '',
+    ];
 
     useEffect(() => {
       if (pageIndex) setIndex(pageIndex === 0 ? pageIndex : pageIndex - 1);
@@ -204,7 +212,10 @@ const Container = React.forwardRef<HTMLDivElement | null, ISectionProps>(
               onClick={() => handleSwitch(i)}
               {...{ expanded }}
             >
-              <TitleImg isExpanded={expanded && index != 4} src={imgs[index]}></TitleImg>
+              <TitleImg
+                isExpanded={expanded && index != 4}
+                src={imgs[index]}
+              ></TitleImg>
               <Content expanded={expanded} index={i} animating={animating} />
             </ItemLayout>
           );
