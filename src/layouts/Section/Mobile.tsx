@@ -271,7 +271,6 @@ const SponsorBlock = styled.div({
   padding: '50px 30px',
   background: 'black',
   width: '-webkit-fill-available',
-  zIndex: 4,
 });
 
 const SponsorTitle = styled.div({
