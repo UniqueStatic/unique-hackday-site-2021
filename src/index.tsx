@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import smoothscroll from 'smoothscroll-polyfill';
 import Main from './layouts/Main';
 import './index.css';
+
+smoothscroll.polyfill();
 
 ReactDOM.render(
   <React.StrictMode>

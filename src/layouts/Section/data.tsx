@@ -2,34 +2,90 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { jsx, css } from '@emotion/react';
+import schedulePic from '../../assets/imgs/流程安排.png'
+import twentyFourPic from '../../assets/imgs/24小时.png'
+import travelFoodPic from '../../assets/imgs/旅行食物.png'
+import trophyPic from '../../assets/imgs/奖杯.png'
+import introPic from '../../assets/imgs/Introduction.png'
+import questionPic from '../../assets/imgs/问号.png'
+
+
+export const pic = {
+  schedulePic,
+  twentyFourPic,
+  travelFoodPic,
+  trophyPic,
+  introPic,
+  questionPic
+}
 
 const Container = styled.div({
   padding: '0 4vw',
   h2: {
-    fontSize: '1.7rem',
+    fontSize: '1.5rem',
+    fontWeight: 'normal'
     // margin: '2em 0',
   },
   h3: {
-    fontSize: '1.3rem',
-    marginBottom: '2rem',
+    fontSize: '1.2rem',
+    fontWeight: 'normal',
+    margin: '0 0 32px 0'
   },
   small: {
-    fontSize: '1.2rem',
+    fontSize: '1rem',
+    margin: '0 0 0 20px'
     // margin:'none'
   },
+
   p: {
-    fontSize: '1.45rem',
+    fontSize: '1.2rem',
+    margin: '0'
   },
-  '& > *': {
-    // display:'none'
-    margin: '0 0 3rem',
-    ':first-child': {
-      margin: '3rem 0',
-    },
-  },
+
+  a: {
+    color:'black',
+    fontWeight:'bold'
+  }
 });
 
-export const Introduction = (
+interface PhraseProps {
+  doubleMargin: boolean
+}
+
+const P = styled.p<PhraseProps>(({doubleMargin}) => ({
+  marginBottom: doubleMargin ? '72px!important' : '36px'
+}))
+const introductionData = [
+  'Unique Hackday',
+  '最初源于联创团队内部成员的Hackday比赛之后将比赛的规模扩大，邀请来自全国的大学一同参与。',
+  '因疫情缘故缺席了2020年，而今年我们决定重启，继续将开放、创新、极客的精神传递给更多的人。',
+  '150名参赛选手',
+  '通过简历筛选出来来自全国各大高校的150名学生',
+  '24小时',
+  '程序、设计、产品',
+  '在24小时内实现产品开发',
+  '旅行&食物',
+  '报销交通费',
+  '无限量的食物供应',
+  '奖金&纪念',
+  '丰厚的奖金',
+  '精美的纪念品'
+]
+
+const IntroImg = styled.img({
+  width: '6vmin',
+  height: '6vmin',
+  position: 'absolute',
+  top: '0',
+  transform: 'translateY(-25%)',
+  right: '-10vw'
+})
+
+const Text = styled.text({
+  position: 'relative',
+})
+
+const Introduction = (
   <Container>
     <h2>Unique Hackday</h2>
     <p>
@@ -40,30 +96,37 @@ export const Introduction = (
     </p>
     <h2>
       150名参赛选手{' '}
-      <small
+    </h2>
+    <small
         css={css({
           display: 'inline-block',
           fontWeight: 'normal',
           fontSize: '1rem!important',
           letterSpacing: '0.5ch',
+          margin: '0 0 72px 0!important'
         })}
       >
         通过简历筛选出来来自全国各大高校的150名学生
       </small>
-    </h2>
-
-    <h3>24小时</h3>
-    <small>程序、设计、产品在24小时内实现产品开发。</small>
-    <h3>{'旅行&食物'}</h3>
-    <small>报销交通费与无限量的食物供应。</small>
-    <h3>{'奖金&纪念'}</h3>
-    <small>丰厚的奖金与精美的纪念品。</small>
+    <h3>
+      <Text><IntroImg src={pic.twentyFourPic}/>24小时</Text>
+    </h3>
+    <P doubleMargin={true}>程序、设计、产品在24小时内实现产品开发。</P>
+    <h3>
+      <Text><IntroImg src={pic.travelFoodPic}/>{'旅行&食物'}</Text>
+    </h3>
+    <P doubleMargin={true}>报销交通费与无限量的食物供应。</P>
+    <h3>
+      <Text><IntroImg src={pic.trophyPic}/>{'奖金&纪念'}</Text>
+    </h3>
+    <P doubleMargin={true}>丰厚的奖金与精美的纪念品。</P>
   </Container>
 );
 
 const scheduleData = [
   {
     date: '2021.06.13',
+    day: 'DAY 1',
     spans: [
       { from: '08:00', to: '09:30', content: '参会嘉宾/比赛选手 ·签到' },
       { from: '09:30', to: '11:00', content: '启明学院报告厅 ·比赛开幕式' },
@@ -73,31 +136,53 @@ const scheduleData = [
     ],
   },
   {
-    date: '2021.06.13',
+    date: '2021.06.14',
+    day: 'DAY 2',
     spans: [
       { from: '07:00', to: '08:00', content: '进行早餐' },
       { from: '11:00', to: '13:00', content: '进行午餐 休息' },
       { from: '14:00', to: '16:30', content: '项目展示' },
       { from: '16:30', to: '18:00', content: '闭幕式&颁奖仪式' },
-      { from: '16:30', to: '18:30', content: '合影留念' },
+      { from: '18:00', to: '18:30', content: '合影留念' },
     ],
   },
 ];
 
-export const Schedule = (
+interface TitleProps {
+  needBorder : boolean 
+}
+
+const Title = styled.div<TitleProps>( ({ needBorder }) => ({
+  fontSize: '1.7rem',
+  fontWeight: 'normal',
+  margin: '20px 0',
+  paddingLeft: '5px',
+  borderLeft: needBorder ? '2px solid black' : 'none',
+  position: 'relative',
+  left: '-7px',
+  display: 'flex',
+  alignItems: 'center',
+}))
+
+const Schedule = (
   <Container>
     {scheduleData.map((day, i) => (
       <div key={i}>
-        <h2>
+        <Title needBorder={true}>
           DAY {i + 1} <small>{day.date}</small>
-        </h2>
+        </Title>
         {day.spans.map(({ from, to, content }) => (
-          <div key={from}>
-            <h3>
+          <h2 key={from}>
+            <h3 css={css`
+              margin-bottom: 18px!important;
+            `}>
               {from}~{to}
             </h3>
-            <p>{content}</p>
-          </div>
+            <p css={css`
+              font-size: 1rem!important;
+              margin-bottom: 40px!important;
+            `}>{content}</p>
+          </h2>
         ))}
       </div>
     ))}
@@ -112,14 +197,16 @@ const awardsData = [
   { nameChn: '企业特色奖', nameEng: 'Corporate', value: 'TBD' },
 ];
 
-export const Awards = (
+const Awards = (
   <Container>
     {awardsData.map(({ nameChn, nameEng, value }, i) => (
       <div key={i}>
-        <h2>
-          {nameChn} <small>{nameEng}</small>
-        </h2>
-        <p>{value}</p>
+        <Title needBorder={false}>
+          {nameChn} <small>{'/'}</small><small>{nameEng}</small>
+        </Title>
+        <p css={css`
+          margin-bottom: 50px!important;
+        `}>{value}</p>
       </div>
     ))}
   </Container>
@@ -158,7 +245,7 @@ const faqsData = [
         <p>你可以以个人申请，你也可组好队伍以一个团队一起申请。</p>
         <p>
           你可以在
-          <a href="https://console.hack.hustunique.com">
+          <a css={css`color:black; font-weight:bold;`}href="https://console.hack.hustunique.com">
             console.hack.hustunique.com
           </a>
           进入您的控制台并选择“我的队伍”更新您的参赛信息。
@@ -175,7 +262,7 @@ const faqsData = [
     answer: (
       <>
         如果您希望能够在黑客马拉松中展示您的品牌，并在您的目标群体进行宣传，请发送邮件至
-        <a
+        <a css={css`color:black; font-weight:bold;`}
           href="
         mailto:contact@hustunique.com"
         >
@@ -187,27 +274,72 @@ const faqsData = [
   },
 ];
 
-export const FAQs = (
+const FAQs = (
   <Container>
     {faqsData.map(({ question, answer }, i) => (
       <div key={i}>
-        <h2>{question}</h2>
-        <div>{answer}</div>
+        <h3>{question}</h3>
+        <P doubleMargin={true}>{answer}</P>
       </div>
     ))}
   </Container>
 );
 
-export const Access = (
+const accessData = {
+  position: '湖北省 武汉市 洪山区 珞喻路 1037号',
+  institution: '华中科技大学 启明学院',
+  mail: 'contact@hustunique.com',
+  qq: '官方FAQ QQ群组：1057802260'
+}
+
+const Access = (
   <Container>
-    <h2>湖北省 武汉市 洪山区 珞喻路 1037号</h2>
-    <h2>华中科技大学 启明学院</h2>
-    <a
-      href="
-        mailto:contact@hustunique.com"
-    >
-      contact@hustunique.com
+    <h2>{accessData.position}</h2>
+    <h2>{accessData.institution}</h2>
+    <a href="mailto:contact@hustunique.com">
+      {accessData.mail}
     </a>
-    <p>官方FAQ QQ群组：852034326</p>
+    <p>{accessData.qq}</p>
   </Container>
 );
+
+
+
+const titleData = [
+  {
+    nameChn: '比赛介绍',
+    nameEng: 'Introduction',
+    content: Introduction,
+  },
+  {
+    nameChn: '流程安排',
+    nameEng: 'Schedule',
+    content: Schedule,
+  },
+  {
+    nameChn: '奖项设置',
+    nameEng: 'Awards',
+    content: Awards,
+  },
+  {
+    nameChn: '常见问题',
+    nameEng: 'FAQs',
+    content: FAQs,
+  },
+  {
+    nameChn: '联系我们',
+    nameEng: 'Contact',
+    content: Access,
+  },
+];
+
+const data = {
+  titleData,
+  introductionData,
+  scheduleData,
+  awardsData,
+  faqsData,
+  accessData,
+}
+
+export default data

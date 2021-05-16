@@ -93,14 +93,22 @@ const Introduction: FC = () => {
       </FloatBlock>
       <FloatBlock isRight={true}>
         <TextBlock isTitle={true}>
+<<<<<<< HEAD
           <Text><IntroImg src={pic.travelFoodPic}/>{introductionData[8]}</Text>
+=======
+          <Text><IntroImg src={pic.travelFoodPic}/>{introductionData[5]}</Text>
+>>>>>>> 65656405eab7d96cc465ae70dde002d888da89c3
         </TextBlock>
         <TextBlock isTitle={false}>{introductionData[9]}</TextBlock>
         <TextBlock isTitle={false}>{introductionData[10]}</TextBlock>
       </FloatBlock>
       <FloatBlock isRight={false}>
         <TextBlock isTitle={true}>
+<<<<<<< HEAD
           <Text><IntroImg src={pic.trophyPic}/>{introductionData[8]}</Text>
+=======
+          <Text><IntroImg src={pic.trophyPic}/>{introductionData[5]}</Text>
+>>>>>>> 65656405eab7d96cc465ae70dde002d888da89c3
         </TextBlock>
         <TextBlock isTitle={false}>{introductionData[12]}</TextBlock>
         <TextBlock isTitle={false}>{introductionData[13]}</TextBlock>
@@ -128,7 +136,11 @@ const Schedule: FC = () => {
   const elements = scheduleData.map((_) => {
     const times = _.spans.map(_ =>
       <TimeBlock key={_.from}>
+<<<<<<< HEAD
         <TextBlock isTitle={false}>{_.from}~{_.to}</TextBlock>
+=======
+        <TextBlock isTitle={false}>{_.from} ~ {_.to}</TextBlock>
+>>>>>>> 65656405eab7d96cc465ae70dde002d888da89c3
         <TextBlock isTitle={false}>{_.content}</TextBlock>
       </TimeBlock>
     )
