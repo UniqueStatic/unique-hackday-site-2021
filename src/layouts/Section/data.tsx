@@ -185,7 +185,7 @@ interface TitleProps {
 const Title = styled.div<TitleProps>(({ needBorder }) => ({
   fontSize: '1.7rem',
   fontWeight: 500,
-  margin: '5vh 0 3vh 0',
+  margin: '5vh 0 0 0',
   paddingLeft: '5px',
   borderLeft: needBorder ? '2px solid black' : 'none',
   position: 'relative',
@@ -203,6 +203,7 @@ const Schedule = (
         </Title>
         <div
           css={css`
+            margin-top: 3vh;
             padding-left: 0.5vw;
           `}
         >
@@ -244,12 +245,18 @@ const Awards = (
   <Container>
     {awardsData.map(({ nameChn, nameEng, value }, i) => (
       <div key={i}>
-        <Title needBorder={false}>
+        <Title
+          needBorder={false}
+          css={css`
+            margin-botton: 1vh;
+          `}
+        >
           {nameChn} <small>{'/'}</small>
           <small>{nameEng}</small>
         </Title>
         <p
           css={css`
+            margin-top: 15px;
             margin-bottom: 50px !important;
           `}
         >
