@@ -374,11 +374,28 @@ const accessData = {
 };
 
 const Access = (
-  <Container>
+  <Container
+    css={css`
+      margin-top: 4vh;
+    `}
+  >
     <h2>{accessData.position}</h2>
     <h2>{accessData.institution}</h2>
-    <a href="mailto:contact@hustunique.com">{accessData.mail}</a>
-    <p>{accessData.qq}</p>
+    <p
+      css={css`
+        margin-top: 4vh;
+        margin-bottom: 0;
+      `}
+    >
+      <a href="mailto:contact@hustunique.com">{accessData.mail}</a>
+    </p>
+    <p
+      css={css`
+        margin-top: 1vh;
+      `}
+    >
+      {accessData.qq}
+    </p>
   </Container>
 );
 
