@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import SponsorPic from '../../assets/imgs/Sponsor.png'
 import { css, keyframes } from '@emotion/react';
 import { Background, Primary, Secondary } from '@/consts/color';
-import data from './data';
+import data, {pic} from './data';
 import type { IRefForwarder } from '@/interface';
 const { titleData, introductionData, scheduleData, awardsData } = data
 
@@ -60,6 +60,18 @@ const TextBlock = styled.div<TextBlockProps>(({ isTitle }) => ({
   lineHeight: 'calc(100% + 20px)',
 }))
 
+const IntroImg = styled.img({
+  width: '8vw',
+  height: '8vw',
+  position: 'absolute',
+  top: '0',
+  right: '-15vw'
+})
+
+const Text = styled.text({
+  position: 'relative',
+})
+
 const Introduction: FC = () => {
   return (
     <>
@@ -73,17 +85,23 @@ const Introduction: FC = () => {
       <ItemTitle width='80%'>{introductionData[3]}</ItemTitle>
       <SubTitle>{introductionData[4]}</SubTitle>
       <FloatBlock isRight={false}>
-        <TextBlock isTitle={true}>{introductionData[5]}</TextBlock>
+        <TextBlock isTitle={true}>
+          <Text><IntroImg src={pic.twentyFourPic}/>{introductionData[5]}</Text>
+        </TextBlock>
         <TextBlock isTitle={false}>{introductionData[6]}</TextBlock>
         <TextBlock isTitle={false}>{introductionData[7]}</TextBlock>
       </FloatBlock>
       <FloatBlock isRight={true}>
-        <TextBlock isTitle={true}>{introductionData[8]}</TextBlock>
+        <TextBlock isTitle={true}>
+          <Text><IntroImg src={pic.travelFoodPic}/>{introductionData[5]}</Text>
+        </TextBlock>
         <TextBlock isTitle={false}>{introductionData[9]}</TextBlock>
         <TextBlock isTitle={false}>{introductionData[10]}</TextBlock>
       </FloatBlock>
       <FloatBlock isRight={false}>
-        <TextBlock isTitle={true}>{introductionData[11]}</TextBlock>
+        <TextBlock isTitle={true}>
+          <Text><IntroImg src={pic.trophyPic}/>{introductionData[5]}</Text>
+        </TextBlock>
         <TextBlock isTitle={false}>{introductionData[12]}</TextBlock>
         <TextBlock isTitle={false}>{introductionData[13]}</TextBlock>
       </FloatBlock>
@@ -92,13 +110,18 @@ const Introduction: FC = () => {
 }
 
 const DateBlock = styled.div({
-  paddingLeft: '20px',
+  paddingLeft: '16px',
   borderLeft: '2px solid black',
   marginBottom: '42px'
 })
 
 const TimeBlock = styled.div({
-  margin: '32px 0'
+  margin: '32px 18px'
+})
+
+const DateText = styled.div({
+  fontWeight: 200,
+  marginBottom: '18px'
 })
 
 const Schedule: FC = () => {
@@ -112,7 +135,7 @@ const Schedule: FC = () => {
     return (
       <div key={_.day}>
         <DateBlock>
-          <TextBlock isTitle={false}>{_.date}</TextBlock>
+          <DateText>{_.date}</DateText>
           <TextBlock isTitle={true}>{_.day}</TextBlock>
         </DateBlock>
         {times}
@@ -245,7 +268,7 @@ interface IContentProps {
 }
 const SponsorBlock = styled.div({
   position: 'relative',
-  height: 'calc(100vh - 100px)',
+  minHeight: 'calc(100vh - 100px)',
   padding: '50px 30px',
   background: 'black',
   width: '-webkit-fill-available',

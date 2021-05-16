@@ -47,6 +47,7 @@ const ComputerPic = styled.img({
 });
 
 const RebootTextLayout = styled.div({
+  fontFamily: 'Swis721 BlkEx BT',
   position: 'absolute',
   top: '40%',
   left: '35%',
@@ -57,7 +58,8 @@ const Reboot2021 = styled.div({
   position: 'absolute',
   top: '82%',
   left: '16%',
-  fontSize: '1.5vmin',
+  fontSize: '1vmin',
+  fontFamily: 'Swis721 BlkEx BT',
   color: 'black',
   transform: 'rotate(-7deg)',
   fontWeight: 900,
@@ -264,13 +266,15 @@ const HackdayTitleLayout = styled.div({
 
 const UniqueText = styled.div({
   fontSize: 'calc(6px + 1vmin)',
-  fontWeight: 300,
-  letterSpacing: '3px',
+  fontWeight: 400,
+  letterSpacing: '4.5px',
 });
 
 const HackdayText = styled.div({
   fontSize: 'calc(12px + 2vmin)',
-  fontFamily: 'Maven Pro',
+  fontFamily: 'Swis721 BlkEx BT',
+  position: 'relative',
+  left: '-2px'
 });
 const MenuButtonLayout = styled.div({
   position: 'absolute',

@@ -46,17 +46,18 @@ const RebootTextLayout = styled.div({
   position: 'absolute',
   top: '31%',
   left: '35%',
+  fontFamily: 'Swis721 BlkEx BT',
   fontSize: '2.2vmin',
 });
 
 const Reboot2021 = styled.div({
+  fontFamily: 'Swis721 BlkEx BT',
   position: 'absolute',
   top: '66%',
   left: '16%',
-  fontSize: '1.5vmin',
+  fontSize: '1.2vmin',
   color: 'black',
-  transform: 'rotate(-7deg)',
-  fontWeight: 900,
+  transform: 'rotate(-7deg)'
 });
 
 const RebootText = styled.div((props) => ({
@@ -154,11 +155,7 @@ const HackDayTitle: FC<HackdayProps> = (props) => {
   return (
     <HackdayTitleLayout shouldUp={shouldUp}>
       <UniqueText>UNIQUESTUDIO</UniqueText>
-      <HackdayText
-        css={css({
-          fontFamily: 'Maven Pro',
-        })}
-      >
+      <HackdayText>
         HACKDAY
       </HackdayText>
     </HackdayTitleLayout>
@@ -179,7 +176,7 @@ const SplitLine = styled.div({
 const No2021 = styled.div({
   position: 'absolute',
   right: '0',
-  top: 'calc(-1 * (12px + 2vmin))',
+  top: 'calc(12vh - 12px - 2vmin)',
   fontSize: 'calc(4px + 2vmin)',
   fontWeight: 300,
 });
@@ -195,12 +192,15 @@ const HackdayTitleLayout = styled.div<HackdayProps>(({ shouldUp }) => ({
 
 const UniqueText = styled.div({
   fontSize: 'calc(6px + 1vmin)',
-  fontWeight: 300,
-  letterSpacing: '3px',
+  fontWeight: 400,
+  letterSpacing: '4.5px',
 });
 
 const HackdayText = styled.div({
   fontSize: 'calc(12px + 2vmin)',
+  fontFamily: 'Swis721 BlkEx BT',
+  position: 'relative',
+  left: '-2px'
 });
 interface MenuButtonBlockProps {
   color: string;

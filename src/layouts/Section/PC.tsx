@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { css, keyframes } from '@emotion/react';
 import { Background, Primary, Secondary } from '@/consts/color';
 import data from './data';
+import {pic} from './data'
 import type { IRefForwarder } from '@/interface';
 
 const BorderWidth = '2px';
@@ -55,6 +56,7 @@ const ItemLayout = styled.li<IExpandable>(
     transition: 'width .5s ease-in-out',
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     // alignItems: 'center',
     // justifyContent: 'center',
     zIndex: 1,
@@ -63,33 +65,11 @@ const ItemLayout = styled.li<IExpandable>(
   withBorder,
 );
 
-const bounce = keyframes`
-  from, 20%, 53%, 80%, to {
-    transform: translate3d(0,0,0);
-  }
-
-  40%, 43% {
-    transform: translate3d(0, -30px, 0);
-  }
-
-  70% {
-    transform: translate3d(0, -15px, 0);
-  }
-
-  90% {
-    transform: translate3d(0,-4px,0);
-  }
-`;
-
-const fadeIn = keyframes({
-  '0%': { opacity: 0 },
-  '100%': { opacity: 1 },
-});
-
 const ScrollView = styled.div<IExpandable>(({ expanded = false }) => ({
   // padding: '0 3vw',
   borderTop: `${BorderWidth} solid ${Primary}`,
   overflowY: 'auto',
+  overflowX: 'hidden',
   width: 'calc(41vw + 1px)',
 
   // whiteSpace:'nowrap',
@@ -120,22 +100,25 @@ const RotatedText = styled.div({
   fontSize: '25px',
   position: 'absolute',
   bottom: '0',
-  left: 'calc(50% - 1ch)',
-  fontFamily: ['Russo One'],
+  left: 'calc(50% - 12.5px)',
+  fontFamily: 'Swis721 BlkEx BT',
 });
 
 const BlackText = styled.div<IExpandable>(({ expanded = false }) => ({
   margin: expanded ? '3vw' : 'initial',
-  fontFamily: ['Russo One'],
+  fontFamily: 'Swis721 BlkEx BT',
+  fontSize: 'calc(6px + 2vmin)',
 }));
 
 const ItemTitle = styled.div<IExpandable>(({ expanded = false }) => ({
   flex: '0 0 10vh',
   display: 'flex',
+  width: '100%',
   alignItems: 'center',
   justifyContent: expanded ? 'flex-start' : 'center',
   whiteSpace: 'nowrap',
   overflow: 'hidden',
+  position: 'relative'
   // div: {
   //   display: 'contents',
   // },
@@ -164,7 +147,19 @@ const Content: FC<IContentProps> = ({ expanded = false, index, animating }) => {
     </>
   );
 };
+interface TitleImgProps{
+  isExpanded: boolean
+}
 
+const TitleImg = styled.img<TitleImgProps>(({ isExpanded }) => ({
+  position:'absolute',
+  width: '6vh',
+  height: '6vh',
+  top: 'calc(9vh - 4vh)',
+  left: 'calc(90% - 4vh)',
+  visibility: isExpanded ? 'visible' : 'hidden',
+  zIndex: 2,
+}))
 interface ISectionProps {
   pageIndex: number;
   setPageIndex: (index: number) => void;
@@ -175,6 +170,7 @@ const Container = React.forwardRef<HTMLDivElement | null, ISectionProps>(
     // Create the count state.
     const [index, setIndex] = useState(0);
     const [animating, setAnimating] = useState(false);
+    const imgs = [pic.introPic, pic.schedulePic, pic.trophyPic, pic.questionPic, '']
 
     useEffect(() => {
       if (pageIndex) setIndex(pageIndex === 0 ? pageIndex : pageIndex - 1);
@@ -209,6 +205,7 @@ const Container = React.forwardRef<HTMLDivElement | null, ISectionProps>(
               onClick={() => handleSwitch(i)}
               {...{ expanded }}
             >
+              <TitleImg isExpanded={expanded && index != 4} src={imgs[index]}></TitleImg>
               <Content expanded={expanded} index={i} animating={animating} />
             </ItemLayout>
           );

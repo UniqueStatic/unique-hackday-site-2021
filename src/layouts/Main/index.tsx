@@ -125,15 +125,15 @@ const Main: FC = () => {
   return (
     <>
       <Global
-        styles={css`
-          html {
-            -webkit-text-size-adjust: none;
+        styles={css({
+          body:{
+            margin: '0'
+          },
+          '@font-face': {
+            fontFamily: 'Swis721 BlkEx BT',
+            src: 'url("../../dist/assets/font/swz721ke.woff2") format("woff2")'
           }
-          body {
-            margin: 0;
-          }
-        `}
-      />
+      })} />
       <BasicLayout ref={layoutRef} isPC={isPC}>
         <Header
           switchMenu={setShowMenu.bind(this, !showMenu)}
