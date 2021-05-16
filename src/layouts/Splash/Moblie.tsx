@@ -109,7 +109,7 @@ interface MenuLayoutProps {
 }
 
 const MenuLayout = styled.div<MenuLayoutProps>((props) => ({
-  position: 'absolute',
+  position: 'fixed',
   backgroundColor: Background,
   height: '100vh',
   width: '-webkit-fill-available',
@@ -195,6 +195,7 @@ const Menu: FC<MenuProps> = (props) => {
   ));
   return (
     <MenuLayout isHidden={isHidden}>
+
       <MenuMain>
         <MenuTitle>MENU ---- 2021</MenuTitle>
         <Select>{options}</Select>

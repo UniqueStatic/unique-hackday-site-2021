@@ -8,6 +8,8 @@ import { Global, css } from '@emotion/react';
 import Pager from '@/components/Pager';
 import * as SplashCommon from '../Splash';
 import { globalStyles } from './globalStyles';
+import { Sponsor } from '../Sponsor/Mobile';
+import { SponsorMobile, SponsorPC } from '../Sponsor';
 
 const isSafari = window.navigator.userAgent.includes('Safari');
 const isChrome = window.navigator.userAgent.includes('Chrome');
@@ -24,7 +26,7 @@ const BasicLayout = styled.div<BasicLayoutProps>(({ isPC }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   // justifyContent: 'center',
-  overflowY: !isPC || (isSafari && !isChrome) ? 'auto' : 'hidden',
+  overflowY: !isPC || (isSafari && !isChrome) ? 'visible' : 'hidden',
   marginTop: '12vh',
   fontSize: 'calc(10px + 2vmin)',
   color: Primary,
@@ -34,12 +36,18 @@ const BasicLayout = styled.div<BasicLayoutProps>(({ isPC }) => ({
   '::-webkit-scrollbar': { display: 'none' },
 }));
 
+const InvertStyles = css({
+  background: Primary,
+  color: Background,
+  filter: 'invert(1)',
+});
+
 const enum Direction {
   Prev,
   Next,
 }
 
-const PageMax = 5;
+const PageMax = 7;
 
 const shouldShowPCLayout = () =>
   !(window.innerWidth / window.innerHeight < 0.8);
@@ -51,11 +59,20 @@ const Main: FC = () => {
   const layoutRef = useRef<HTMLDivElement | null>(null);
   const SplashRef = useRef<HTMLDivElement | null>(null);
   const SectionRef = useRef<HTMLDivElement | null>(null);
+  const SponsorRef = useRef<HTMLDivElement | null>(null);
+
   const switchPage = useCallback((pageIndex: number) => {
     if (!pageIndex) {
-      SplashRef.current?.scrollIntoView({ behavior: 'smooth' });
     } else {
       SectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+    switch (pageIndex) {
+      case 0:
+        return SplashRef.current?.scrollIntoView({ behavior: 'smooth' });
+      case PageMax - 1:
+        return SponsorRef.current?.scrollIntoView({ behavior: 'smooth' });
+      default:
+        SectionRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, []);
   const handleScroll = useCallback(
@@ -64,7 +81,7 @@ const Main: FC = () => {
         let ret = index;
         switch (direction) {
           case Direction.Next: {
-            ret = index == PageMax ? index : index + 1;
+            ret = index == PageMax - 1 ? index : index + 1;
             break;
           }
           case Direction.Prev:
@@ -129,16 +146,20 @@ const Main: FC = () => {
   const Section = isPC
     ? SectionCommon.components.PC
     : SectionCommon.components.Mobile;
+
+  const Sponsor = isPC ?SponsorPC:SponsorMobile; 
   // Create the count state.
   return (
     <>
-      <Global
-        styles={globalStyles}
-      />
+      <Global styles={globalStyles} />
+      {showMenu && <Global styles={css({ body: { overflow: 'hidden' } })} />}
+
       <Header
+        dark={pageIndex===PageMax -1}
         switchMenu={setShowMenu.bind(this, !showMenu)}
         pageIndex={pageIndex}
         showMenu={showMenu}
+        css={InvertStyles}
       />
       <BasicLayout ref={layoutRef} isPC={isPC}>
         <Splash ref={SplashRef} />
@@ -147,8 +168,10 @@ const Main: FC = () => {
           pageIndex={pageIndex}
           setPageIndex={setPageIndex}
         />
+        <Sponsor ref={SponsorRef} id={'item5'} />
       </BasicLayout>
-      <Pager pageIndex={pageIndex} showPager={isPC} />
+
+      <Pager pageIndex={pageIndex} max={PageMax} showPager={isPC} />
       <Menu
         pageIndex={pageIndex}
         setPageIndex={handleMenuOption}

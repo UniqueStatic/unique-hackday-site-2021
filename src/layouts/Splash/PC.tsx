@@ -20,7 +20,7 @@ const SplashLayout = styled.div({
 const FrontPageLayout = styled.div((props) => ({
   height: '100vh',
   width: '-webkit-fill-available',
-  backgroundColor: Background,
+  background: Background,
   display: 'flex',
   alignItems: 'center',
   overflow: 'hidden',
@@ -76,7 +76,7 @@ const SignUpBlock = styled.div({
   fontSize: 'calc(6px + 2vmin)',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: 'white',
+  background: 'white',
 });
 
 const SignUpBackground = styled.div({
@@ -85,7 +85,7 @@ const SignUpBackground = styled.div({
   left: 'calc(50% - 0.5 * (50px + 10vmin))',
   height: 'calc(20px + 4vmin)',
   width: 'calc(50px + 10vmin)',
-  backgroundColor: '#E3E3E3',
+  background: '#E3E3E3',
   border: '1px black solid',
   cursor: 'pointer',
 });
@@ -127,16 +127,20 @@ const FrontPage: FC = ({}) => {
   );
 };
 
-interface HeaderProps {
+interface IDark {
+  dark?:boolean
+}
+
+interface HeaderProps extends IDark {
   switchMenu: () => void;
   pageIndex: number;
   showMenu: boolean;
 }
 const Header: FC<HeaderProps> = (props) => {
-  const { showMenu, switchMenu, pageIndex } = props;
+  const { showMenu, switchMenu, pageIndex, dark = false } = props;
   return (
     <>
-      <HeaderLayout>
+      <HeaderLayout dark={dark}>
         <HeaderLine />
         <No2021>NO.2021</No2021>
         <HackDayTitle shouldUp={pageIndex === 0 ? false : true} />
@@ -160,25 +164,26 @@ const HackDayTitle: FC<HackdayProps> = (props) => {
   );
 };
 
-const HeaderLayout = styled.div({
+const HeaderLayout = styled.div<IDark>(({ dark }) => ({
   position: 'fixed',
   width: '-webkit-fill-available',
-  top:'0',
+  top: '0',
   height: '0',
-  backgroundColor: Background,
+  background: dark ? '#fff' : Background,
   zIndex: 2,
   paddingTop: '12vh',
   display: 'flex',
   justifyContent: 'center',
-});
+  filter: dark ? 'invert(1)' : 'none',
+}));
 
 const HeaderLine = styled.div({
   position: 'absolute',
   bottom: '0',
-  width:'94vw',
+  width: '94vw',
   height: '2px',
-  backgroundColor: 'black',
-})
+  background: 'black',
+});
 
 const No2021 = styled.div({
   position: 'absolute',
@@ -219,7 +224,7 @@ const MenuButtonBlock = styled.div<MenuButtonBlockProps>((props) => ({
   width: '100%',
   height: '3px',
   margin: '1px 0',
-  backgroundColor: props.color,
+  background: props.color,
   transform:
     props.isTop && props.active
       ? 'rotate(45deg) translateY(5.5px)'
@@ -274,7 +279,7 @@ interface MenuLayoutProps {
 
 const MenuLayout = styled.div<MenuLayoutProps>((props) => ({
   position: 'absolute',
-  backgroundColor: Background,
+  background: Background,
   height: '100vh',
   width: '-webkit-fill-available',
   top: 0,
@@ -295,7 +300,7 @@ const MenuTitleBlock = styled.div({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: Background,
+  background: Background,
 });
 
 const MenuTitleBackground = styled.div({
@@ -304,7 +309,7 @@ const MenuTitleBackground = styled.div({
   left: '15%',
   height: 'calc(10px + 4vmin)',
   width: 'calc(100px + 20vmin)',
-  backgroundColor: 'transparent',
+  background: 'transparent',
   border: '1px black solid',
   cursor: 'pointer',
 });
