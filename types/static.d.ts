@@ -56,4 +56,7 @@ declare module '*.png' {
   export default ref;
 }
 
+declare module '*.woff';
+declare module '*.woff2';
+
 /* CUSTOM: ADD YOUR OWN HERE */

@@ -7,6 +7,7 @@ import { Background, Primary } from '@/consts/color';
 import { Global, css } from '@emotion/react';
 import Pager from '@/components/Pager';
 import * as SplashCommon from '../Splash';
+import { globalStyles } from './globalStyles';
 
 const isSafari = window.navigator.userAgent.includes('Safari');
 const isChrome = window.navigator.userAgent.includes('Chrome');
@@ -40,11 +41,13 @@ const enum Direction {
 
 const PageMax = 5;
 
-const isPC = !(window.innerWidth / window.innerHeight < 0.8);
+const shouldShowPCLayout = () =>
+  !(window.innerWidth / window.innerHeight < 0.8);
 
 const Main: FC = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
+  const [isPC, setIsPC] = useState(shouldShowPCLayout());
   const layoutRef = useRef<HTMLDivElement | null>(null);
   const SplashRef = useRef<HTMLDivElement | null>(null);
   const SectionRef = useRef<HTMLDivElement | null>(null);
@@ -102,35 +105,35 @@ const Main: FC = () => {
   }, [handleScroll, isPC]);
 
   useEffect(() => {
-    const handler = () => switchPage(pageIndex);
+    const handler = () => {
+      switchPage(pageIndex);
+      setIsPC(shouldShowPCLayout());
+    };
     window.addEventListener('resize', handler);
     return () => window.removeEventListener('resize', handler);
-  }, [pageIndex, switchPage, isPC]);
+  }, [pageIndex, switchPage, setIsPC]);
 
-  let handleMenuOption = (pageIndex: number) => {
-    setPageIndex(pageIndex);
-    setShowMenu(false);
-    isPC && switchPage(pageIndex);
-  };
+  const handleMenuOption = useCallback(
+    (pageIndex: number) => {
+      setPageIndex(pageIndex);
+      setShowMenu(false);
+      isPC && switchPage(pageIndex);
+    },
+    [isPC, switchPage, setPageIndex, setShowMenu],
+  );
+
   const { Header, Menu, Splash } = isPC
     ? SplashCommon.components.PC
     : SplashCommon.components.Mobile;
-  let Section = isPC
+
+  const Section = isPC
     ? SectionCommon.components.PC
     : SectionCommon.components.Mobile;
   // Create the count state.
   return (
     <>
       <Global
-        styles={css({
-          body: {
-            margin: '0',
-          },
-          '@font-face': {
-            fontFamily: 'Swis721 BlkEx BT',
-            src: 'url("../../dist/assets/font/swz721ke.woff2") format("woff2")',
-          },
-        })}
+        styles={globalStyles}
       />
       <Header
         switchMenu={setShowMenu.bind(this, !showMenu)}
@@ -138,7 +141,6 @@ const Main: FC = () => {
         showMenu={showMenu}
       />
       <BasicLayout ref={layoutRef} isPC={isPC}>
-
         <Splash ref={SplashRef} />
         <Section
           ref={SectionRef}
