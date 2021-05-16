@@ -134,7 +134,6 @@ const Content: FC<IContentProps> = ({ expanded = false, index, animating }) => {
   const { nameChn, nameEng, content } = titleData[index];
   return (
     <>
-      {' '}
       <ItemTitle {...{ expanded }}>
         <BlackText {...{ expanded }}>0{index + 1}</BlackText>
         {expanded && ` ${nameChn} / ${nameEng}`}

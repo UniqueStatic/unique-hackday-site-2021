@@ -27,7 +27,7 @@ const BasicLayout = styled.div<BasicLayoutProps>( ({isPC}) => ({
   fontSize: 'calc(10px + 2vmin)',
   color: Primary,
   scrollBehavior: 'smooth',
-  '-ms-overflow-style': 'none' /* IE and Edge */,
+  'msOverflowStyle': 'none' /* IE and Edge */,
   scrollbarWidth: 'none' /* Firefox */,
   '::-webkit-scrollbar': { display: 'none' },
 }));
@@ -39,10 +39,12 @@ const enum Direction {
 
 const PageMax = 5;
 
+
+const isPC = !(window.innerWidth / window.innerHeight < 0.8)
+
 const Main: FC = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
-  const [isPC, setIsPC] = useState(false);
   const layoutRef = useRef<HTMLDivElement | null>(null);
   const SplashRef = useRef<HTMLDivElement | null>(null);
   const SectionRef = useRef<HTMLDivElement | null>(null);
@@ -90,7 +92,7 @@ const Main: FC = () => {
         }
         throttle = setTimeout(() => {
           throttle = null;
-        }, 500);
+        }, 1000);
       };
       layoutRef.current?.addEventListener('wheel', handler);
       return () => {
@@ -111,14 +113,6 @@ const Main: FC = () => {
     setShowMenu(false);
     switchPage(pageIndex)
   };
-
-  let resize = () => {
-    if (window.innerWidth / window.innerHeight < 0.8)
-      setIsPC(false);
-    else
-      setIsPC(true);
-  }
-  window.onload = window.onresize = resize;
   const { Header, Menu, Splash } = isPC ? SplashCommon.components.PC : SplashCommon.components.Mobile;
   let Section = isPC ? SectionCommon.components.PC : SectionCommon.components.Mobile;
   // Create the count state.

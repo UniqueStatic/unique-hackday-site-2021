@@ -55,6 +55,11 @@ interface PhraseProps {
 const P = styled.p<PhraseProps>(({doubleMargin}) => ({
   marginBottom: doubleMargin ? '72px!important' : '36px'
 }))
+
+const Div = styled.div<PhraseProps>(({doubleMargin}) => ({
+  marginBottom: doubleMargin ? '72px!important' : '36px'
+}))
+
 const introductionData = [
   'Unique Hackday',
   '最初源于联创团队内部成员的Hackday比赛之后将比赛的规模扩大，邀请来自全国的大学一同参与。',
@@ -81,8 +86,9 @@ const IntroImg = styled.img({
   right: '-10vw'
 })
 
-const Text = styled.text({
+const Text = styled.div({
   position: 'relative',
+  display: 'inline-block'
 })
 
 const Introduction = (
@@ -173,11 +179,11 @@ const Schedule = (
         </Title>
         {day.spans.map(({ from, to, content }) => (
           <h2 key={from}>
-            <h3 css={css`
+            <p css={css`
               margin-bottom: 18px!important;
             `}>
               {from}~{to}
-            </h3>
+            </p>
             <p css={css`
               font-size: 1rem!important;
               margin-bottom: 40px!important;
@@ -215,11 +221,19 @@ const Awards = (
 const faqsData = [
   {
     question: '谁可以参加？',
-    answer: `不管你是高中毕业生，还是大学在校生,都可以报名参加我们的比赛。`,
+    answer: (
+      <p>
+        不管你是高中毕业生，还是大学在校生,都可以报名参加我们的比赛。
+      </p>
+    ),
   },
   {
     question: '参加HACKDAY需要多少钱？',
-    answer: `我们不仅不会收取费用，我们还会为您提供一个周末的餐饮和小吃。如果您不是来自武汉，我们还会为您的报销支付至多700元人民币的费用。`,
+    answer: (
+      <p>
+        我们不仅不会收取费用，我们还会为您提供一个周末的餐饮和小吃。如果您不是来自武汉，我们还会为您的报销支付至多700元人民币的费用。
+      </p>
+    ),
   },
   {
     question: '参加比赛需要准备什么？',
@@ -255,7 +269,11 @@ const faqsData = [
   },
   {
     question: '参加比赛有硬件提供吗？',
-    answer: `如果您有特定的硬件，请随身携带。我们将尽最大努力在活动中提供硬件。有关这方面的更多细节将在活动附近提供。`,
+    answer: (
+      <p>
+         如果您有特定的硬件，请随身携带。我们将尽最大努力在活动中提供硬件。有关这方面的更多细节将在活动附近提供。
+      </p>
+    ),
   },
   {
     question: '如何成为赞助商？',
@@ -279,7 +297,7 @@ const FAQs = (
     {faqsData.map(({ question, answer }, i) => (
       <div key={i}>
         <h3>{question}</h3>
-        <P doubleMargin={true}>{answer}</P>
+        <Div doubleMargin={true}>{answer}</Div>
       </div>
     ))}
   </Container>
