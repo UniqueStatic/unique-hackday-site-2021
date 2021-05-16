@@ -24,7 +24,7 @@ const BasicLayout = styled.div<BasicLayoutProps>(({ isPC }) => ({
   alignItems: 'center',
   // justifyContent: 'center',
   overflowY: !isPC || (isSafari && !isChrome) ? 'auto' : 'hidden',
-  marginTop: isPC ? '0' : '12vh',
+  marginTop: '12vh',
   fontSize: 'calc(10px + 2vmin)',
   color: Primary,
   scrollBehavior: 'smooth',

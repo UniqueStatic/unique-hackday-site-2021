@@ -136,11 +136,12 @@ const Header: FC<HeaderProps> = (props) => {
   const { showMenu, switchMenu, pageIndex } = props;
   return (
     <>
-      <SplitLine>
+      <HeaderLayout>
+        <HeaderLine />
         <No2021>NO.2021</No2021>
         <HackDayTitle shouldUp={pageIndex === 0 ? false : true} />
         <MenuButton active={showMenu} click={switchMenu} />
-      </SplitLine>
+      </HeaderLayout>
     </>
   );
 };
@@ -159,20 +160,29 @@ const HackDayTitle: FC<HackdayProps> = (props) => {
   );
 };
 
-const SplitLine = styled.div({
+const HeaderLayout = styled.div({
   position: 'fixed',
-  width: '94vw',
+  width: '-webkit-fill-available',
+  top:'0',
   height: '0',
-  borderBottom: '2px black solid',
   backgroundColor: Background,
   zIndex: 2,
-  margin: '0 auto',
   paddingTop: '12vh',
+  display: 'flex',
+  justifyContent: 'center',
 });
+
+const HeaderLine = styled.div({
+  position: 'absolute',
+  bottom: '0',
+  width:'94vw',
+  height: '2px',
+  backgroundColor: 'black',
+})
 
 const No2021 = styled.div({
   position: 'absolute',
-  right: '0',
+  right: '3vw',
   top: 'calc(12vh - 12px - 2vmin)',
   fontSize: 'calc(4px + 2vmin)',
   fontWeight: 300,
@@ -180,7 +190,7 @@ const No2021 = styled.div({
 
 const HackdayTitleLayout = styled.div<HackdayProps>(({ shouldUp }) => ({
   position: 'absolute',
-  left: '0',
+  left: '3vw',
   // top: '10px',
   padding: '10px 0 0',
   transform: `translateY(${shouldUp ? '-100%' : 0})`,

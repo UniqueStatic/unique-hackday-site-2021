@@ -15,12 +15,12 @@ const titleData = data.titleData;
 const ContentLayout = styled.div({
   display: 'flex',
   position: 'relative',
+  top: '-2px',
   justifyContent: 'center',
   fontSize: 'calc(10px + 2vmin)',
   width: '80vw',
   margin: '0 10%',
   background: Background,
-  paddingTop: '12vh',
   minHeight: '100vh',
   '&::after': {
     content: '""',
@@ -28,7 +28,7 @@ const ContentLayout = styled.div({
     /* display: table; */
     position: 'absolute',
     height: BorderWidth,
-    top: 'calc(92vh + 2px)',
+    top: 'calc(80vh)',
     // bottom:'10vh',
     background: Primary,
   },
@@ -46,6 +46,7 @@ interface IExpandable {
 const ItemLayout = styled.li<IExpandable>(
   ({ expanded = false }) => ({
     position: 'relative',
+    top: '-2px',
     overflow: 'hidden',
     background: '#e3e3e3',
     listStyle: 'none',
