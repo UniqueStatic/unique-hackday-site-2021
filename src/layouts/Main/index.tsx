@@ -18,12 +18,13 @@ interface BasicLayoutProps {
 const BasicLayout = styled.div<BasicLayoutProps>(({ isPC }) => ({
   position: 'relative',
   background: Background,
-  maxHeight: '100vh',
+  maxHeight: '88vh',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   // justifyContent: 'center',
   overflowY: !isPC || (isSafari && !isChrome) ? 'auto' : 'hidden',
+  marginTop: isPC ? '0' : '12vh',
   fontSize: 'calc(10px + 2vmin)',
   color: Primary,
   scrollBehavior: 'smooth',
@@ -109,7 +110,7 @@ const Main: FC = () => {
   let handleMenuOption = (pageIndex: number) => {
     setPageIndex(pageIndex);
     setShowMenu(false);
-    switchPage(pageIndex);
+    isPC && switchPage(pageIndex);
   };
   const { Header, Menu, Splash } = isPC
     ? SplashCommon.components.PC
@@ -131,12 +132,13 @@ const Main: FC = () => {
           },
         })}
       />
+      <Header
+        switchMenu={setShowMenu.bind(this, !showMenu)}
+        pageIndex={pageIndex}
+        showMenu={showMenu}
+      />
       <BasicLayout ref={layoutRef} isPC={isPC}>
-        <Header
-          switchMenu={setShowMenu.bind(this, !showMenu)}
-          pageIndex={pageIndex}
-          showMenu={showMenu}
-        />
+
         <Splash ref={SplashRef} />
         <Section
           ref={SectionRef}

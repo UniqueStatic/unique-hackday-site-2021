@@ -249,6 +249,7 @@ const SplitLine = styled.div({
   position: 'fixed',
   width: '-webkit-fill-available',
   height: '0',
+  top: '0',
   borderBottom: '1.5px solid black',
   backgroundColor: '#EFB8D3',
   zIndex: 2,
