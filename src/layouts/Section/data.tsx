@@ -27,8 +27,8 @@ const Container = styled.div({
   },
   h3: {
     fontSize: '1.2rem',
-    fontWeight: 'normal',
-    margin: '0 0 32px 0',
+    fontWeight: 500,
+    // margin: '0 0 32px 0',
   },
   small: {
     fontSize: '1rem',
@@ -55,9 +55,9 @@ const P = styled.p<PhraseProps>(({ doubleMargin }) => ({
   marginBottom: doubleMargin ? '72px!important' : '36px',
 }));
 
-const Div = styled.div<PhraseProps>(({ doubleMargin }) => ({
-  marginBottom: doubleMargin ? '72px!important' : '36px',
-}));
+const Div = styled.div<PhraseProps>({
+  marginBottom: '4vh',
+});
 
 const introductionData = [
   'Unique Hackday',
@@ -331,7 +331,7 @@ const faqsData = [
   {
     question: '如何成为赞助商？',
     answer: (
-      <>
+      <p>
         如果您希望能够在黑客马拉松中展示您的品牌，并在您的目标群体进行宣传，请发送邮件至
         <a
           css={css`
@@ -344,7 +344,7 @@ const faqsData = [
           contact@hustunique.com
         </a>
         。
-      </>
+      </p>
     ),
   },
 ];
@@ -353,7 +353,13 @@ const FAQs = (
   <Container>
     {faqsData.map(({ question, answer }, i) => (
       <div key={i}>
-        <h3>{question}</h3>
+        <h3
+          css={css`
+            margin-top: 5vh;
+          `}
+        >
+          {question}
+        </h3>
         <Div doubleMargin={true}>{answer}</Div>
       </div>
     ))}
