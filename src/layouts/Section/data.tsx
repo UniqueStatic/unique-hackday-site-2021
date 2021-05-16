@@ -22,7 +22,7 @@ const Container = styled.div({
   padding: '0 4vw',
   h2: {
     fontSize: '1.5rem',
-    fontWeight: 'normal',
+    fontWeight: 500,
     // margin: '2em 0',
   },
   h3: {
@@ -38,7 +38,7 @@ const Container = styled.div({
 
   p: {
     fontSize: '1.2rem',
-    margin: '0',
+    // margin: '0',
   },
 
   a: {
@@ -88,25 +88,43 @@ const IntroImg = styled.img({
 const Text = styled.div({
   position: 'relative',
   display: 'inline-block',
+  fontWeight: 500,
+});
+
+const IntroMessage = styled.p({
+  marginTop: '3vh',
 });
 
 const Introduction = (
   <Container>
-    <h2>Unique Hackday</h2>
-    <p>
+    <h2
+      css={css`
+        margin-top: 4vh;
+      `}
+    >
+      Unique Hackday
+    </h2>
+    <IntroMessage>
       最初源于联创团队内部成员的Hackday比赛之后将比赛的规模扩大，邀请来自全国的大学一同参与。
-    </p>
-    <p>
+    </IntroMessage>
+    <IntroMessage>
       因疫情缘故缺席了2020年，而今年我们决定重启，继续将开放、创新、极客的精神传递给更多的人。
-    </p>
-    <h2>150名参赛选手 </h2>
+    </IntroMessage>
+    <h2
+      css={css`
+        margin-top: 4vh;
+        margin-bottom: 0;
+      `}
+    >
+      150名参赛选手
+    </h2>
     <small
       css={css({
         display: 'inline-block',
         fontWeight: 'normal',
         fontSize: '1rem!important',
         letterSpacing: '0.5ch',
-        margin: '0 0 72px 0!important',
+        margin: '0 0 5vh 0!important',
       })}
     >
       通过简历筛选出来来自全国各大高校的150名学生

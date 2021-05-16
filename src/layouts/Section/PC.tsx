@@ -157,7 +157,7 @@ const TitleImg = styled.img<TitleImgProps>(({ isExpanded }) => ({
   position: 'absolute',
   width: '6vh',
   height: '6vh',
-  top: 'calc(9vh - 4vh)',
+  top: 'calc(9vh - 1vh)',
   left: 'calc(90% - 4vh)',
   visibility: isExpanded ? 'visible' : 'hidden',
   zIndex: 2,
