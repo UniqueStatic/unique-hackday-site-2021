@@ -26,7 +26,7 @@ const BasicLayout = styled.div<BasicLayoutProps>(({ isPC }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   // justifyContent: 'center',
-  overflowY: !isPC || (isSafari && !isChrome) ? 'visible' : 'hidden',
+  overflowY: !isPC || (isSafari && !isChrome) ? 'auto' : 'hidden',
   marginTop: '8vh',
   fontSize: 'calc(10px + 2vmin)',
   color: Primary,

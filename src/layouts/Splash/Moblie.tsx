@@ -262,7 +262,7 @@ const SplitLine = styled.div({
 const HackdayTitleLayout = styled.div({
   position: 'absolute',
   left: '20px',
-  top: '-40px',
+  transform: 'translateY(-100%)'
 });
 
 const UniqueText = styled.div({
