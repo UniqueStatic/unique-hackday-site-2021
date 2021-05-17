@@ -48,6 +48,7 @@ const SubTitle = styled.div({
   display: 'flex',
   justifyContent: 'center',
   letterSpacing: '0.3ch',
+  fontWeight: 350
 });
 
 interface FloatBlockProps {
@@ -65,10 +66,12 @@ const FloatBlock = styled.div<FloatBlockProps>(({ isRight }) => ({
 
 interface TextBlockProps {
   fontSize: number;
+  fontWeight: number;
 }
 
-const TextBlock = styled.div<TextBlockProps>(({ fontSize }) => ({
+const TextBlock = styled.div<TextBlockProps>(({ fontSize, fontWeight }) => ({
   fontSize: fontSizeData[fontSize],
+  fontWeight: fontWeight,
   lineHeight: 'calc(100% + 20px)',
 }));
 
@@ -103,37 +106,37 @@ const Introduction: FC = () => {
         <IntroMessage>{introductionData[1]}</IntroMessage>
         <IntroMessage>{introductionData[2]}</IntroMessage>
       </IntroLayout>
-      <ItemTitle width="80%">{introductionData[3]}</ItemTitle>
+      <ItemTitle width="calc(100% - 12vw)">{introductionData[3]}</ItemTitle>
       <SubTitle>{introductionData[4]}</SubTitle>
       <FloatBlock isRight={false}>
-        <TextBlock fontSize={3}>
+        <TextBlock fontWeight={500} fontSize={3}>
           <Text>
             <IntroImg src={pic.twentyFourPic} />
             {introductionData[5]}
           </Text>
         </TextBlock>
-        <TextBlock fontSize={2}>{introductionData[6]}</TextBlock>
-        <TextBlock fontSize={2}>{introductionData[7]}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>{introductionData[6]}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>{introductionData[7]}</TextBlock>
       </FloatBlock>
       <FloatBlock isRight={true}>
-        <TextBlock fontSize={3}>
+        <TextBlock fontWeight={500} fontSize={3}>
           <Text>
             <IntroImg src={pic.travelFoodPic} />
             {introductionData[8]}
           </Text>
         </TextBlock>
-        <TextBlock fontSize={2}>{introductionData[9]}</TextBlock>
-        <TextBlock fontSize={2}>{introductionData[10]}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>{introductionData[9]}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>{introductionData[10]}</TextBlock>
       </FloatBlock>
       <FloatBlock isRight={false}>
-        <TextBlock fontSize={3}>
+        <TextBlock fontWeight={500} fontSize={3}>
           <Text>
             <IntroImg src={pic.trophyPic} />
             {introductionData[11]}
           </Text>
         </TextBlock>
-        <TextBlock fontSize={2}>{introductionData[12]}</TextBlock>
-        <TextBlock fontSize={2}>{introductionData[13]}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>{introductionData[12]}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>{introductionData[13]}</TextBlock>
       </FloatBlock>
     </>
   );
@@ -150,7 +153,7 @@ const TimeBlock = styled.div({
 
 const DateText = styled.div({
   fontWeight: 200,
-  fontSize: fontSizeData[3],
+  fontSize: fontSizeData[2],
   marginBottom: '18px',
 });
 
@@ -158,17 +161,17 @@ const Schedule: FC = () => {
   const elements = scheduleData.map((_) => {
     const times = _.spans.map((_) => (
       <TimeBlock key={_.from}>
-        <TextBlock fontSize={2}>
+        <TextBlock fontWeight={500} fontSize={2}>
           {_.from}~{_.to}
         </TextBlock>
-        <TextBlock fontSize={1}>{_.content}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={1}>{_.content}</TextBlock>
       </TimeBlock>
     ));
     return (
       <div key={_.day}>
         <DateBlock>
           <DateText>{_.date}</DateText>
-          <TextBlock fontSize={3}>
+          <TextBlock fontWeight={500} fontSize={3}>
             {_.day}
           </TextBlock>
         </DateBlock>
@@ -187,10 +190,10 @@ const AwardsBlock = styled.div({
 const Awards: FC = () => {
   const awards = awardsData.map((_) => (
     <AwardsBlock key={_.nameChn}>
-      <TextBlock fontSize={3}>
+      <TextBlock fontWeight={450} fontSize={3}>
         {_.nameChn} / {_.nameEng}
       </TextBlock>
-      <TextBlock fontSize={2}>{_.value}</TextBlock>
+      <TextBlock fontWeight={400} fontSize={2}>{_.value}</TextBlock>
     </AwardsBlock>
   ));
   return <>{awards}</>;
@@ -210,7 +213,7 @@ const FAQs: FC = () => {
   const faqs = data.faqsData.map((_) => (
     <FAQBlock key={_.question}>
       <FAQTitle>{_.question}</FAQTitle>
-      <TextBlock fontSize={2}>{_.answer}</TextBlock>
+      <TextBlock fontWeight={400} fontSize={2}>{_.answer}</TextBlock>
     </FAQBlock>
   ));
   return <>{faqs}</>;
@@ -238,10 +241,10 @@ const Access: FC = () => {
   return (
     <AccessLayout>
       <AccessBlock>
-        <TextBlock fontSize={2}>{position}</TextBlock>
-        <TextBlock fontSize={2}>{institution}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>{position}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>{institution}</TextBlock>
         <AccessMail href={`mailto:${mail}`}>{mail}</AccessMail>
-        <TextBlock fontSize={2}>{qq}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>{qq}</TextBlock>
       </AccessBlock>
     </AccessLayout>
   );
@@ -298,8 +301,15 @@ const ItemTitle = styled.div<ItemTitleProps>(({ width }) => ({
   padding: `1vmin ${innerMargin}`,
   margin: '0 0 6vh',
   width: width,
-  fontSize: fontSizeData[3],
+  fontSize: fontSizeData[4],
+  fontWeight: 600,
 }));
+
+const EngText = styled.div({
+  display: 'inline',
+  fontSize: fontSizeData[4],
+  fontWeight: 400
+})
 
 interface IContentProps {
   index: number;
@@ -323,7 +333,7 @@ const Content: FC<IContentProps> = ({ index }) => {
   ];
   return (
     <ContentBlock>
-      <ItemTitle width="auto">{`${nameChn} / ${nameEng}`}</ItemTitle>
+      <ItemTitle width="auto">{nameChn}<EngText>{` / ${nameEng}`}</EngText></ItemTitle>
       {Contents[index]}
     </ContentBlock>
   );

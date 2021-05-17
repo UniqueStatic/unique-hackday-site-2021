@@ -56,6 +56,8 @@ const Main: FC = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const [isPC, setIsPC] = useState(shouldShowPCLayout());
+  const [dark, setDark] = useState(false);
+  const [index, setIndex] = useState(0);
   const layoutRef = useRef<HTMLDivElement | null>(null);
   const SplashRef = useRef<HTMLDivElement | null>(null);
   const SectionRef = useRef<HTMLDivElement | null>(null);
@@ -96,7 +98,23 @@ const Main: FC = () => {
     },
     [setPageIndex],
   );
-
+  useEffect(() => {
+    const observerDark = new IntersectionObserver((entries) => {
+      if(entries[0].time > 1000)
+        setDark(true);
+    }, {threshold: 1})
+    const observerColor = new IntersectionObserver((entries) => {
+      if(entries[0].time > 1000)
+        setDark(false);
+    }, {threshold: 0})
+    const element = document.getElementById('item5');
+    if(!isPC && element){
+      console.log('observe succeed!')
+      observerColor.observe(element);
+      observerDark.observe(element);
+    }
+  }, [isPC])
+  console.log(dark)
   useEffect(() => {
     if (isPC) {
       let throttle: number | null = null;
@@ -146,7 +164,6 @@ const Main: FC = () => {
   const Section = isPC
     ? SectionCommon.components.PC
     : SectionCommon.components.Mobile;
-
   const Sponsor = isPC ?SponsorPC:SponsorMobile; 
   // Create the count state.
   return (
@@ -155,7 +172,7 @@ const Main: FC = () => {
       {showMenu && <Global styles={css({ body: { overflow: 'hidden' } })} />}
 
       <Header
-        dark={pageIndex===PageMax -1}
+        dark={isPC && pageIndex===PageMax - 1 || dark}
         switchMenu={setShowMenu.bind(this, !showMenu)}
         pageIndex={pageIndex}
         showMenu={showMenu}
@@ -168,7 +185,7 @@ const Main: FC = () => {
           pageIndex={pageIndex}
           setPageIndex={setPageIndex}
         />
-        <Sponsor ref={SponsorRef} id={'item5'} />
+        <Sponsor ref={SponsorRef} id={'item5'}/>
       </BasicLayout>
 
       <Pager pageIndex={pageIndex} max={PageMax} showPager={isPC} />
