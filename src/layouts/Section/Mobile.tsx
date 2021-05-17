@@ -9,7 +9,6 @@ import React, {
 import logo from '@/assets/logo.svg';
 // import './styles.css';
 import styled from '@emotion/styled';
-import SponsorPic from '../../assets/imgs/Sponsor.png';
 import { css, keyframes } from '@emotion/react';
 import { Background, Primary, Secondary } from '@/consts/color';
 import data, { pic } from './data';
@@ -238,7 +237,7 @@ const ContentContainer = forwardRef<
           </ItemLayout>
         );
       })}
-      <Sponsor id="item5" />
+      {/* <Sponsor id="item5" /> */}
     </ContentLayout>
   );
 });
@@ -246,6 +245,7 @@ const ContentContainer = forwardRef<
 const ContentLayout = styled.div({
   paddingTop: '15vh',
   width: '100%',
+  background:Background
 });
 
 interface IExpandable {
@@ -274,69 +274,7 @@ const ItemTitle = styled.div<ItemTitleProps>(({ width }) => ({
 interface IContentProps {
   index: number;
 }
-const SponsorBlock = styled.div({
-  position: 'relative',
-  minHeight: 'calc(100vh - 100px)',
-  padding: '50px 30px',
-  background: 'black',
-  width: '-webkit-fill-available',
-  zIndex: 4,
-});
 
-const SponsorTitle = styled.div({
-  color: 'white',
-  background: 'black',
-  margin: '0 0 64px',
-});
-
-const SponsorImg = styled.img({
-  position: 'absolute',
-  top: '90px',
-  left: '30px',
-  maxHeight: '20px',
-});
-
-const SponsorName = styled.div({
-  fontSize: '1.2rem',
-  paddingTop: '10vh',
-  color: 'white',
-  background: 'black',
-});
-
-const SponsorText = styled.div({
-  fontSize: '0.8rem',
-  lineHeight: 'calc(100% + 20px)',
-  paddingTop: '15px',
-  color: 'white',
-  background: 'black',
-});
-
-interface SponsorProps {
-  id: string;
-}
-
-const Sponsor: FC<SponsorProps> = ({ id }) => {
-  return (
-    <SponsorBlock id={id}>
-      <SponsorTitle>赞助商 / Sponsor</SponsorTitle>
-      <SponsorImg src={SponsorPic}></SponsorImg>
-      <SponsorName>武汉夜莺科技有限公司</SponsorName>
-      <SponsorText>
-        坐落于武汉光谷核心繁华地带（K11写字楼）。
-        核心创始人来自华中科技大学联创团队。
-        是一家专注于智能营销领域的科技公司。
-        于2016年获得知名投资机构真格基金投资、于2018年获得近
-        千万元战略融资、于2021年获得新一轮融资。
-        核心业务微伴助手、壹伴助手直接或间影响国内数亿C端用户。
-        近3年公司估值上涨百倍，除此之外，目前仍在超高速上涨！
-        “是一个不折不扣的潜力股”。 这些Tag可以更好的给我们做一个概述：
-        大厂薪资、酷炫工作氛围、优质办公环境、大牛多、扁平化、
-        双休、涨薪快（半年固定涨）、弹性工作、零食下午茶、生日
-        庆祝、周年礼物、节日礼包、学习报销…… 我们欢迎有理想的小伙伴加入！
-      </SponsorText>
-    </SponsorBlock>
-  );
-};
 const ContentBlock = styled.div({
   marginBottom: '100px',
   display: 'flex',

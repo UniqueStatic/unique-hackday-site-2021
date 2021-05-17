@@ -182,7 +182,8 @@ const Container = React.forwardRef<HTMLDivElement | null, ISectionProps>(
     ];
 
     useEffect(() => {
-      if (pageIndex) setIndex(pageIndex === 0 ? pageIndex : pageIndex - 1);
+      if (pageIndex && pageIndex <= 5) // magic
+        setIndex(pageIndex === 0 ? pageIndex : pageIndex - 1);
     }, [pageIndex]);
 
     const handleSwitch = useCallback(

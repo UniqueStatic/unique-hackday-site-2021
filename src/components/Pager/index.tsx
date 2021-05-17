@@ -37,7 +37,7 @@ interface IPagerProps {
   showPager: boolean;
 }
 
-const Pager: FC<IPagerProps> = ({ showPager, pageIndex = 0, max = 6 }) => {
+const Pager: FC<IPagerProps> = ({ showPager, pageIndex = 0, max = 7 }) => {
   return (
     <PagerContainer showPager={showPager}>
       {Array(max)
