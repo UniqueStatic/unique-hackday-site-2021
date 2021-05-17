@@ -206,7 +206,7 @@ const HackdayTitleLayout = styled.div<HackdayProps>(({ shouldUp }) => ({
 
 const UniqueText = styled.div({
   fontSize: '2vmin',
-  fontWeight: 300,
+  fontWeight: 400,
   letterSpacing: '4.5px',
 });
 
@@ -368,7 +368,7 @@ const Menu: FC<MenuProps> = (props) => {
     '奖项设置 / Awards',
     '常见问题 / FAQs',
     '联系我们 / Access',
-    '主办方 / About Us',
+    '赞助商 / Sponsor',
   ];
   const { isHidden, setPageIndex } = props;
   const options = optionText.map((_, i) => (

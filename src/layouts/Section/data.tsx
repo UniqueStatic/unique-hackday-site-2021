@@ -37,7 +37,7 @@ const Container = styled.div({
   },
 
   p: {
-    fontSize: '1.2rem',
+    fontSize: '1rem',
     // margin: '0',
   },
 

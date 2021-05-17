@@ -10,7 +10,7 @@ import logo from '@/assets/logo.svg';
 // import './styles.css';
 import styled from '@emotion/styled';
 import { css, keyframes } from '@emotion/react';
-import { Background, Primary, Secondary } from '@/consts/color';
+import { MobileBackground } from '@/consts/color';
 import data, { pic } from './data';
 const { titleData, introductionData, scheduleData, awardsData } = data;
 
@@ -39,7 +39,10 @@ const IntroLayout = styled.div({
 const SubTitle = styled.div({
   fontSize: '0.75rem',
   position: 'relative',
-  top: '-50px',
+  top: '-5vh',
+  display: 'flex',
+  justifyContent: 'center',
+  letterSpacing: '0.3ch',
 });
 
 interface FloatBlockProps {
@@ -60,7 +63,7 @@ interface TextBlockProps {
 }
 
 const TextBlock = styled.div<TextBlockProps>(({ isTitle }) => ({
-  fontSize: isTitle ? '1.2rem' : '1rem',
+  fontSize: isTitle ? '1.5rem' : '1.2rem',
   lineHeight: 'calc(100% + 20px)',
 }));
 
@@ -78,6 +81,9 @@ const Text = styled.text({
 
 const IntroMessage = styled.p({
   margin: '0 0 1.5vh 0',
+  ':last-child': {
+    margin: 0,
+  },
 });
 
 const Introduction: FC = () => {
@@ -127,16 +133,19 @@ const Introduction: FC = () => {
 const DateBlock = styled.div({
   paddingLeft: '16px',
   borderLeft: '2px solid black',
-  marginBottom: '42px',
 });
 
 const TimeBlock = styled.div({
-  margin: '32px 18px',
+  margin: '2.5vh',
 });
 
 const DateText = styled.div({
   fontWeight: 200,
   marginBottom: '18px',
+});
+
+const ContentText = styled.div({
+  fontSize: '1rem',
 });
 
 const Schedule: FC = () => {
@@ -146,14 +155,21 @@ const Schedule: FC = () => {
         <TextBlock isTitle={false}>
           {_.from}~{_.to}
         </TextBlock>
-        <TextBlock isTitle={false}>{_.content}</TextBlock>
+        <ContentText>{_.content}</ContentText>
       </TimeBlock>
     ));
     return (
       <div key={_.day}>
         <DateBlock>
           <DateText>{_.date}</DateText>
-          <TextBlock isTitle={true}>{_.day}</TextBlock>
+          <TextBlock
+            isTitle={true}
+            css={css`
+              font-size: 1.5rem;
+            `}
+          >
+            {_.day}
+          </TextBlock>
         </DateBlock>
         {times}
       </div>
@@ -172,7 +188,7 @@ const Awards: FC = () => {
       <TextBlock isTitle={false}>
         {_.nameChn} / {_.nameEng}
       </TextBlock>
-      <TextBlock isTitle={false}>{_.value}</TextBlock>
+      <ContentText>{_.value}</ContentText>
     </AwardsBlock>
   ));
   return <>{awards}</>;
@@ -184,6 +200,7 @@ const FAQBlock = styled.div({
 const FAQText = styled.div<TextBlockProps>(({ isTitle }) => ({
   fontSize: isTitle ? '1.2rem' : '1rem',
   marginBottom: isTitle ? '1rem' : '0',
+  fontWeight: isTitle ? 500 : 400,
 }));
 
 const FAQs: FC = () => {
@@ -245,7 +262,7 @@ const ContentContainer = forwardRef<
 const ContentLayout = styled.div({
   paddingTop: '15vh',
   width: '100%',
-  background:Background
+  background: MobileBackground,
 });
 
 interface IExpandable {

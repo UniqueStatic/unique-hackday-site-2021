@@ -3,7 +3,7 @@ import logo from '@/assets/logo.svg';
 // import './styles.css';
 import styled from '@emotion/styled';
 import * as SectionCommon from '../Section';
-import { Background, Primary } from '@/consts/color';
+import { Background, MobileBackground, Primary } from '@/consts/color';
 import { Global, css } from '@emotion/react';
 import Pager from '@/components/Pager';
 import * as SplashCommon from '../Splash';
@@ -20,7 +20,7 @@ interface BasicLayoutProps {
 
 const BasicLayout = styled.div<BasicLayoutProps>(({ isPC }) => ({
   position: 'relative',
-  background: Background,
+  background: isPC ? Background : MobileBackground,
   maxHeight: '92vh',
   display: 'flex',
   flexDirection: 'column',

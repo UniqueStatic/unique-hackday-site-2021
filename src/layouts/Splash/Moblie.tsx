@@ -27,13 +27,13 @@ const FrontPageLayout = styled.div((props) => ({
 
 const UniqueLayout = styled.img({
   position: 'absolute',
-  top: '20%',
+  top: '15%',
   width: '60%',
 });
 
 const ComputerLayout = styled.div({
   position: 'absolute',
-  top: '40%',
+  top: '35%',
   width: '100%',
   height: 'calc(80vw * 403 / 421)',
   display: 'flex',
@@ -72,9 +72,9 @@ const RebootText = styled.div((props) => ({
 const SignUpBlock = styled.div({
   position: 'absolute',
   height: 'calc(20px + 4vmin)',
-  width: '130px',
+  width: '35vw',
   letterSpacing: '3px',
-  bottom: '30px',
+  bottom: '8vh',
   display: 'flex',
   fontSize: 'calc(6px + 2vmin)',
   justifyContent: 'center',
@@ -129,6 +129,7 @@ const MenuTitle = styled.div({
   backgroundColor: 'black',
   color: 'white',
   fontSize: 'calc(10px + 2vmin)',
+  fontFamily: 'Swis721 BlkEx BT',
   display: 'flex',
   alignItems: 'center',
   padding: '0 10px',
@@ -197,7 +198,7 @@ const Menu: FC<MenuProps> = (props) => {
   return (
     <MenuLayout isHidden={isHidden}>
       <MenuMain>
-        <MenuTitle>MENU ---- 2021</MenuTitle>
+        <MenuTitle>MENU —— 2021</MenuTitle>
         <Select>{options}</Select>
       </MenuMain>
     </MenuLayout>
@@ -255,7 +256,7 @@ const SplitLine = styled.div({
   backgroundColor: '#EFB8D3',
   zIndex: 2,
   margin: '0 auto',
-  paddingTop: '12vh',
+  paddingTop: '8vh',
 });
 
 const HackdayTitleLayout = styled.div({

@@ -20,10 +20,10 @@ const SponsorTitle = styled.div({
   paddingTop: '2vh',
 });
 
-const SponsorImg = styled.img( ({
+const SponsorImg = styled.img({
   margin: '1rem 0',
-  maxHeight: '4rem' 
-}));
+  maxHeight: '2.4rem',
+});
 
 const SponsorName = styled.div({
   color: 'white',
@@ -38,7 +38,6 @@ const Text = styled.div({
   background: 'black',
 });
 
-
 export const Sponsor = forwardRef<HTMLDivElement | null, SponsorProps>(
   ({ id }, outerRef) => {
     const { ref, shouldAbove } = useAbove();
@@ -48,7 +47,9 @@ export const Sponsor = forwardRef<HTMLDivElement | null, SponsorProps>(
           <SponsorTitle>赞助商 / Sponsor</SponsorTitle>
           <div css={css({ margin: '0 15%' })}>
             <SponsorName>武汉夜莺科技有限公司</SponsorName>
-            <SponsorImg src={SponsorPic}></SponsorImg>
+            <a href="https://weibanzhushou.com/" target="_blank">
+              <SponsorImg src={SponsorPic}></SponsorImg>
+            </a>
 
             <Text>
               坐落于武汉光谷核心繁华地带（K11写字楼）。核心创始人来自华中科技大学联创团队。

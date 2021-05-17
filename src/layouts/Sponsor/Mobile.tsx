@@ -16,7 +16,11 @@ const SponsorBlock = styled.div<ISponsorBlockProps>(({ above = false }) => ({
 const SponsorTitle = styled.div({
   color: 'white',
   background: 'black',
-  margin: '0 0 64px',
+  margin: '0 15%',
+  display: 'flex',
+  alignItems: 'center',
+  fontSize: '1.2rem',
+  height: '10vh',
 });
 
 const SponsorImg = styled.img({
@@ -47,26 +51,34 @@ export const Sponsor = forwardRef<HTMLDivElement | null, SponsorProps>(
           {/* <Sticky> */}
           <SponsorTitle>赞助商 / Sponsor</SponsorTitle>
           <div css={css({ margin: '0 15%' })}>
-            <SponsorName>武汉夜莺科技有限公司</SponsorName>
-            <SponsorImg src={SponsorPic}></SponsorImg>
+            <a href="https://weibanzhushou.com/" target="_blank">
+              <SponsorImg src={SponsorPic}></SponsorImg>
+            </a>
 
-            <Text>
-              坐落于武汉光谷核心繁华地带（K11写字楼）。核心创始人来自华中科技大学联创团队。
-            </Text>
-            <Text>是一家专注于智能营销领域的科技公司。</Text>
-            <Text>
-              于2016年获得知名投资机构真格基金投资、于2018年获得近千万元战略融资、于2021年获得新一轮融资。
-            </Text>
-            <Text>核心业务微伴助手、壹伴助手直接或间影响国内数亿C端用户。</Text>
-            <Text>近3年公司估值上涨百倍，除此之外，目前仍在超高速上涨！</Text>
-            <Text>“是一个不折不扣的潜力股”。</Text>
-            <Text>这些Tag可以更好的给我们做一个概述：</Text>
-            <Text>大厂薪资、酷炫工作氛围、优质办公环境、大牛多、扁平化、</Text>
-            <Text>双休、涨薪快（半年固定涨）、弹性工作、零食下午茶、</Text>
-            <Text>
-              生日庆祝、周年礼物、节日礼包、学习报销……
-              我们欢迎有理想的小伙伴加入！
-            </Text>
+            <div css={css({ marginTop: '6vh', paddingBottom: '6vh' })}>
+              <SponsorName>武汉夜莺科技有限公司</SponsorName>
+              <Text>
+                坐落于武汉光谷核心繁华地带（K11写字楼）。核心创始人来自华中科技大学联创团队。
+              </Text>
+              <Text>是一家专注于智能营销领域的科技公司。</Text>
+              <Text>
+                于2016年获得知名投资机构真格基金投资、于2018年获得近千万元战略融资、于2021年获得新一轮融资。
+              </Text>
+              <Text>
+                核心业务微伴助手、壹伴助手直接或间影响国内数亿C端用户。
+              </Text>
+              <Text>近3年公司估值上涨百倍，除此之外，目前仍在超高速上涨！</Text>
+              <Text>“是一个不折不扣的潜力股”。</Text>
+              <Text>这些Tag可以更好的给我们做一个概述：</Text>
+              <Text>
+                大厂薪资、酷炫工作氛围、优质办公环境、大牛多、扁平化、
+              </Text>
+              <Text>双休、涨薪快（半年固定涨）、弹性工作、零食下午茶、</Text>
+              <Text>
+                生日庆祝、周年礼物、节日礼包、学习报销……
+                我们欢迎有理想的小伙伴加入！
+              </Text>
+            </div>
           </div>
         </SponsorBlock>
       </div>
