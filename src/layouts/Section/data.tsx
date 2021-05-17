@@ -22,13 +22,13 @@ const Container = styled.div({
   padding: '0 4vw',
   h2: {
     fontSize: '1.5rem',
-    fontWeight: 'normal',
+    fontWeight: 500,
     // margin: '2em 0',
   },
   h3: {
     fontSize: '1.2rem',
-    fontWeight: 'normal',
-    margin: '0 0 32px 0',
+    fontWeight: 500,
+    // margin: '0 0 32px 0',
   },
   small: {
     fontSize: '1rem',
@@ -37,8 +37,8 @@ const Container = styled.div({
   },
 
   p: {
-    fontSize: '1.2rem',
-    margin: '0',
+    fontSize: '1rem',
+    // margin: '0',
   },
 
   a: {
@@ -55,9 +55,9 @@ const P = styled.p<PhraseProps>(({ doubleMargin }) => ({
   marginBottom: doubleMargin ? '72px!important' : '36px',
 }));
 
-const Div = styled.div<PhraseProps>(({ doubleMargin }) => ({
-  marginBottom: doubleMargin ? '72px!important' : '36px',
-}));
+const Div = styled.div<PhraseProps>({
+  marginBottom: '4vh',
+});
 
 const introductionData = [
   'Unique Hackday',
@@ -74,7 +74,7 @@ const introductionData = [
   '奖金&纪念',
   '丰厚的奖金',
   '精美的纪念品',
-];
+] as const;
 
 const IntroImg = styled.img({
   width: '6vmin',
@@ -88,25 +88,43 @@ const IntroImg = styled.img({
 const Text = styled.div({
   position: 'relative',
   display: 'inline-block',
+  fontWeight: 500,
+});
+
+const IntroMessage = styled.p({
+  marginTop: '3vh',
 });
 
 const Introduction = (
   <Container>
-    <h2>Unique Hackday</h2>
-    <p>
+    <h2
+      css={css`
+        margin-top: 4vh;
+      `}
+    >
+      Unique Hackday
+    </h2>
+    <IntroMessage>
       最初源于联创团队内部成员的Hackday比赛之后将比赛的规模扩大，邀请来自全国的大学一同参与。
-    </p>
-    <p>
+    </IntroMessage>
+    <IntroMessage>
       因疫情缘故缺席了2020年，而今年我们决定重启，继续将开放、创新、极客的精神传递给更多的人。
-    </p>
-    <h2>150名参赛选手 </h2>
+    </IntroMessage>
+    <h2
+      css={css`
+        margin-top: 4vh;
+        margin-bottom: 0;
+      `}
+    >
+      150名参赛选手
+    </h2>
     <small
       css={css({
         display: 'inline-block',
         fontWeight: 'normal',
         fontSize: '1rem!important',
         letterSpacing: '0.5ch',
-        margin: '0 0 72px 0!important',
+        margin: '0 0 5vh 0!important',
       })}
     >
       通过简历筛选出来来自全国各大高校的150名学生
@@ -165,9 +183,9 @@ interface TitleProps {
 }
 
 const Title = styled.div<TitleProps>(({ needBorder }) => ({
-  fontSize: '1.7rem',
-  fontWeight: 'normal',
-  margin: '20px 0',
+  fontSize: '1.2rem',
+  fontWeight: 500,
+  margin: '5vh 0 0 0',
   paddingLeft: '5px',
   borderLeft: needBorder ? '2px solid black' : 'none',
   position: 'relative',
@@ -183,25 +201,33 @@ const Schedule = (
         <Title needBorder={true}>
           DAY {i + 1} <small>{day.date}</small>
         </Title>
-        {day.spans.map(({ from, to, content }) => (
-          <h2 key={from}>
-            <p
-              css={css`
-                margin-bottom: 18px !important;
-              `}
-            >
-              {from}~{to}
-            </p>
-            <p
-              css={css`
-                font-size: 1rem !important;
-                margin-bottom: 40px !important;
-              `}
-            >
-              {content}
-            </p>
-          </h2>
-        ))}
+        <div
+          css={css`
+            margin-top: 3vh;
+            padding-left: 0.5vw;
+          `}
+        >
+          {day.spans.map(({ from, to, content }) => (
+            <h2 key={from}>
+              <p
+                css={css`
+                  margin-bottom: 18px !important;
+                `}
+              >
+                {from}~{to}
+              </p>
+              <p
+                css={css`
+                  font-size: 1rem !important;
+                  margin-bottom: 40px !important;
+                  font-weight: 400;
+                `}
+              >
+                {content}
+              </p>
+            </h2>
+          ))}
+        </div>
       </div>
     ))}
   </Container>
@@ -219,12 +245,18 @@ const Awards = (
   <Container>
     {awardsData.map(({ nameChn, nameEng, value }, i) => (
       <div key={i}>
-        <Title needBorder={false}>
+        <Title
+          needBorder={false}
+          css={css`
+            margin-botton: 1vh;
+          `}
+        >
           {nameChn} <small>{'/'}</small>
           <small>{nameEng}</small>
         </Title>
         <p
           css={css`
+            margin-top: 15px;
             margin-bottom: 50px !important;
           `}
         >
@@ -299,7 +331,7 @@ const faqsData = [
   {
     question: '如何成为赞助商？',
     answer: (
-      <>
+      <p>
         如果您希望能够在黑客马拉松中展示您的品牌，并在您的目标群体进行宣传，请发送邮件至
         <a
           css={css`
@@ -312,7 +344,7 @@ const faqsData = [
           contact@hustunique.com
         </a>
         。
-      </>
+      </p>
     ),
   },
 ];
@@ -321,7 +353,13 @@ const FAQs = (
   <Container>
     {faqsData.map(({ question, answer }, i) => (
       <div key={i}>
-        <h3>{question}</h3>
+        <h3
+          css={css`
+            margin-top: 5vh;
+          `}
+        >
+          {question}
+        </h3>
         <Div doubleMargin={true}>{answer}</Div>
       </div>
     ))}
@@ -336,11 +374,28 @@ const accessData = {
 };
 
 const Access = (
-  <Container>
+  <Container
+    css={css`
+      margin-top: 4vh;
+    `}
+  >
     <h2>{accessData.position}</h2>
     <h2>{accessData.institution}</h2>
-    <a href="mailto:contact@hustunique.com">{accessData.mail}</a>
-    <p>{accessData.qq}</p>
+    <p
+      css={css`
+        margin-top: 4vh;
+        margin-bottom: 0;
+      `}
+    >
+      <a href="mailto:contact@hustunique.com">{accessData.mail}</a>
+    </p>
+    <p
+      css={css`
+        margin-top: 1vh;
+      `}
+    >
+      {accessData.qq}
+    </p>
   </Container>
 );
 

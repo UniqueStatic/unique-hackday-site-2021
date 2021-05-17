@@ -84,6 +84,7 @@ const ScrollView = styled.div<IExpandable>(({ expanded = false }) => ({
   },
   '::-webkit-scrollbar-track': {
     border: `${BorderWidth} solid ${Primary}`,
+    borderRight: 'none',
     borderTop: `none`,
     background: 'e3e3e3',
   },
@@ -98,7 +99,7 @@ interface AppProps {}
 const RotatedText = styled.div({
   transform: 'rotate(-90deg)',
   transformOrigin: 'left top',
-  fontSize: '25px',
+  fontSize: '2vmin',
   position: 'absolute',
   bottom: '0',
   left: 'calc(50% - 12.5px)',
@@ -157,7 +158,7 @@ const TitleImg = styled.img<TitleImgProps>(({ isExpanded }) => ({
   position: 'absolute',
   width: '6vh',
   height: '6vh',
-  top: 'calc(9vh - 4vh)',
+  top: 'calc(9vh - 1vh)',
   left: 'calc(90% - 4vh)',
   visibility: isExpanded ? 'visible' : 'hidden',
   zIndex: 2,
@@ -181,7 +182,8 @@ const Container = React.forwardRef<HTMLDivElement | null, ISectionProps>(
     ];
 
     useEffect(() => {
-      if (pageIndex) setIndex(pageIndex === 0 ? pageIndex : pageIndex - 1);
+      if (pageIndex && pageIndex <= 5) // magic
+        setIndex(pageIndex === 0 ? pageIndex : pageIndex - 1);
     }, [pageIndex]);
 
     const handleSwitch = useCallback(
