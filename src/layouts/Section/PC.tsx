@@ -84,6 +84,7 @@ const ScrollView = styled.div<IExpandable>(({ expanded = false }) => ({
   },
   '::-webkit-scrollbar-track': {
     border: `${BorderWidth} solid ${Primary}`,
+    borderRight: 'none',
     borderTop: `none`,
     background: 'e3e3e3',
   },

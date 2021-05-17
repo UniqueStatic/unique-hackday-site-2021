@@ -74,7 +74,7 @@ const introductionData = [
   '奖金&纪念',
   '丰厚的奖金',
   '精美的纪念品',
-];
+] as const;
 
 const IntroImg = styled.img({
   width: '6vmin',
@@ -183,7 +183,7 @@ interface TitleProps {
 }
 
 const Title = styled.div<TitleProps>(({ needBorder }) => ({
-  fontSize: '1.7rem',
+  fontSize: '1.2rem',
   fontWeight: 500,
   margin: '5vh 0 0 0',
   paddingLeft: '5px',

@@ -12,10 +12,8 @@ import styled from '@emotion/styled';
 import SponsorPic from '../../assets/imgs/Sponsor.png';
 import { css, keyframes } from '@emotion/react';
 import { Background, Primary, Secondary } from '@/consts/color';
-import data, {pic} from './data';
-const { titleData, introductionData, scheduleData, awardsData } = data
-
-
+import data, { pic } from './data';
+const { titleData, introductionData, scheduleData, awardsData } = data;
 
 // const ContentContainer = styled.div({
 //   height: '100vh',
@@ -50,6 +48,7 @@ interface FloatBlockProps {
 }
 
 const FloatBlock = styled.div<FloatBlockProps>(({ isRight }) => ({
+  marginBottom: '6vh',
   borderLeft: '2px solid black',
   paddingLeft: '20px',
   position: 'relative',
@@ -71,22 +70,24 @@ const IntroImg = styled.img({
   height: '8vw',
   position: 'absolute',
   top: '0',
-  right: '-15vw',
+  right: '-11vw',
 });
 
 const Text = styled.text({
   position: 'relative',
 });
 
+const IntroMessage = styled.p({
+  margin: '0 0 1.5vh 0',
+});
+
 const Introduction: FC = () => {
   return (
     <>
       <IntroLayout>
-        {introductionData[0]}
-        <br />
-        {introductionData[1]}
-        <br />
-        {introductionData[2]}
+        <IntroMessage>{introductionData[0]}</IntroMessage>
+        <IntroMessage>{introductionData[1]}</IntroMessage>
+        <IntroMessage>{introductionData[2]}</IntroMessage>
       </IntroLayout>
       <ItemTitle width="80%">{introductionData[3]}</ItemTitle>
       <SubTitle>{introductionData[4]}</SubTitle>
@@ -102,14 +103,20 @@ const Introduction: FC = () => {
       </FloatBlock>
       <FloatBlock isRight={true}>
         <TextBlock isTitle={true}>
-          <Text><IntroImg src={pic.travelFoodPic}/>{introductionData[8]}</Text>
+          <Text>
+            <IntroImg src={pic.travelFoodPic} />
+            {introductionData[8]}
+          </Text>
         </TextBlock>
         <TextBlock isTitle={false}>{introductionData[9]}</TextBlock>
         <TextBlock isTitle={false}>{introductionData[10]}</TextBlock>
       </FloatBlock>
       <FloatBlock isRight={false}>
         <TextBlock isTitle={true}>
-          <Text><IntroImg src={pic.trophyPic}/>{introductionData[11]}</Text>
+          <Text>
+            <IntroImg src={pic.trophyPic} />
+            {introductionData[11]}
+          </Text>
         </TextBlock>
         <TextBlock isTitle={false}>{introductionData[12]}</TextBlock>
         <TextBlock isTitle={false}>{introductionData[13]}</TextBlock>
@@ -137,7 +144,9 @@ const Schedule: FC = () => {
   const elements = scheduleData.map((_) => {
     const times = _.spans.map((_) => (
       <TimeBlock key={_.from}>
-        <TextBlock isTitle={false}>{_.from}~{_.to}</TextBlock>
+        <TextBlock isTitle={false}>
+          {_.from}~{_.to}
+        </TextBlock>
         <TextBlock isTitle={false}>{_.content}</TextBlock>
       </TimeBlock>
     ));
@@ -258,7 +267,7 @@ const ItemTitle = styled.div<ItemTitleProps>(({ width }) => ({
   color: 'white',
   background: 'black',
   padding: '4px 20px',
-  margin: '0 0 64px',
+  margin: '0 0 6vh',
   width: width,
 }));
 
