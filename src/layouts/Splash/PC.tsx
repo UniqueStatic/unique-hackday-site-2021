@@ -29,11 +29,7 @@ const FrontPageLayout = styled.div((props) => ({
 
 const ComputerLayout = styled.div({
   position: 'relative',
-<<<<<<< HEAD
-  top: '-100px',
-=======
   top: '-8vh', // I have no choices...
->>>>>>> 5f94c3ed53451f16b78adfcfdf2eac9a06a20b10
   width: 'calc(100vh * 421 / 403)',
   maxWidth: '100%',
   display: 'flex',
