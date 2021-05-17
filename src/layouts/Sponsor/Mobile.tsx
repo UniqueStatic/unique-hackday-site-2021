@@ -5,26 +5,28 @@ import SponsorPic from '../../assets/imgs/Sponsor.png';
 import { jsx, css } from '@emotion/react';
 import { ISponsorBlockProps, SponsorProps, useAbove } from './common';
 
+const fontSizeData = Array(6).fill(null).map((_, i) => `calc(${6 + i * 2}px + ${(6 + i * 2) / 10}vmax)`)
+
 const SponsorBlock = styled.div<ISponsorBlockProps>(({ above = false }) => ({
   position: 'relative',
-  minHeight: '100vh',
-  background: 'black',
-  width: '100vw',
+  Height: '100vh',
   zIndex: above ? 4 : 0,
+  padding: '5vh 11vw',
+  width: 'calc(100% - 22vw)',
+  background: 'black'
 }));
 
 const SponsorTitle = styled.div({
   color: 'white',
   background: 'black',
-  margin: '0 15%',
   display: 'flex',
   alignItems: 'center',
-  fontSize: '1.2rem',
-  height: '10vh',
+  fontSize: fontSizeData[3],
+  marginBottom: '3vh'
 });
 
 const SponsorImg = styled.img({
-  maxHeight: '20px',
+  maxHeight: fontSizeData[4],
 });
 
 const SponsorName = styled.div({
@@ -42,15 +44,19 @@ const Text = styled.div({
   background: 'black',
 });
 
+const SponsorLayout = styled.div({
+  width: '100%'
+})
+
 export const Sponsor = forwardRef<HTMLDivElement | null, SponsorProps>(
   ({ id }, outerRef) => {
     const { ref, shouldAbove } = useAbove();
     return (
-      <div ref={outerRef}>
+      <SponsorLayout ref={outerRef}>
         <SponsorBlock id={id} ref={ref} above={shouldAbove}>
           {/* <Sticky> */}
           <SponsorTitle>赞助商 / Sponsor</SponsorTitle>
-          <div css={css({ margin: '0 15%' })}>
+          <div>
             <a href="https://weibanzhushou.com/" target="_blank">
               <SponsorImg src={SponsorPic}></SponsorImg>
             </a>
@@ -81,7 +87,7 @@ export const Sponsor = forwardRef<HTMLDivElement | null, SponsorProps>(
             </div>
           </div>
         </SponsorBlock>
-      </div>
+      </SponsorLayout>
     );
   },
 );

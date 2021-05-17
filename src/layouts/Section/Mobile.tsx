@@ -14,6 +14,10 @@ import { MobileBackground } from '@/consts/color';
 import data, { pic } from './data';
 const { titleData, introductionData, scheduleData, awardsData } = data;
 
+const primaryBorder = '2px solid black'
+const innerMargin = 'calc(6vw + 2px)'
+const outerMargin = '5vw'
+const fontSizeData = Array(6).fill(null).map((_, i) => `calc(${6 + i * 2}px + ${(6 + i * 2) / 10}vmax)`)
 // const ContentContainer = styled.div({
 //   height: '100vh',
 //   width: '-webkit-fill-available',
@@ -29,16 +33,17 @@ const { titleData, introductionData, scheduleData, awardsData } = data;
 
 // export default Content;
 const IntroLayout = styled.div({
-  borderLeft: '2px solid black',
-  paddingLeft: '20px',
+  borderLeft: primaryBorder,
+  paddingLeft: innerMargin,
   lineHeight: 'calc(100% + 20px)',
   fontSize: '1rem',
   marginBottom: '162px',
 });
 
 const SubTitle = styled.div({
-  fontSize: '0.75rem',
+  fontSize: '3vw',
   position: 'relative',
+  width: '-webkit-fill-available',
   top: '-5vh',
   display: 'flex',
   justifyContent: 'center',
@@ -51,27 +56,27 @@ interface FloatBlockProps {
 
 const FloatBlock = styled.div<FloatBlockProps>(({ isRight }) => ({
   marginBottom: '6vh',
-  borderLeft: '2px solid black',
-  paddingLeft: '20px',
+  borderLeft: primaryBorder,
+  paddingLeft: '5vw',
   position: 'relative',
   left: isRight ? '100%' : 'none',
-  transform: isRight ? 'translateX(-100%)' : 'none',
+  transform: isRight ? 'translateX(-120%)' : 'none',
 }));
 
 interface TextBlockProps {
-  isTitle: boolean;
+  fontSize: number;
 }
 
-const TextBlock = styled.div<TextBlockProps>(({ isTitle }) => ({
-  fontSize: isTitle ? '1.5rem' : '1.2rem',
+const TextBlock = styled.div<TextBlockProps>(({ fontSize }) => ({
+  fontSize: fontSizeData[fontSize],
   lineHeight: 'calc(100% + 20px)',
 }));
 
 const IntroImg = styled.img({
-  width: '8vw',
-  height: '8vw',
+  width: 'calc(16px + 1.6vmax)',
+  height: 'calc(16px + 1.6vmax)',
   position: 'absolute',
-  top: '0',
+  transform: 'translateY(25%)',
   right: '-11vw',
 });
 
@@ -80,10 +85,14 @@ const Text = styled.text({
 });
 
 const IntroMessage = styled.p({
-  margin: '0 0 1.5vh 0',
+  fontSize: fontSizeData[2],
+  lineHeight: 'calc(100% + 1.5vh)',
   ':last-child': {
     margin: 0,
   },
+  ':first-of-type': {
+    margin: 0,
+  }
 });
 
 const Introduction: FC = () => {
@@ -97,77 +106,69 @@ const Introduction: FC = () => {
       <ItemTitle width="80%">{introductionData[3]}</ItemTitle>
       <SubTitle>{introductionData[4]}</SubTitle>
       <FloatBlock isRight={false}>
-        <TextBlock isTitle={true}>
+        <TextBlock fontSize={3}>
           <Text>
             <IntroImg src={pic.twentyFourPic} />
             {introductionData[5]}
           </Text>
         </TextBlock>
-        <TextBlock isTitle={false}>{introductionData[6]}</TextBlock>
-        <TextBlock isTitle={false}>{introductionData[7]}</TextBlock>
+        <TextBlock fontSize={2}>{introductionData[6]}</TextBlock>
+        <TextBlock fontSize={2}>{introductionData[7]}</TextBlock>
       </FloatBlock>
       <FloatBlock isRight={true}>
-        <TextBlock isTitle={true}>
+        <TextBlock fontSize={3}>
           <Text>
             <IntroImg src={pic.travelFoodPic} />
             {introductionData[8]}
           </Text>
         </TextBlock>
-        <TextBlock isTitle={false}>{introductionData[9]}</TextBlock>
-        <TextBlock isTitle={false}>{introductionData[10]}</TextBlock>
+        <TextBlock fontSize={2}>{introductionData[9]}</TextBlock>
+        <TextBlock fontSize={2}>{introductionData[10]}</TextBlock>
       </FloatBlock>
       <FloatBlock isRight={false}>
-        <TextBlock isTitle={true}>
+        <TextBlock fontSize={3}>
           <Text>
             <IntroImg src={pic.trophyPic} />
             {introductionData[11]}
           </Text>
         </TextBlock>
-        <TextBlock isTitle={false}>{introductionData[12]}</TextBlock>
-        <TextBlock isTitle={false}>{introductionData[13]}</TextBlock>
+        <TextBlock fontSize={2}>{introductionData[12]}</TextBlock>
+        <TextBlock fontSize={2}>{introductionData[13]}</TextBlock>
       </FloatBlock>
     </>
   );
 };
 
 const DateBlock = styled.div({
-  paddingLeft: '16px',
-  borderLeft: '2px solid black',
+  paddingLeft: '6vw',
+  borderLeft: primaryBorder,
 });
 
 const TimeBlock = styled.div({
-  margin: '2.5vh',
+  margin: innerMargin,
 });
 
 const DateText = styled.div({
   fontWeight: 200,
+  fontSize: fontSizeData[3],
   marginBottom: '18px',
-});
-
-const ContentText = styled.div({
-  fontSize: '1rem',
 });
 
 const Schedule: FC = () => {
   const elements = scheduleData.map((_) => {
     const times = _.spans.map((_) => (
       <TimeBlock key={_.from}>
-        <TextBlock isTitle={false}>
+        <TextBlock fontSize={2}>
           {_.from}~{_.to}
         </TextBlock>
-        <ContentText>{_.content}</ContentText>
+        <TextBlock fontSize={1}>{_.content}</TextBlock>
       </TimeBlock>
     ));
     return (
       <div key={_.day}>
         <DateBlock>
           <DateText>{_.date}</DateText>
-          <TextBlock
-            isTitle={true}
-            css={css`
-              font-size: 1.5rem;
-            `}
-          >
+          <TextBlock fontSize={3}>
             {_.day}
           </TextBlock>
         </DateBlock>
@@ -180,59 +181,69 @@ const Schedule: FC = () => {
 
 const AwardsBlock = styled.div({
   marginBottom: '48px',
+  marginLeft: '6vw'
 });
 
 const Awards: FC = () => {
   const awards = awardsData.map((_) => (
     <AwardsBlock key={_.nameChn}>
-      <TextBlock isTitle={false}>
+      <TextBlock fontSize={3}>
         {_.nameChn} / {_.nameEng}
       </TextBlock>
-      <ContentText>{_.value}</ContentText>
+      <TextBlock fontSize={2}>{_.value}</TextBlock>
     </AwardsBlock>
   ));
   return <>{awards}</>;
 };
 const FAQBlock = styled.div({
+  margin: `0 ${innerMargin}`,
   marginBottom: '48px',
 });
 
-const FAQText = styled.div<TextBlockProps>(({ isTitle }) => ({
-  fontSize: isTitle ? '1.2rem' : '1rem',
-  marginBottom: isTitle ? '1rem' : '0',
-  fontWeight: isTitle ? 500 : 400,
-}));
+const FAQTitle = styled.div({
+  fontSize: fontSizeData[3],
+  marginBottom: fontSizeData[3],
+  fontWeight: 500,
+})
 
 const FAQs: FC = () => {
   const faqs = data.faqsData.map((_) => (
     <FAQBlock key={_.question}>
-      <FAQText isTitle={true}>{_.question}</FAQText>
-      <FAQText isTitle={false}>{_.answer}</FAQText>
+      <FAQTitle>{_.question}</FAQTitle>
+      <TextBlock fontSize={2}>{_.answer}</TextBlock>
     </FAQBlock>
   ));
   return <>{faqs}</>;
 };
 
+const AccessLayout = styled.div({
+  minHeight: 'calc(65vh - 100px)',
+})
+
 const AccessBlock = styled.div({
-  borderLeft: '2px solid black',
-  paddingLeft: '20px',
+  borderLeft: primaryBorder,
+  paddingLeft: innerMargin,
+
 });
 
 const AccessMail = styled.a({
   color: 'black',
   marginTop: '50px',
   display: 'block',
+  fontSize: fontSizeData[2],
 });
 
 const Access: FC = () => {
   const { position, institution, mail, qq } = data.accessData;
   return (
-    <AccessBlock>
-      <TextBlock isTitle={false}>{position}</TextBlock>
-      <TextBlock isTitle={false}>{institution}</TextBlock>
-      <AccessMail href={`mailto:${mail}`}>{mail}</AccessMail>
-      <TextBlock isTitle={false}>{qq}</TextBlock>
-    </AccessBlock>
+    <AccessLayout>
+      <AccessBlock>
+        <TextBlock fontSize={2}>{position}</TextBlock>
+        <TextBlock fontSize={2}>{institution}</TextBlock>
+        <AccessMail href={`mailto:${mail}`}>{mail}</AccessMail>
+        <TextBlock fontSize={2}>{qq}</TextBlock>
+      </AccessBlock>
+    </AccessLayout>
   );
 };
 
@@ -261,7 +272,7 @@ const ContentContainer = forwardRef<
 
 const ContentLayout = styled.div({
   paddingTop: '15vh',
-  width: '100%',
+  width: 'auto',
   background: MobileBackground,
 });
 
@@ -270,9 +281,10 @@ interface IExpandable {
 }
 
 const ItemLayout = styled.div({
+  overflow: 'hidden',
   display: 'flex',
   flexFlow: 'column',
-  padding: '0 24px',
+  margin: `0 ${outerMargin}`,
   alignItems: 'flex-start',
 });
 
@@ -283,9 +295,10 @@ interface ItemTitleProps {
 const ItemTitle = styled.div<ItemTitleProps>(({ width }) => ({
   color: 'white',
   background: 'black',
-  padding: '4px 20px',
+  padding: `1vmin ${innerMargin}`,
   margin: '0 0 6vh',
   width: width,
+  fontSize: fontSizeData[3],
 }));
 
 interface IContentProps {
@@ -346,7 +359,7 @@ const Container = forwardRef<HTMLDivElement | null, ISectionProps>(
         }
         // setIndex(i);
         setPageIndex(i + 1);
-        return () => {};
+        return () => { };
       },
       [animating, index],
     );

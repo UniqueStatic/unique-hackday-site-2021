@@ -73,7 +73,7 @@ const SignUpBlock = styled.div({
   position: 'absolute',
   height: 'calc(20px + 4vmin)',
   width: '35vw',
-  letterSpacing: '3px',
+  letterSpacing: '1vmax',
   bottom: '8vh',
   display: 'flex',
   fontSize: 'calc(6px + 2vmin)',
@@ -86,7 +86,7 @@ const SignUpBlock = styled.div({
 });
 
 const SignUp: FC = () => {
-  return <SignUpBlock>START</SignUpBlock>;
+  return <SignUpBlock>立即报名</SignUpBlock>;
 };
 
 const Reboot: FC = () => {
@@ -261,7 +261,7 @@ const SplitLine = styled.div({
 
 const HackdayTitleLayout = styled.div({
   position: 'absolute',
-  left: '20px',
+  left: '5vw',
   transform: 'translateY(-100%)'
 });
 
