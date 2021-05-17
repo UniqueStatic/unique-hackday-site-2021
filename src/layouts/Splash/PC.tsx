@@ -45,8 +45,8 @@ const ComputerPic = styled.img({
 
 const RebootTextLayout = styled.div({
   position: 'absolute',
-  top: '32vh',
-  left: '28vw',
+  top: '31%',
+  left: '35%',
   fontFamily: 'Swis721 BlkEx BT',
   fontSize: '2.2vmin',
 });
