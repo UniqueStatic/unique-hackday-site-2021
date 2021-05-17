@@ -29,6 +29,7 @@ const FrontPageLayout = styled.div((props) => ({
 
 const ComputerLayout = styled.div({
   position: 'relative',
+  top: '-8vh', // I have no choices...
   width: 'calc(100vh * 421 / 403)',
   maxWidth: '100%',
   display: 'flex',
@@ -44,8 +45,8 @@ const ComputerPic = styled.img({
 
 const RebootTextLayout = styled.div({
   position: 'absolute',
-  top: '31%',
-  left: '35%',
+  top: '32vh',
+  left: '28vw',
   fontFamily: 'Swis721 BlkEx BT',
   fontSize: '2.2vmin',
 });
@@ -128,7 +129,7 @@ const FrontPage: FC = ({}) => {
 };
 
 interface IDark {
-  dark?:boolean
+  dark?: boolean;
 }
 
 interface HeaderProps extends IDark {
@@ -171,10 +172,11 @@ const HeaderLayout = styled.div<IDark>(({ dark }) => ({
   height: '0',
   background: dark ? '#fff' : Background,
   zIndex: 2,
-  paddingTop: '12vh',
+  paddingTop: '8vh',
   display: 'flex',
   justifyContent: 'center',
   filter: dark ? 'invert(1)' : 'none',
+  paddingBottom: '1vh',
 }));
 
 const HeaderLine = styled.div({
@@ -188,9 +190,9 @@ const HeaderLine = styled.div({
 const No2021 = styled.div({
   position: 'absolute',
   right: '3vw',
-  top: 'calc(12vh - 12px - 2vmin)',
+  top: 'calc(8vh - 12px - 2vmin)',
   fontSize: 'calc(4px + 2vmin)',
-  fontWeight: 300,
+  fontWeight: 400,
 });
 
 const HackdayTitleLayout = styled.div<HackdayProps>(({ shouldUp }) => ({
@@ -203,13 +205,13 @@ const HackdayTitleLayout = styled.div<HackdayProps>(({ shouldUp }) => ({
 }));
 
 const UniqueText = styled.div({
-  fontSize: 'calc(6px + 1vmin)',
-  fontWeight: 400,
+  fontSize: '2vmin',
+  fontWeight: 300,
   letterSpacing: '4.5px',
 });
 
 const HackdayText = styled.div({
-  fontSize: 'calc(12px + 2vmin)',
+  fontSize: '3vmin',
   fontFamily: 'Swis721 BlkEx BT',
   position: 'relative',
   left: '-2px',
@@ -236,7 +238,7 @@ const MenuButtonBlock = styled.div<MenuButtonBlockProps>((props) => ({
 
 const MenuButtonLayout = styled.div({
   position: 'absolute',
-  top: 'calc(12vh + 20px)',
+  top: 'calc(8vh + 20px)',
   right: '10vmin',
   width: '20px',
   cursor: 'pointer',
@@ -294,7 +296,8 @@ const MenuTitleBlock = styled.div({
   width: 'calc(100px + 20vmin)',
   border: '1px black solid',
   fontSize: 'calc(5px + 2vmin)',
-  fontWeight: 300,
+  fontWeight: 400,
+  fontFamily: 'Swis721 BlkEx BT',
   left: '-6px',
   top: '-6px',
   display: 'flex',
@@ -305,8 +308,8 @@ const MenuTitleBlock = styled.div({
 
 const MenuTitleBackground = styled.div({
   position: 'absolute',
-  top: '5%',
-  left: '15%',
+  top: '6vh',
+  left: '15vw',
   height: 'calc(10px + 4vmin)',
   width: 'calc(100px + 20vmin)',
   background: 'transparent',
@@ -325,9 +328,7 @@ const MenuTitle: FC = () => {
   return (
     <MenuTitleBackground>
       <MenuTitleBlock>
-        MENU
-        <Line></Line>
-        2021
+        MENU —— 2021
       </MenuTitleBlock>
     </MenuTitleBackground>
   );
@@ -343,7 +344,8 @@ const Option = styled.div({
   width: 'calc(200px + 40vmin)',
   height: 'calc(10px + 2vmin)',
   padding: 'calc(6px + 2vmin)',
-  fontWeight: 300,
+  fontWeight: 400,
+  fontSize: '2.5vmin',
   cursor: 'pointer',
 });
 

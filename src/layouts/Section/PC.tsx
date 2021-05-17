@@ -99,7 +99,7 @@ interface AppProps {}
 const RotatedText = styled.div({
   transform: 'rotate(-90deg)',
   transformOrigin: 'left top',
-  fontSize: '25px',
+  fontSize: '2vmin',
   position: 'absolute',
   bottom: '0',
   left: 'calc(50% - 12.5px)',

@@ -82,6 +82,7 @@ const SignUpBlock = styled.div({
   backgroundColor: 'black',
   color: 'white',
   fontWeight: 600,
+  fontFamily: 'Swis721 BlkEx BT',
 });
 
 const SignUp: FC = () => {
@@ -195,7 +196,6 @@ const Menu: FC<MenuProps> = (props) => {
   ));
   return (
     <MenuLayout isHidden={isHidden}>
-
       <MenuMain>
         <MenuTitle>MENU ---- 2021</MenuTitle>
         <Select>{options}</Select>
