@@ -27,13 +27,13 @@ const FrontPageLayout = styled.div((props) => ({
 
 const UniqueLayout = styled.img({
   position: 'absolute',
-  top: '20%',
+  top: '15%',
   width: '60%',
 });
 
 const ComputerLayout = styled.div({
   position: 'absolute',
-  top: '40%',
+  top: '35%',
   width: '100%',
   height: 'calc(80vw * 403 / 421)',
   display: 'flex',
@@ -72,9 +72,9 @@ const RebootText = styled.div((props) => ({
 const SignUpBlock = styled.div({
   position: 'absolute',
   height: 'calc(20px + 4vmin)',
-  width: '130px',
-  letterSpacing: '3px',
-  bottom: '30px',
+  width: '35vw',
+  letterSpacing: '1vmax',
+  bottom: '8vh',
   display: 'flex',
   fontSize: 'calc(6px + 2vmin)',
   justifyContent: 'center',
@@ -82,10 +82,12 @@ const SignUpBlock = styled.div({
   backgroundColor: 'black',
   color: 'white',
   fontWeight: 600,
+  fontFamily: 'Swis721 BlkEx BT',
+  textAlign: 'center',
 });
 
 const SignUp: FC = () => {
-  return <SignUpBlock>START</SignUpBlock>;
+  return <SignUpBlock>立即报名</SignUpBlock>;
 };
 
 const Reboot: FC = () => {
@@ -109,8 +111,8 @@ interface MenuLayoutProps {
 }
 
 const MenuLayout = styled.div<MenuLayoutProps>((props) => ({
-  position: 'absolute',
-  backgroundColor: Background,
+  position: 'fixed',
+  backgroundColor: '#EFB8D3',
   height: '100vh',
   width: '-webkit-fill-available',
   top: 0,
@@ -128,6 +130,7 @@ const MenuTitle = styled.div({
   backgroundColor: 'black',
   color: 'white',
   fontSize: 'calc(10px + 2vmin)',
+  fontFamily: 'Swis721 BlkEx BT',
   display: 'flex',
   alignItems: 'center',
   padding: '0 10px',
@@ -143,12 +146,10 @@ interface ActiveProps {
   active: boolean;
 }
 
-const OptionBlock = styled.a<ActiveProps>(({active}) => ({
+const OptionBlock = styled.a<ActiveProps>(({ active }) => ({
   color: 'black',
   position: 'relative',
-  top: '-4px',
   width: 'calc(200px + 40vmin)',
-  height: active ? 'calc(28px + 4vmin)' : 'calc(15px + 2vmin)',
   padding: 'calc(6px + 2vmin)',
   paddingTop: '0',
   paddingBottom: 'calc(12px + 4vmin)',
@@ -156,7 +157,11 @@ const OptionBlock = styled.a<ActiveProps>(({active}) => ({
   fontSize: active ? 'calc(14px + 2vmin)' : 'inherit',
   display: 'flex',
   alignItems: 'flex-start',
-  textDecoration: 'none'
+  textDecoration: 'none',
+  ':last-of-type':{
+    margin: '0',
+    paddingBottom: '0'
+  }
 }));
 
 const MenuMain = styled.div({
@@ -196,17 +201,14 @@ const Menu: FC<MenuProps> = (props) => {
   return (
     <MenuLayout isHidden={isHidden}>
       <MenuMain>
-        <MenuTitle>MENU ---- 2021</MenuTitle>
-        <Select>
-          {options}
-        </Select>
+        <MenuTitle>MENU —— 2021</MenuTitle>
+        <Select>{options}</Select>
       </MenuMain>
     </MenuLayout>
   );
 };
 
 const FrontPage: FC = () => {
-  const [showMenu, setShowMenu] = useState(false);
   return (
     <FrontPageLayout>
       <UniqueLayout src={pics.unique} />
@@ -220,75 +222,90 @@ const FrontPage: FC = () => {
   );
 };
 
-interface HeaderProps {
+interface DarkProps {
+  dark: boolean
+}
+interface HeaderProps extends DarkProps {
   switchMenu: () => void;
   showMenu: boolean;
+  dark: boolean;
 }
 const Header: FC<HeaderProps> = (props) => {
-  const { showMenu, switchMenu } = props;
+  const { showMenu, switchMenu, dark } = props;
   return (
-    <SplitLine>
+    <SplitLine dark={dark} >
       <HeaderContainer>
-        <HackDayTitle />
-        <MenuButton active={showMenu} click={switchMenu} />
+        <AboveHeader>
+          <HackDayTitle dark={dark} />
+          <MenuButton dark={dark} active={showMenu} click={switchMenu} />
+        </AboveHeader>
       </HeaderContainer>
     </SplitLine>
   );
 };
+const AboveHeader = styled.div({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  position: 'absolute',
+  top: '-1vh',
+  padding: '0 5vw',
+  width: '90%',
+  transform: 'translateY(-100%)'
+})
+
 const HeaderContainer = styled.div({
   position: 'relative',
 });
-const HackDayTitle: FC = () => {
+const HackDayTitle: FC<DarkProps> = ({dark}) => {
   return (
-    <HackdayTitleLayout>
+    <HackdayTitleLayout dark={dark}>
       <UniqueText>UNIQUESTUDIO</UniqueText>
       <HackdayText>HACKDAY</HackdayText>
     </HackdayTitleLayout>
   );
 };
 
-const SplitLine = styled.div({
+const SplitLine = styled.div<DarkProps>(({dark}) =>({
+  transition: 'color 0.5s',
   position: 'fixed',
   width: '-webkit-fill-available',
   height: '0',
-  borderBottom: '1.5px solid black',
-  backgroundColor:'#EFB8D3',
+  top: '0',
+  borderBottom: dark ? '1.5px solid white' : '1.5px solid black',
+  backgroundColor: dark ? 'black' : '#EFB8D3',
   zIndex: 2,
   margin: '0 auto',
-  paddingTop: '12vh',
-});
+  paddingTop: '8vh',
+}));
 
-const HackdayTitleLayout = styled.div({
-  position: 'absolute',
-  left: '20px',
-  top: '-40px',
-});
+const HackdayTitleLayout = styled.div<DarkProps>(({dark}) => ({
+  transition: 'color 0.5s',
+  color: dark ? 'white' : 'black'
+}));
 
 const UniqueText = styled.div({
   fontSize: 'calc(6px + 1vmin)',
   fontWeight: 400,
-  letterSpacing: '4.5px',
+  letterSpacing: '2.5px',
 });
 
 const HackdayText = styled.div({
-  fontSize: 'calc(12px + 2vmin)',
+  fontSize: 'calc(8px + 0.8vmax)',
   fontFamily: 'Swis721 BlkEx BT',
   position: 'relative',
-  left: '-2px'
 });
 const MenuButtonLayout = styled.div({
-  position: 'absolute',
-  top: '-30px',
-  right: '10vmin',
   width: '20px',
   cursor: 'pointer',
 });
 
-interface MenuButtonProps {
+interface MenuButtonProps extends DarkProps {
   click: () => void;
   active: boolean;
 }
-interface MenuButtonBlockProps {
+interface MenuButtonBlockProps{
   color: string;
   isTop: boolean;
   isBottom: boolean;
@@ -308,11 +325,11 @@ const MenuButtonBlock = styled.div<MenuButtonBlockProps>((props) => ({
   transition: '0.5s',
 }));
 const MenuButton: FC<MenuButtonProps> = (props) => {
-  const { click, active } = props;
+  const { click, active, dark } = props;
   return (
     <MenuButtonLayout onClick={click}>
       <MenuButtonBlock
-        color="black"
+        color={dark ? 'white' : "black"}
         isTop={true}
         isBottom={false}
         active={active}
@@ -324,7 +341,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
         active={active}
       />
       <MenuButtonBlock
-        color="black"
+        color={dark ? 'white' : "black"}
         isTop={false}
         isBottom={true}
         active={active}

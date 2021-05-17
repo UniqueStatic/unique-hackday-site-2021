@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 // import './styles.css';
-import {pics} from '.';
+import { pics } from '.';
 import styled from '@emotion/styled';
 import { Background, Primary, Secondary } from '@/consts/color';
 import { jsx, css } from '@emotion/react';
@@ -20,7 +20,7 @@ const SplashLayout = styled.div({
 const FrontPageLayout = styled.div((props) => ({
   height: '100vh',
   width: '-webkit-fill-available',
-  backgroundColor: Background,
+  background: Background,
   display: 'flex',
   alignItems: 'center',
   overflow: 'hidden',
@@ -29,6 +29,7 @@ const FrontPageLayout = styled.div((props) => ({
 
 const ComputerLayout = styled.div({
   position: 'relative',
+  top: '-8vh', // I have no choices...
   width: 'calc(100vh * 421 / 403)',
   maxWidth: '100%',
   display: 'flex',
@@ -57,7 +58,7 @@ const Reboot2021 = styled.div({
   left: '16%',
   fontSize: '1.2vmin',
   color: 'black',
-  transform: 'rotate(-7deg)'
+  transform: 'rotate(-7deg)',
 });
 
 const RebootText = styled.div((props) => ({
@@ -76,7 +77,7 @@ const SignUpBlock = styled.div({
   fontSize: 'calc(6px + 2vmin)',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: 'white',
+  background: 'white',
 });
 
 const SignUpBackground = styled.div({
@@ -85,7 +86,7 @@ const SignUpBackground = styled.div({
   left: 'calc(50% - 0.5 * (50px + 10vmin))',
   height: 'calc(20px + 4vmin)',
   width: 'calc(50px + 10vmin)',
-  backgroundColor: '#E3E3E3',
+  background: '#E3E3E3',
   border: '1px black solid',
   cursor: 'pointer',
 });
@@ -108,11 +109,10 @@ const Reboot: FC = () => {
   );
 };
 
-
-const Splash = React.forwardRef<HTMLDivElement|null>((props, ref) => (
-      <SplashLayout ref={ref}>
-      <FrontPage />
-    </SplashLayout>
+const Splash = React.forwardRef<HTMLDivElement | null>((props, ref) => (
+  <SplashLayout ref={ref}>
+    <FrontPage />
+  </SplashLayout>
 ));
 
 const FrontPage: FC = ({}) => {
@@ -128,20 +128,25 @@ const FrontPage: FC = ({}) => {
   );
 };
 
-interface HeaderProps {
+interface IDark {
+  dark?: boolean;
+}
+
+interface HeaderProps extends IDark {
   switchMenu: () => void;
   pageIndex: number;
   showMenu: boolean;
 }
 const Header: FC<HeaderProps> = (props) => {
-  const { showMenu, switchMenu, pageIndex } = props;
+  const { showMenu, switchMenu, pageIndex, dark = false } = props;
   return (
     <>
-      <SplitLine>
+      <HeaderLayout dark={dark}>
+        <HeaderLine />
         <No2021>NO.2021</No2021>
         <HackDayTitle shouldUp={pageIndex === 0 ? false : true} />
         <MenuButton active={showMenu} click={switchMenu} />
-      </SplitLine>
+      </HeaderLayout>
     </>
   );
 };
@@ -155,35 +160,44 @@ const HackDayTitle: FC<HackdayProps> = (props) => {
   return (
     <HackdayTitleLayout shouldUp={shouldUp}>
       <UniqueText>UNIQUESTUDIO</UniqueText>
-      <HackdayText>
-        HACKDAY
-      </HackdayText>
+      <HackdayText>HACKDAY</HackdayText>
     </HackdayTitleLayout>
   );
 };
 
-const SplitLine = styled.div({
+const HeaderLayout = styled.div<IDark>(({ dark }) => ({
   position: 'fixed',
-  width: '94vw',
+  width: '-webkit-fill-available',
+  top: '0',
   height: '0',
-  borderBottom: '2px black solid',
-  backgroundColor: Background,
+  background: dark ? '#fff' : Background,
   zIndex: 2,
-  margin: '0 auto',
-  paddingTop: '12vh',
+  paddingTop: '8vh',
+  display: 'flex',
+  justifyContent: 'center',
+  filter: dark ? 'invert(1)' : 'none',
+  paddingBottom: '1vh',
+}));
+
+const HeaderLine = styled.div({
+  position: 'absolute',
+  bottom: '0',
+  width: '94vw',
+  height: '2px',
+  background: 'black',
 });
 
 const No2021 = styled.div({
   position: 'absolute',
-  right: '0',
-  top: 'calc(12vh - 12px - 2vmin)',
+  right: '3vw',
+  top: 'calc(8vh - 12px - 2vmin)',
   fontSize: 'calc(4px + 2vmin)',
-  fontWeight: 300,
+  fontWeight: 400,
 });
 
 const HackdayTitleLayout = styled.div<HackdayProps>(({ shouldUp }) => ({
   position: 'absolute',
-  left: '0',
+  left: '3vw',
   // top: '10px',
   padding: '10px 0 0',
   transform: `translateY(${shouldUp ? '-100%' : 0})`,
@@ -191,16 +205,16 @@ const HackdayTitleLayout = styled.div<HackdayProps>(({ shouldUp }) => ({
 }));
 
 const UniqueText = styled.div({
-  fontSize: 'calc(6px + 1vmin)',
+  fontSize: '2vmin',
   fontWeight: 400,
   letterSpacing: '4.5px',
 });
 
 const HackdayText = styled.div({
-  fontSize: 'calc(12px + 2vmin)',
+  fontSize: '3vmin',
   fontFamily: 'Swis721 BlkEx BT',
   position: 'relative',
-  left: '-2px'
+  left: '-2px',
 });
 interface MenuButtonBlockProps {
   color: string;
@@ -212,7 +226,7 @@ const MenuButtonBlock = styled.div<MenuButtonBlockProps>((props) => ({
   width: '100%',
   height: '3px',
   margin: '1px 0',
-  backgroundColor: props.color,
+  background: props.color,
   transform:
     props.isTop && props.active
       ? 'rotate(45deg) translateY(5.5px)'
@@ -224,7 +238,7 @@ const MenuButtonBlock = styled.div<MenuButtonBlockProps>((props) => ({
 
 const MenuButtonLayout = styled.div({
   position: 'absolute',
-  top: 'calc(12vh + 20px)',
+  top: 'calc(8vh + 20px)',
   right: '10vmin',
   width: '20px',
   cursor: 'pointer',
@@ -267,7 +281,7 @@ interface MenuLayoutProps {
 
 const MenuLayout = styled.div<MenuLayoutProps>((props) => ({
   position: 'absolute',
-  backgroundColor: Background,
+  background: Background,
   height: '100vh',
   width: '-webkit-fill-available',
   top: 0,
@@ -282,22 +296,23 @@ const MenuTitleBlock = styled.div({
   width: 'calc(100px + 20vmin)',
   border: '1px black solid',
   fontSize: 'calc(5px + 2vmin)',
-  fontWeight: 300,
+  fontWeight: 400,
+  fontFamily: 'Swis721 BlkEx BT',
   left: '-6px',
   top: '-6px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: Background,
+  background: Background,
 });
 
 const MenuTitleBackground = styled.div({
   position: 'absolute',
-  top: '5%',
-  left: '15%',
+  top: '6vh',
+  left: '15vw',
   height: 'calc(10px + 4vmin)',
   width: 'calc(100px + 20vmin)',
-  backgroundColor: 'transparent',
+  background: 'transparent',
   border: '1px black solid',
   cursor: 'pointer',
 });
@@ -306,15 +321,15 @@ const Line = styled.div({
   width: '100px',
   height: '0',
   borderTop: '1.5px black solid',
-  margin: '0 10px'
-})
+  margin: '0 10px',
+});
 
 const MenuTitle: FC = () => {
   return (
     <MenuTitleBackground>
-      <MenuTitleBlock>MENU 
-        <Line></Line>
-      2021</MenuTitleBlock>
+      <MenuTitleBlock>
+        MENU —— 2021
+      </MenuTitleBlock>
     </MenuTitleBackground>
   );
 };
@@ -329,7 +344,8 @@ const Option = styled.div({
   width: 'calc(200px + 40vmin)',
   height: 'calc(10px + 2vmin)',
   padding: 'calc(6px + 2vmin)',
-  fontWeight: 300,
+  fontWeight: 400,
+  fontSize: '2.5vmin',
   cursor: 'pointer',
 });
 
@@ -352,7 +368,7 @@ const Menu: FC<MenuProps> = (props) => {
     '奖项设置 / Awards',
     '常见问题 / FAQs',
     '联系我们 / Access',
-    '主办方 / About Us',
+    '赞助商 / Sponsor',
   ];
   const { isHidden, setPageIndex } = props;
   const options = optionText.map((_, i) => (

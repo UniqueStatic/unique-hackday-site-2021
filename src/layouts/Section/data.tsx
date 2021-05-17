@@ -2,13 +2,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { jsx, css } from '@emotion/react';
-import schedulePic from '../../assets/imgs/流程安排.png'
-import twentyFourPic from '../../assets/imgs/24小时.png'
-import travelFoodPic from '../../assets/imgs/旅行食物.png'
-import trophyPic from '../../assets/imgs/奖杯.png'
-import introPic from '../../assets/imgs/Introduction.png'
-import questionPic from '../../assets/imgs/问号.png'
-
+import schedulePic from '../../assets/imgs/流程安排.png';
+import twentyFourPic from '../../assets/imgs/24小时.png';
+import travelFoodPic from '../../assets/imgs/旅行食物.png';
+import trophyPic from '../../assets/imgs/奖杯.png';
+import introPic from '../../assets/imgs/Introduction.png';
+import questionPic from '../../assets/imgs/问号.png';
 
 export const pic = {
   schedulePic,
@@ -16,45 +15,50 @@ export const pic = {
   travelFoodPic,
   trophyPic,
   introPic,
-  questionPic
-}
+  questionPic,
+};
 
 const Container = styled.div({
   padding: '0 4vw',
   h2: {
     fontSize: '1.5rem',
-    fontWeight: 'normal'
+    fontWeight: 500,
     // margin: '2em 0',
   },
   h3: {
     fontSize: '1.2rem',
-    fontWeight: 'normal',
-    margin: '0 0 32px 0'
+    fontWeight: 500,
+    // margin: '0 0 32px 0',
   },
   small: {
     fontSize: '1rem',
-    margin: '0 0 0 20px'
+    margin: '0 0 0 20px',
     // margin:'none'
   },
 
   p: {
-    fontSize: '1.2rem',
-    margin: '0'
+    fontSize: '1rem',
+    // margin: '0',
   },
 
   a: {
-    color:'black',
-    fontWeight:'bold'
-  }
+    color: 'black',
+    fontWeight: 'bold',
+  },
 });
 
 interface PhraseProps {
-  doubleMargin: boolean
+  doubleMargin: boolean;
 }
 
-const P = styled.p<PhraseProps>(({doubleMargin}) => ({
-  marginBottom: doubleMargin ? '72px!important' : '36px'
-}))
+const P = styled.p<PhraseProps>(({ doubleMargin }) => ({
+  marginBottom: doubleMargin ? '72px!important' : '36px',
+}));
+
+const Div = styled.div<PhraseProps>({
+  marginBottom: '4vh',
+});
+
 const introductionData = [
   'Unique Hackday',
   '最初源于联创团队内部成员的Hackday比赛之后将比赛的规模扩大，邀请来自全国的大学一同参与。',
@@ -69,8 +73,8 @@ const introductionData = [
   '无限量的食物供应',
   '奖金&纪念',
   '丰厚的奖金',
-  '精美的纪念品'
-]
+  '精美的纪念品',
+] as const;
 
 const IntroImg = styled.img({
   width: '6vmin',
@@ -78,46 +82,72 @@ const IntroImg = styled.img({
   position: 'absolute',
   top: '0',
   transform: 'translateY(-25%)',
-  right: '-10vw'
-})
+  right: '-10vw',
+});
 
-const Text = styled.text({
+const Text = styled.div({
   position: 'relative',
-})
+  display: 'inline-block',
+  fontWeight: 500,
+});
+
+const IntroMessage = styled.p({
+  marginTop: '3vh',
+});
 
 const Introduction = (
   <Container>
-    <h2>Unique Hackday</h2>
-    <p>
+    <h2
+      css={css`
+        margin-top: 4vh;
+      `}
+    >
+      Unique Hackday
+    </h2>
+    <IntroMessage>
       最初源于联创团队内部成员的Hackday比赛之后将比赛的规模扩大，邀请来自全国的大学一同参与。
-    </p>
-    <p>
+    </IntroMessage>
+    <IntroMessage>
       因疫情缘故缺席了2020年，而今年我们决定重启，继续将开放、创新、极客的精神传递给更多的人。
-    </p>
-    <h2>
-      150名参赛选手{' '}
+    </IntroMessage>
+    <h2
+      css={css`
+        margin-top: 4vh;
+        margin-bottom: 0;
+      `}
+    >
+      150名参赛选手
     </h2>
     <small
-        css={css({
-          display: 'inline-block',
-          fontWeight: 'normal',
-          fontSize: '1rem!important',
-          letterSpacing: '0.5ch',
-          margin: '0 0 72px 0!important'
-        })}
-      >
-        通过简历筛选出来来自全国各大高校的150名学生
-      </small>
+      css={css({
+        display: 'inline-block',
+        fontWeight: 'normal',
+        fontSize: '1rem!important',
+        letterSpacing: '0.5ch',
+        margin: '0 0 5vh 0!important',
+      })}
+    >
+      通过简历筛选出来来自全国各大高校的150名学生
+    </small>
     <h3>
-      <Text><IntroImg src={pic.twentyFourPic}/>24小时</Text>
+      <Text>
+        <IntroImg src={pic.twentyFourPic} />
+        24小时
+      </Text>
     </h3>
     <P doubleMargin={true}>程序、设计、产品在24小时内实现产品开发。</P>
     <h3>
-      <Text><IntroImg src={pic.travelFoodPic}/>{'旅行&食物'}</Text>
+      <Text>
+        <IntroImg src={pic.travelFoodPic} />
+        {'旅行&食物'}
+      </Text>
     </h3>
     <P doubleMargin={true}>报销交通费与无限量的食物供应。</P>
     <h3>
-      <Text><IntroImg src={pic.trophyPic}/>{'奖金&纪念'}</Text>
+      <Text>
+        <IntroImg src={pic.trophyPic} />
+        {'奖金&纪念'}
+      </Text>
     </h3>
     <P doubleMargin={true}>丰厚的奖金与精美的纪念品。</P>
   </Container>
@@ -149,20 +179,20 @@ const scheduleData = [
 ];
 
 interface TitleProps {
-  needBorder : boolean 
+  needBorder: boolean;
 }
 
-const Title = styled.div<TitleProps>( ({ needBorder }) => ({
-  fontSize: '1.7rem',
-  fontWeight: 'normal',
-  margin: '20px 0',
+const Title = styled.div<TitleProps>(({ needBorder }) => ({
+  fontSize: '1.2rem',
+  fontWeight: 500,
+  margin: '5vh 0 0 0',
   paddingLeft: '5px',
   borderLeft: needBorder ? '2px solid black' : 'none',
   position: 'relative',
   left: '-7px',
   display: 'flex',
   alignItems: 'center',
-}))
+}));
 
 const Schedule = (
   <Container>
@@ -171,19 +201,33 @@ const Schedule = (
         <Title needBorder={true}>
           DAY {i + 1} <small>{day.date}</small>
         </Title>
-        {day.spans.map(({ from, to, content }) => (
-          <h2 key={from}>
-            <h3 css={css`
-              margin-bottom: 18px!important;
-            `}>
-              {from}~{to}
-            </h3>
-            <p css={css`
-              font-size: 1rem!important;
-              margin-bottom: 40px!important;
-            `}>{content}</p>
-          </h2>
-        ))}
+        <div
+          css={css`
+            margin-top: 3vh;
+            padding-left: 0.5vw;
+          `}
+        >
+          {day.spans.map(({ from, to, content }) => (
+            <h2 key={from}>
+              <p
+                css={css`
+                  margin-bottom: 18px !important;
+                `}
+              >
+                {from}~{to}
+              </p>
+              <p
+                css={css`
+                  font-size: 1rem !important;
+                  margin-bottom: 40px !important;
+                  font-weight: 400;
+                `}
+              >
+                {content}
+              </p>
+            </h2>
+          ))}
+        </div>
       </div>
     ))}
   </Container>
@@ -201,12 +245,23 @@ const Awards = (
   <Container>
     {awardsData.map(({ nameChn, nameEng, value }, i) => (
       <div key={i}>
-        <Title needBorder={false}>
-          {nameChn} <small>{'/'}</small><small>{nameEng}</small>
+        <Title
+          needBorder={false}
+          css={css`
+            margin-botton: 1vh;
+          `}
+        >
+          {nameChn} <small>{'/'}</small>
+          <small>{nameEng}</small>
         </Title>
-        <p css={css`
-          margin-bottom: 50px!important;
-        `}>{value}</p>
+        <p
+          css={css`
+            margin-top: 15px;
+            margin-bottom: 50px !important;
+          `}
+        >
+          {value}
+        </p>
       </div>
     ))}
   </Container>
@@ -215,11 +270,17 @@ const Awards = (
 const faqsData = [
   {
     question: '谁可以参加？',
-    answer: `不管你是高中毕业生，还是大学在校生,都可以报名参加我们的比赛。`,
+    answer: (
+      <p>不管你是高中毕业生，还是大学在校生,都可以报名参加我们的比赛。</p>
+    ),
   },
   {
     question: '参加HACKDAY需要多少钱？',
-    answer: `我们不仅不会收取费用，我们还会为您提供一个周末的餐饮和小吃。如果您不是来自武汉，我们还会为您的报销支付至多700元人民币的费用。`,
+    answer: (
+      <p>
+        我们不仅不会收取费用，我们还会为您提供一个周末的餐饮和小吃。如果您不是来自武汉，我们还会为您的报销支付至多700元人民币的费用。
+      </p>
+    ),
   },
   {
     question: '参加比赛需要准备什么？',
@@ -245,7 +306,13 @@ const faqsData = [
         <p>你可以以个人申请，你也可组好队伍以一个团队一起申请。</p>
         <p>
           你可以在
-          <a css={css`color:black; font-weight:bold;`}href="https://console.hack.hustunique.com">
+          <a
+            css={css`
+              color: black;
+              font-weight: bold;
+            `}
+            href="https://console.hack.hustunique.com"
+          >
             console.hack.hustunique.com
           </a>
           进入您的控制台并选择“我的队伍”更新您的参赛信息。
@@ -255,21 +322,29 @@ const faqsData = [
   },
   {
     question: '参加比赛有硬件提供吗？',
-    answer: `如果您有特定的硬件，请随身携带。我们将尽最大努力在活动中提供硬件。有关这方面的更多细节将在活动附近提供。`,
+    answer: (
+      <p>
+        如果您有特定的硬件，请随身携带。我们将尽最大努力在活动中提供硬件。有关这方面的更多细节将在活动附近提供。
+      </p>
+    ),
   },
   {
     question: '如何成为赞助商？',
     answer: (
-      <>
+      <p>
         如果您希望能够在黑客马拉松中展示您的品牌，并在您的目标群体进行宣传，请发送邮件至
-        <a css={css`color:black; font-weight:bold;`}
+        <a
+          css={css`
+            color: black;
+            font-weight: bold;
+          `}
           href="
         mailto:contact@hustunique.com"
         >
           contact@hustunique.com
         </a>
         。
-      </>
+      </p>
     ),
   },
 ];
@@ -278,8 +353,14 @@ const FAQs = (
   <Container>
     {faqsData.map(({ question, answer }, i) => (
       <div key={i}>
-        <h3>{question}</h3>
-        <P doubleMargin={true}>{answer}</P>
+        <h3
+          css={css`
+            margin-top: 5vh;
+          `}
+        >
+          {question}
+        </h3>
+        <Div doubleMargin={true}>{answer}</Div>
       </div>
     ))}
   </Container>
@@ -289,21 +370,34 @@ const accessData = {
   position: '湖北省 武汉市 洪山区 珞喻路 1037号',
   institution: '华中科技大学 启明学院',
   mail: 'contact@hustunique.com',
-  qq: '官方FAQ QQ群组：1057802260'
-}
+  qq: '官方FAQ QQ群组：1057802260',
+};
 
 const Access = (
-  <Container>
+  <Container
+    css={css`
+      margin-top: 4vh;
+    `}
+  >
     <h2>{accessData.position}</h2>
     <h2>{accessData.institution}</h2>
-    <a href="mailto:contact@hustunique.com">
-      {accessData.mail}
-    </a>
-    <p>{accessData.qq}</p>
+    <p
+      css={css`
+        margin-top: 4vh;
+        margin-bottom: 0;
+      `}
+    >
+      <a href="mailto:contact@hustunique.com">{accessData.mail}</a>
+    </p>
+    <p
+      css={css`
+        margin-top: 1vh;
+      `}
+    >
+      {accessData.qq}
+    </p>
   </Container>
 );
-
-
 
 const titleData = [
   {
@@ -340,6 +434,6 @@ const data = {
   awardsData,
   faqsData,
   accessData,
-}
+};
 
-export default data
+export default data;
