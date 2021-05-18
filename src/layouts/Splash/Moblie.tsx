@@ -158,10 +158,10 @@ const OptionBlock = styled.a<ActiveProps>(({ active }) => ({
   display: 'flex',
   alignItems: 'flex-start',
   textDecoration: 'none',
-  ':last-of-type':{
+  ':last-of-type': {
     margin: '0',
-    paddingBottom: '0'
-  }
+    paddingBottom: '0',
+  },
 }));
 
 const MenuMain = styled.div({
@@ -223,7 +223,7 @@ const FrontPage: FC = () => {
 };
 
 interface DarkProps {
-  dark: boolean
+  dark: boolean;
 }
 interface HeaderProps extends DarkProps {
   switchMenu: () => void;
@@ -233,7 +233,7 @@ interface HeaderProps extends DarkProps {
 const Header: FC<HeaderProps> = (props) => {
   const { showMenu, switchMenu, dark } = props;
   return (
-    <SplitLine dark={dark} >
+    <SplitLine dark={dark}>
       <HeaderContainer>
         <AboveHeader>
           <HackDayTitle dark={dark} />
@@ -252,13 +252,13 @@ const AboveHeader = styled.div({
   top: '-1vh',
   padding: '0 5vw',
   width: '90%',
-  transform: 'translateY(-100%)'
-})
+  transform: 'translateY(-100%)',
+});
 
 const HeaderContainer = styled.div({
   position: 'relative',
 });
-const HackDayTitle: FC<DarkProps> = ({dark}) => {
+const HackDayTitle: FC<DarkProps> = ({ dark }) => {
   return (
     <HackdayTitleLayout dark={dark}>
       <UniqueText>UNIQUESTUDIO</UniqueText>
@@ -267,7 +267,7 @@ const HackDayTitle: FC<DarkProps> = ({dark}) => {
   );
 };
 
-const SplitLine = styled.div<DarkProps>(({dark}) =>({
+const SplitLine = styled.div<DarkProps>(({ dark }) => ({
   transition: 'color 0.5s',
   position: 'fixed',
   width: '-webkit-fill-available',
@@ -280,9 +280,9 @@ const SplitLine = styled.div<DarkProps>(({dark}) =>({
   paddingTop: '8vh',
 }));
 
-const HackdayTitleLayout = styled.div<DarkProps>(({dark}) => ({
+const HackdayTitleLayout = styled.div<DarkProps>(({ dark }) => ({
   transition: 'color 0.5s',
-  color: dark ? 'white' : 'black'
+  color: dark ? 'white' : 'black',
 }));
 
 const UniqueText = styled.div({
@@ -305,7 +305,7 @@ interface MenuButtonProps extends DarkProps {
   click: () => void;
   active: boolean;
 }
-interface MenuButtonBlockProps{
+interface MenuButtonBlockProps {
   color: string;
   isTop: boolean;
   isBottom: boolean;
@@ -329,7 +329,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
   return (
     <MenuButtonLayout onClick={click}>
       <MenuButtonBlock
-        color={dark ? 'white' : "black"}
+        color={dark ? 'white' : 'black'}
         isTop={true}
         isBottom={false}
         active={active}
@@ -341,7 +341,7 @@ const MenuButton: FC<MenuButtonProps> = (props) => {
         active={active}
       />
       <MenuButtonBlock
-        color={dark ? 'white' : "black"}
+        color={dark ? 'white' : 'black'}
         isTop={false}
         isBottom={true}
         active={active}

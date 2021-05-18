@@ -5,7 +5,9 @@ import SponsorPic from '../../assets/imgs/Sponsor.png';
 import { jsx, css } from '@emotion/react';
 import { ISponsorBlockProps, SponsorProps, useAbove } from './common';
 
-const fontSizeData = Array(6).fill(null).map((_, i) => `calc(${6 + i * 2}px + ${(6 + i * 2) / 10}vmax)`)
+const fontSizeData = Array(6)
+  .fill(null)
+  .map((_, i) => `calc(${6 + i * 2}px + ${(6 + i * 2) / 10}vmax)`);
 
 const SponsorBlock = styled.div<ISponsorBlockProps>(({ above = false }) => ({
   position: 'relative',
@@ -13,7 +15,7 @@ const SponsorBlock = styled.div<ISponsorBlockProps>(({ above = false }) => ({
   zIndex: above ? 4 : 0,
   padding: '5vh 11vw',
   width: 'calc(100% - 22vw)',
-  background: 'black'
+  background: 'black',
 }));
 
 const SponsorTitle = styled.div({
@@ -23,7 +25,7 @@ const SponsorTitle = styled.div({
   alignItems: 'center',
   fontSize: fontSizeData[3],
   marginBottom: '3vh',
-  fontWeight: 600
+  fontWeight: 600,
 });
 
 const SponsorImg = styled.img({
@@ -48,11 +50,11 @@ const Text = styled.div({
 const SponsorLayout = styled.div({
   minHeight: '92vh',
   background: 'black',
-  width: '100%'
-})
+  width: '100%',
+});
 
 export const Sponsor = forwardRef<HTMLDivElement | null, SponsorProps>(
-  ({ id}, outerRef) => {
+  ({ id }, outerRef) => {
     const { ref, shouldAbove } = useAbove();
     return (
       <SponsorLayout ref={outerRef}>

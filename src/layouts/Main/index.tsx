@@ -63,17 +63,19 @@ const Main: FC = () => {
   const SponsorRef = useRef<HTMLDivElement | null>(null);
 
   const switchPage = useCallback((pageIndex: number) => {
-    if (!pageIndex) {
-    } else {
-      SectionRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }
-    switch (pageIndex) {
-      case 0:
-        return SplashRef.current?.scrollIntoView({ behavior: 'smooth' });
-      case PageMax - 1:
-        return SponsorRef.current?.scrollIntoView({ behavior: 'smooth' });
-      default:
-        SectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (SectionRef.current && SponsorRef.current && SplashRef.current) {
+      if (!pageIndex) {
+      } else {
+        SectionRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+      switch (pageIndex) {
+        case 0:
+          return SplashRef.current.scrollIntoView({ behavior: 'smooth' });
+        case PageMax - 1:
+          return SponsorRef.current.scrollIntoView({ behavior: 'smooth' });
+        default:
+          SectionRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   }, []);
   const handleScroll = useCallback(
@@ -99,15 +101,15 @@ const Main: FC = () => {
   );
   useEffect(() => {
     const observerDark = new IntersectionObserver((entries) => {
-      if(entries[0].time > 3000)
+      if (entries[0].time > 3000)
         setDark(true);
-    }, {threshold: 0.99})
+    }, { threshold: 0.99 })
     const observerColor = new IntersectionObserver((entries) => {
-      if(entries[0].time > 3000)
+      if (entries[0].time > 3000)
         setDark(false);
-    }, {threshold: 0})
+    }, { threshold: 0 })
     const element = document.getElementById('item5');
-    if(!isPC && element){
+    if (!isPC && element) {
       console.log('observe succeed!')
       observerColor.observe(element);
       observerDark.observe(element);
@@ -130,11 +132,14 @@ const Main: FC = () => {
           throttle = null;
         }, 1000);
       };
-      layoutRef.current?.addEventListener('wheel', handler);
-      return () => {
-        layoutRef.current?.removeEventListener('wheel', handler);
-        throttle && clearTimeout(throttle);
-      };
+      if(layoutRef.current){
+        layoutRef.current.addEventListener('wheel', handler);
+        return () => {
+          if(layoutRef.current)
+          layoutRef.current.removeEventListener('wheel', handler);
+          throttle && clearTimeout(throttle);
+        };
+      }
     }
   }, [handleScroll, isPC]);
 
@@ -162,15 +167,21 @@ const Main: FC = () => {
   const Section = isPC
     ? SectionCommon.components.PC
     : SectionCommon.components.Mobile;
-  const Sponsor = isPC ?SponsorPC:SponsorMobile; 
+  const Sponsor = isPC ? SponsorPC : SponsorMobile;
   // Create the count state.
   return (
     <>
       <Global styles={globalStyles} />
-      {showMenu && <Global styles={css({ body: { overflow: 'hidden' } })} />}
+      {showMenu && <Global styles={css({
+        html: {
+        },
+        body: {
+          overflow: 'hidden'
+        }
+      })} />}
 
       <Header
-        dark={isPC && pageIndex===PageMax - 1 || dark}
+        dark={isPC && pageIndex === PageMax - 1 || dark}
         switchMenu={setShowMenu.bind(this, !showMenu)}
         pageIndex={pageIndex}
         showMenu={showMenu}
@@ -183,7 +194,7 @@ const Main: FC = () => {
           pageIndex={pageIndex}
           setPageIndex={setPageIndex}
         />
-        <Sponsor ref={SponsorRef} id={'item5'}/>
+        <Sponsor ref={SponsorRef} id={'item5'} />
       </BasicLayout>
 
       <Pager pageIndex={pageIndex} max={PageMax} showPager={isPC} />

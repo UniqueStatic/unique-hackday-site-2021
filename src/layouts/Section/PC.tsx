@@ -182,7 +182,8 @@ const Container = React.forwardRef<HTMLDivElement | null, ISectionProps>(
     ];
 
     useEffect(() => {
-      if (pageIndex && pageIndex <= 5) // magic
+      if (pageIndex && pageIndex <= 5)
+        // magic
         setIndex(pageIndex === 0 ? pageIndex : pageIndex - 1);
     }, [pageIndex]);
 
@@ -190,8 +191,8 @@ const Container = React.forwardRef<HTMLDivElement | null, ISectionProps>(
       (i: number) => {
         if (animating || i == index) return;
         setAnimating(true);
-        if (ref && 'current' in ref) {
-          ref.current?.addEventListener(
+        if (ref && 'current' in ref && ref.current) {
+          ref.current.addEventListener(
             'transitionend',
             () => setAnimating(false),
             {
