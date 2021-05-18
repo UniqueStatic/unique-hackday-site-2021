@@ -14,10 +14,12 @@ import { MobileBackground } from '@/consts/color';
 import data, { pic } from './data';
 const { titleData, introductionData, scheduleData, awardsData } = data;
 
-const primaryBorder = '2px solid black'
-const innerMargin = 'calc(6vw + 2px)'
-const outerMargin = '5vw'
-const fontSizeData = Array(6).fill(null).map((_, i) => `calc(${6 + i * 2}px + ${(6 + i * 2) / 10}vmax)`)
+const primaryBorder = '2px solid black';
+const innerMargin = 'calc(6vw + 2px)';
+const outerMargin = '5vw';
+const fontSizeData = Array(6)
+  .fill(null)
+  .map((_, i) => `calc(${6 + i * 2}px + ${(6 + i * 2) / 10}vmax)`);
 // const ContentContainer = styled.div({
 //   height: '100vh',
 //   width: '-webkit-fill-available',
@@ -48,7 +50,7 @@ const SubTitle = styled.div({
   display: 'flex',
   justifyContent: 'center',
   letterSpacing: '0.3ch',
-  fontWeight: 350
+  fontWeight: 350,
 });
 
 interface FloatBlockProps {
@@ -95,7 +97,7 @@ const IntroMessage = styled.p({
   },
   ':first-of-type': {
     margin: 0,
-  }
+  },
 });
 
 const Introduction: FC = () => {
@@ -115,8 +117,12 @@ const Introduction: FC = () => {
             {introductionData[5]}
           </Text>
         </TextBlock>
-        <TextBlock fontWeight={400} fontSize={2}>{introductionData[6]}</TextBlock>
-        <TextBlock fontWeight={400} fontSize={2}>{introductionData[7]}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>
+          {introductionData[6]}
+        </TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>
+          {introductionData[7]}
+        </TextBlock>
       </FloatBlock>
       <FloatBlock isRight={true}>
         <TextBlock fontWeight={500} fontSize={3}>
@@ -125,8 +131,12 @@ const Introduction: FC = () => {
             {introductionData[8]}
           </Text>
         </TextBlock>
-        <TextBlock fontWeight={400} fontSize={2}>{introductionData[9]}</TextBlock>
-        <TextBlock fontWeight={400} fontSize={2}>{introductionData[10]}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>
+          {introductionData[9]}
+        </TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>
+          {introductionData[10]}
+        </TextBlock>
       </FloatBlock>
       <FloatBlock isRight={false}>
         <TextBlock fontWeight={500} fontSize={3}>
@@ -135,8 +145,12 @@ const Introduction: FC = () => {
             {introductionData[11]}
           </Text>
         </TextBlock>
-        <TextBlock fontWeight={400} fontSize={2}>{introductionData[12]}</TextBlock>
-        <TextBlock fontWeight={400} fontSize={2}>{introductionData[13]}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>
+          {introductionData[12]}
+        </TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>
+          {introductionData[13]}
+        </TextBlock>
       </FloatBlock>
     </>
   );
@@ -164,7 +178,9 @@ const Schedule: FC = () => {
         <TextBlock fontWeight={500} fontSize={2}>
           {_.from}~{_.to}
         </TextBlock>
-        <TextBlock fontWeight={400} fontSize={1}>{_.content}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={1}>
+          {_.content}
+        </TextBlock>
       </TimeBlock>
     ));
     return (
@@ -184,7 +200,7 @@ const Schedule: FC = () => {
 
 const AwardsBlock = styled.div({
   marginBottom: '48px',
-  marginLeft: '6vw'
+  marginLeft: '6vw',
 });
 
 const Awards: FC = () => {
@@ -193,7 +209,9 @@ const Awards: FC = () => {
       <TextBlock fontWeight={450} fontSize={3}>
         {_.nameChn} / {_.nameEng}
       </TextBlock>
-      <TextBlock fontWeight={400} fontSize={2}>{_.value}</TextBlock>
+      <TextBlock fontWeight={400} fontSize={2}>
+        {_.value}
+      </TextBlock>
     </AwardsBlock>
   ));
   return <>{awards}</>;
@@ -207,13 +225,15 @@ const FAQTitle = styled.div({
   fontSize: fontSizeData[3],
   marginBottom: fontSizeData[3],
   fontWeight: 500,
-})
+});
 
 const FAQs: FC = () => {
   const faqs = data.faqsData.map((_) => (
     <FAQBlock key={_.question}>
       <FAQTitle>{_.question}</FAQTitle>
-      <TextBlock fontWeight={400} fontSize={2}>{_.answer}</TextBlock>
+      <TextBlock fontWeight={400} fontSize={2}>
+        {_.answer}
+      </TextBlock>
     </FAQBlock>
   ));
   return <>{faqs}</>;
@@ -221,12 +241,11 @@ const FAQs: FC = () => {
 
 const AccessLayout = styled.div({
   minHeight: 'calc(65vh - 100px)',
-})
+});
 
 const AccessBlock = styled.div({
   borderLeft: primaryBorder,
   paddingLeft: innerMargin,
-
 });
 
 const AccessMail = styled.a({
@@ -241,10 +260,16 @@ const Access: FC = () => {
   return (
     <AccessLayout>
       <AccessBlock>
-        <TextBlock fontWeight={400} fontSize={2}>{position}</TextBlock>
-        <TextBlock fontWeight={400} fontSize={2}>{institution}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>
+          {position}
+        </TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>
+          {institution}
+        </TextBlock>
         <AccessMail href={`mailto:${mail}`}>{mail}</AccessMail>
-        <TextBlock fontWeight={400} fontSize={2}>{qq}</TextBlock>
+        <TextBlock fontWeight={400} fontSize={2}>
+          {qq}
+        </TextBlock>
       </AccessBlock>
     </AccessLayout>
   );
@@ -308,8 +333,8 @@ const ItemTitle = styled.div<ItemTitleProps>(({ width }) => ({
 const EngText = styled.div({
   display: 'inline',
   fontSize: fontSizeData[4],
-  fontWeight: 400
-})
+  fontWeight: 400,
+});
 
 interface IContentProps {
   index: number;
@@ -333,7 +358,10 @@ const Content: FC<IContentProps> = ({ index }) => {
   ];
   return (
     <ContentBlock>
-      <ItemTitle width="auto">{nameChn}<EngText>{` / ${nameEng}`}</EngText></ItemTitle>
+      <ItemTitle width="auto">
+        {nameChn}
+        <EngText>{` / ${nameEng}`}</EngText>
+      </ItemTitle>
       {Contents[index]}
     </ContentBlock>
   );
@@ -358,8 +386,8 @@ const Container = forwardRef<HTMLDivElement | null, ISectionProps>(
       (i: number) => {
         if (animating || i == index) return;
         setAnimating(true);
-        if (ref && 'current' in ref) {
-          ref.current?.addEventListener(
+        if (ref && 'current' in ref && ref.current) {
+          ref.current.addEventListener(
             'transitionend',
             () => setAnimating(false),
             {
@@ -369,7 +397,7 @@ const Container = forwardRef<HTMLDivElement | null, ISectionProps>(
         }
         // setIndex(i);
         setPageIndex(i + 1);
-        return () => { };
+        return () => {};
       },
       [animating, index],
     );

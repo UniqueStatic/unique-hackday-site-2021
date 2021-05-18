@@ -327,9 +327,7 @@ const Line = styled.div({
 const MenuTitle: FC = () => {
   return (
     <MenuTitleBackground>
-      <MenuTitleBlock>
-        MENU —— 2021
-      </MenuTitleBlock>
+      <MenuTitleBlock>MENU —— 2021</MenuTitleBlock>
     </MenuTitleBackground>
   );
 };
