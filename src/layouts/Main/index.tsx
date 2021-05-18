@@ -101,7 +101,7 @@ const Main: FC = () => {
     const observerDark = new IntersectionObserver((entries) => {
       if(entries[0].time > 3000)
         setDark(true);
-    }, {threshold: 1})
+    }, {threshold: 0.99})
     const observerColor = new IntersectionObserver((entries) => {
       if(entries[0].time > 3000)
         setDark(false);
@@ -155,7 +155,6 @@ const Main: FC = () => {
     },
     [isPC, switchPage, setPageIndex, setShowMenu],
   );
-
   const { Header, Menu, Splash } = isPC
     ? SplashCommon.components.PC
     : SplashCommon.components.Mobile;
