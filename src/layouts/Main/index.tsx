@@ -57,7 +57,6 @@ const Main: FC = () => {
   const [pageIndex, setPageIndex] = useState(0);
   const [isPC, setIsPC] = useState(shouldShowPCLayout());
   const [dark, setDark] = useState(false);
-  const [index, setIndex] = useState(0);
   const layoutRef = useRef<HTMLDivElement | null>(null);
   const SplashRef = useRef<HTMLDivElement | null>(null);
   const SectionRef = useRef<HTMLDivElement | null>(null);
@@ -100,11 +99,11 @@ const Main: FC = () => {
   );
   useEffect(() => {
     const observerDark = new IntersectionObserver((entries) => {
-      if(entries[0].time > 1000)
+      if(entries[0].time > 3000)
         setDark(true);
     }, {threshold: 1})
     const observerColor = new IntersectionObserver((entries) => {
-      if(entries[0].time > 1000)
+      if(entries[0].time > 3000)
         setDark(false);
     }, {threshold: 0})
     const element = document.getElementById('item5');
