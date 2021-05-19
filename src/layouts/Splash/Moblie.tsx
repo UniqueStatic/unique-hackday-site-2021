@@ -69,25 +69,28 @@ const RebootText = styled.div((props) => ({
   color: props.color,
 }));
 
-const SignUpBlock = styled.div({
+const SignUpBlock = styled.a({
   position: 'absolute',
   height: 'calc(20px + 4vmin)',
-  width: '35vw',
-  letterSpacing: '1vmax',
+  width: '25vw',
+  padding: '0 5vw',
   bottom: '8vh',
   display: 'flex',
   fontSize: 'calc(6px + 2vmin)',
-  justifyContent: 'center',
+  justifyContent: 'space-around',
   alignItems: 'center',
   backgroundColor: 'black',
   color: 'white',
   fontWeight: 600,
   fontFamily: 'Swis721 BlkEx BT',
-  textAlign: 'center',
+  textDecoration: 'none',
+  ':visited': {
+    color: 'white'
+  }
 });
 
 const SignUp: FC = () => {
-  return <SignUpBlock>立即报名</SignUpBlock>;
+  return <SignUpBlock href='https://console.hack.hustunique.com'><span>立</span><span>即</span><span>报</span><span>名</span></SignUpBlock>;
 };
 
 const Reboot: FC = () => {

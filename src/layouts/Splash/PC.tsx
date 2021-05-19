@@ -65,7 +65,7 @@ const RebootText = styled.div((props) => ({
   color: props.color,
 }));
 
-const SignUpBlock = styled.div({
+const SignUpBlock = styled.a({
   position: 'absolute',
   height: 'calc(20px + 4vmin)',
   width: 'calc(50px + 10vmin)',
@@ -76,14 +76,20 @@ const SignUpBlock = styled.div({
   display: 'flex',
   fontSize: 'calc(6px + 2vmin)',
   justifyContent: 'center',
+  color: 'black',
   alignItems: 'center',
   background: 'white',
+  textDecoration: 'none',
+  ':visited': {
+    color: 'black'
+  }
 });
 
 const SignUpBackground = styled.div({
   position: 'absolute',
   bottom: '6.5vh',
-  left: 'calc(50% - 0.5 * (50px + 10vmin))',
+  left: '50%',
+  transform: 'translateX(-100%)',
   height: 'calc(20px + 4vmin)',
   width: 'calc(50px + 10vmin)',
   background: '#E3E3E3',
@@ -93,8 +99,8 @@ const SignUpBackground = styled.div({
 
 const SignUp: FC = () => {
   return (
-    <SignUpBackground color="#E6E6E6">
-      <SignUpBlock color="white">立即报名</SignUpBlock>
+    <SignUpBackground>
+      <SignUpBlock href='https://console.hack.hustunique.com'>立即报名</SignUpBlock>
     </SignUpBackground>
   );
 };
@@ -315,13 +321,6 @@ const MenuTitleBackground = styled.div({
   background: 'transparent',
   border: '1px black solid',
   cursor: 'pointer',
-});
-
-const Line = styled.div({
-  width: '100px',
-  height: '0',
-  borderTop: '1.5px black solid',
-  margin: '0 10px',
 });
 
 const MenuTitle: FC = () => {
