@@ -64,7 +64,7 @@ const introductionData = [
   '最初源于联创团队内部成员的Hackday比赛，之后将比赛的规模扩大，邀请来自全国的大学一同参与。',
   '因疫情缘故缺席了2020年，而今年我们决定重启，继续将开放、创新的极客精神传递给更多的人。',
   '120名参赛选手',
-  '通过简历筛选出来来自全国各大高校的120名学生',
+  '通过简历筛选出来来自武汉的120名学生',
   '24小时',
   '程序、设计、产品',
   '在24小时内实现产品开发',
@@ -122,12 +122,12 @@ const Introduction = (
       css={css({
         display: 'inline-block',
         fontWeight: 'normal',
-        fontSize: '1rem!important',
-        letterSpacing: '0.5ch',
+        fontSize: '1.5vw!important',
         margin: '0 0 5vh 0!important',
+        textAlign: 'center'
       })}
     >
-      通过简历筛选出来来自全国各大高校的120名学生
+      通过简历筛选出来来自武汉的120名学生
     </small>
     <h3>
       <Text>
