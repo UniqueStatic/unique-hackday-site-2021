@@ -43,7 +43,7 @@ const IntroLayout = styled.div({
 });
 
 const SubTitle = styled.div({
-  fontSize: '3vw',
+  fontSize: '3.5vw',
   position: 'relative',
   width: '-webkit-fill-available',
   top: '-5vh',
