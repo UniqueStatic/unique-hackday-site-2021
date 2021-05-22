@@ -61,8 +61,8 @@ const Div = styled.div<PhraseProps>({
 
 const introductionData = [
   'Unique Hackday',
-  '最初源于联创团队内部成员的Hackday比赛，之后将比赛的规模扩大，邀请来自全国的大学一同参与。',
-  '因疫情缘故缺席了2020年，而今年我们决定重启，继续将开放、创新的极客精神传递给更多的人。',
+  '起源于联创团队内部的hackday比赛，此后，该赛事发展成为面向全国各大高校在读生的比赛，旨在为学生极客们提供了一个展示自己、相互交流、开阔视野的平台。',
+  '因疫情缘故，2020年hackday遗憾缺席，而今年，联创团队决定重启hackday。',
   '120名参赛选手',
   '通过简历筛选出来来自武汉各大高校的120名学生',
   '24小时',
@@ -105,10 +105,10 @@ const Introduction = (
       Unique Hackday
     </h2>
     <IntroMessage>
-      最初源于联创团队内部成员的Hackday比赛，之后将比赛的规模扩大，邀请来自全国的大学一同参与。
+      起源于联创团队内部的hackday比赛，此后，该赛事发展成为面向全国各大高校在读生的比赛，旨在为学生极客们提供了一个展示自己、相互交流、开阔视野的平台。
     </IntroMessage>
     <IntroMessage>
-      因疫情缘故缺席了2020年，而今年我们决定重启，继续将开放、创新的极客精神传递给更多的人。
+      因疫情缘故，2020年hackday遗憾缺席，而今年，联创团队决定重启hackday。
     </IntroMessage>
     <h2
       css={css`
@@ -124,7 +124,7 @@ const Introduction = (
         fontWeight: 'normal',
         fontSize: '1.2vw!important',
         margin: '0 0 5vh 0!important',
-        textAlign: 'center'
+        textAlign: 'center',
       })}
     >
       通过简历筛选出来来自武汉各大高校的120名学生
@@ -270,9 +270,7 @@ const Awards = (
 const faqsData = [
   {
     question: '谁可以参加？',
-    answer: (
-      <p>不管你是本科生，还是研究生，都可以报名参加我们的比赛。</p>
-    ),
+    answer: <p>不管你是本科生，还是研究生，都可以报名参加我们的比赛。</p>,
   },
   {
     question: '参加HACKDAY需要多少钱？',
@@ -324,7 +322,7 @@ const faqsData = [
     question: '参加比赛有硬件提供吗？',
     answer: (
       <p>
-        如果您有特定的硬件，请随身携带。我们将尽最大努力在活动中提供硬件。有关这方面的更多细节将在活动时提供。
+        如果您有特定的硬件，请随身携带，同时我们也将在比赛中尽可能地提供您需要的硬件。更多详情请进选手群咨询。
       </p>
     ),
   },
