@@ -2,6 +2,7 @@
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import SponsorPic from '../../assets/imgs/Sponsor.png';
+import SponsorPic2 from '../../assets/imgs/壹伴logo.png'
 import { jsx, css } from '@emotion/react';
 import { ISponsorBlockProps, SponsorProps, useAbove } from './common';
 
@@ -61,9 +62,12 @@ export const Sponsor = forwardRef<HTMLDivElement | null, SponsorProps>(
         <SponsorBlock id={id} ref={ref} above={shouldAbove}>
           {/* <Sticky> */}
           <SponsorTitle>赞助商 / Sponsor</SponsorTitle>
-          <div>
+          <div css={css`position:relative`}>
             <a href="https://weibanzhushou.com/" target="_blank">
               <SponsorImg src={SponsorPic}></SponsorImg>
+            </a>
+            <a css={css`position:absolute; top:0; left: calc(4*(14px + 1.4vmax))`} href="https://yiban.io/" target="_blank">
+              <SponsorImg src={SponsorPic2}></SponsorImg>
             </a>
 
             <div css={css({ marginTop: '6vh', paddingBottom: '6vh' })}>

@@ -2,6 +2,7 @@
 import { forwardRef } from 'react';
 import styled from '@emotion/styled';
 import SponsorPic from '../../assets/imgs/Sponsor.png';
+import SponsorPic2 from '../../assets/imgs/壹伴logo.png'
 import { jsx, css } from '@emotion/react';
 import { ISponsorBlockProps, SponsorProps, useAbove } from './common';
 
@@ -47,9 +48,14 @@ export const Sponsor = forwardRef<HTMLDivElement | null, SponsorProps>(
           <SponsorTitle>赞助商 / Sponsor</SponsorTitle>
           <div css={css({ margin: '0 15%' })}>
             <SponsorName>武汉夜莺科技有限公司</SponsorName>
+            <div css={css`position: relative`}>
             <a href="https://weibanzhushou.com/" target="_blank">
               <SponsorImg src={SponsorPic}></SponsorImg>
             </a>
+            <a css={css`position:absolute; top:0; left: calc(4*2.4rem)`} href="https://yiban.io/" target="_blank">
+              <SponsorImg src={SponsorPic2}></SponsorImg>
+            </a>
+            </div>
 
             <Text>
               坐落于武汉光谷核心繁华地带（K11写字楼）。核心创始人来自华中科技大学联创团队。
